@@ -11,7 +11,6 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704544852112670" crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
-    <script src="https://pay.google.com/gp/p/js/pay.js" async></script>
     <script src="script.js" defer></script>
 </head>
 
@@ -26,7 +25,7 @@
                     <li><a href="map.html" class="btn" data-translate="map">Map</a></li>
                     <li><a href="index.html#get-involved" class="btn" data-translate="get_involved">Get Involved</a></li>
                     <li><a href="index.html#contact" class="btn" data-translate="contact">Contact</a></li>
-                    <li><a href="checkout.html" class="btn primary" data-translate="donate">Donate</a></li>
+                    <li><a href="https://www.patreon.com/treeplace" class="btn primary" data-translate="donate">Donate</a></li>
                     <li><a href="login.html" class="btn primary" data-translate="login">Login</a></li>
                 </ul>
             </nav>
@@ -36,16 +35,7 @@
     <section id="checkout" class="section">
         <div class="container">
             <h2>Donate</h2>
-            <form id="checkoutForm">
-                <div class="form-group">
-                    <label for="amount">Donation Amount (USD):</label>
-                    <input type="number" id="amount" name="amount" required>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn primary">Donate</button>
-                </div>
-                <div id="googlePayButton"></div>
-            </form>
+            <p>Please visit our <a href="https://www.patreon.com/treeplace">Patreon page</a> to make a donation.</p>
         </div>
     </section>
 
@@ -61,76 +51,5 @@
             <p data-translate="footer_credits">Directed by Ms. Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Alpha-C</p>
         </div>
     </footer>
-
-    <script>
-        document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const amount = document.getElementById('amount').value;
-            if (amount && amount > 0) {
-                processDonation(amount);
-                alert(`Thank you for your donation of $${amount}!`);
-            } else {
-                alert('Please enter a valid donation amount.');
-            }
-        });
-
-        function onGooglePayLoaded() {
-            const paymentsClient = new google.payments.api.PaymentsClient({ environment: 'TEST' });
-            const button = paymentsClient.createButton({
-                onClick: onGooglePaymentButtonClicked
-            });
-            document.getElementById('googlePayButton').appendChild(button);
-        }
-
-        onGooglePayLoaded();
-
-        function onGooglePaymentButtonClicked() {
-            const paymentDataRequest = getGooglePaymentDataRequest();
-            const paymentsClient = new google.payments.api.PaymentsClient({ environment: 'TEST' });
-            paymentsClient.loadPaymentData(paymentDataRequest)
-                .then(function(paymentData) {
-                    processPayment(paymentData);
-                })
-                .catch(function(err) {
-                    console.error(err);
-                });
-        }
-
-        function getGooglePaymentDataRequest() {
-            const paymentDataRequest = Object.assign({}, baseRequest);
-            paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
-            paymentDataRequest.transactionInfo = getTransactionInfo();
-            paymentDataRequest.merchantInfo = {
-                merchantId: '5552536221',
-                merchantName: 'TreePlace.App'
-            };
-            return paymentDataRequest;
-        }
-
-        const baseRequest = {
-            apiVersion: 2,
-            apiVersionMinor: 0
-        };
-
-        const allowedCardNetworks = ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"];
-        const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
-
-        const tokenizationSpecification = {
-            type: 'PAYMENT_GATEWAY',
-            parameters: {
-                'gateway': 'example',
-                'gatewayMerchantId': 'exampleGatewayMerchantId'
-            }
-        };
-
-        const cardPaymentMethod = {
-            type: 'CARD',
-            parameters: {
-                allowedAuthMethods: allowedCardAuthMethods,
-                allowedCardNetworks: allowedCardNetworks
-            },
-            tokenizationSpecification: tokenizationSpecification
-        };
-
-        const transactionInfo = {
-            total
+</body>
+</html>
