@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Plant Trees in Miami</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Plant Trees in Miami</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about" data-translate="about">About</a></li>
+                    <li><a href="how-it-works.html" data-translate="how_it_works">How It Works</a></li>
+                    <li><a href="map.html" data-translate="map">Map</a></li>
+                    <li><a href="https://docs.google.com/document/d/1tVZJKdNGZUhJ3MQOLqyauU0TQuhPDxvcg5otjDlkV0g/edit?tab=t.0" target="_blank" data-translate="legal">Legal</a></li>
+                    <li><a href="index.html#contact" data-translate="contact">Contact</a></li>
+                    <li><a href="donate.html" class="btn" data-translate="donate">Donate</a></li>
+                    <li><a href="settings.html" data-translate="settings">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="settings" class="section">
+        <div class="container">
+            <h2 data-translate="settings_title">Settings</h2>
+            <p data-translate="settings_text">Customize your experience on our website. Choose your preferred theme, adjust the font size for better readability, and select your preferred language. Our goal is to make your experience as enjoyable and accessible as possible.</p>
+            <form id="settings-form">
+                <label for="theme" data-translate="theme_label">Theme:</label>
+                <select id="theme" name="theme">
+                    <option value="light" data-translate="light">Light</option>
+                    <option value="dark" data-translate="dark">Dark</option>
+                </select>
+
+                <label for="font-size" data-translate="font_size_label">Font Size:</label>
+                <input type="range" id="font-size" name="font-size" min="12" max="24" value="16">
+
+                <label for="language" data-translate="language_label">Language:</label>
+                <select id="language" name="language">
+                    <option value="en" data-translate="english">English</option>
+                    <option value="es" data-translate="spanish">Español</option>
+                </select>
+
+                <label for="newsletter" data-translate="newsletter_label">Newsletter:</label>
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <span data-translate="newsletter_text">Subscribe to our monthly newsletter</span>
+
+                <label for="show_images" data-translate="show_images_label">Show Images:</label>
+                <input type="checkbox" id="show_images" name="show_images" checked>
+                <span data-translate="show_images_text">Display images on the website</span>
+
+                <button type="submit" class="btn" data-translate="save_settings">Save Settings</button>
+            </form>
+            <p data-translate="email_signup">Sign up for emails <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyKgNvQRuqWxVkD8b6lavcoumyCOV3Xt54bDtN2DEYDY1dWQ/viewform?usp=dialog">here</a>.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Plant Trees in Miami. All rights reserved.</p>
+            <p data-translate="footer_credits">Directed by Ms.Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Alpha-C</p>
+        </div>
+    </footer>
+</body>
+
+</html>

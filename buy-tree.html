@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy a Tree for a Friend - TreePlace.App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704544852112670" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LPKDX195WT');
+    </script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>TreePlace.App</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about" class="btn" data-translate="about">About</a></li>
+                    <li><a href="how-it-works.html" class="btn" data-translate="how_it_works">How It Works</a></li>
+                    <li><a href="map.html" class="btn" data-translate="map">Map</a></li>
+                    <li><a href="index.html#get-involved" class="btn" data-translate="get_involved">Get Involved</a></li>
+                    <li><a href="index.html#contact" class="btn" data-translate="contact">Contact</a></li>
+                    <li><a href="checkout.html" class="btn primary" data-translate="donate">Donate</a></li>
+                    <li><a href="login.html" class="btn primary" data-translate="login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="buy-tree" class="section">
+        <div class="container">
+            <h2>Buy a Tree for a Friend</h2>
+            <form id="buyTreeForm">
+                <div class="form-group">
+                    <label for="friendName">Friend's Name:</label>
+                    <input type="text" id="friendName" name="friendName" required>
+                </div>
+                <div class="form-group">
+                    <label for="friendAddress">Friend's Address:</label>
+                    <input type="text" id="friendAddress" name="friendAddress" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Custom Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn primary">Buy Tree for $50</button>
+                </div>
+                <div id="googlePayButton"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="btn primary"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" class="btn primary"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" class="btn primary"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="btn primary"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2025 TreePlace.App. All rights reserved.</p>
+            <p data-translate="footer_credits">Directed by Ms. Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Alpha-C</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('buyTreeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Tree purchased for $50');
+            // Implement purchase logic
+        });
+
+        // Initialize Google Pay
+        const paymentsClient = new google.payments.api.PaymentsClient({ environment: 'TEST' });
+
+        function onGooglePayLoaded() {
+            const button = paymentsClient.createButton({
+                onClick: onGooglePaymentButtonClicked
+            });
+            document.getElementById('googlePayButton').appendChild(button);
+        }
+
+        function onGooglePaymentButtonClicked() {
+            const paymentDataRequest = getGooglePaymentDataRequest();
+            paymentsClient.loadPaymentData(paymentDataRequest)
+                .then(function(paymentData) {
+                    processPayment(paymentData);
+                })
+                .catch(function(err) {
+                    console.error(err);
+                });
+        }
+
+        function getGooglePaymentDataRequest() {
+            const paymentDataRequest = Object.assign({}, baseRequest);
+            paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
+            paymentDataRequest.transactionInfo = getTransactionInfo();
+            paymentDataRequest.merchantInfo = {
+                merchantId: '01234567890123456789',
+                merchantName: 'TreePlace.App'
+            };
+            return paymentDataRequest;
+        }
+
+        const baseRequest = {
+            apiVersion: 2,
+            apiVersionMinor: 0
+        };
+
+        const allowedCardNetworks = ["AMEX", "DISCOVER", "MASTERCARD", "VISA"];
+        const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
+
+        const tokenizationSpecification = {
+            type: 'PAYMENT_GATEWAY',
+            parameters: {
+                'gateway': 'example',
+                'gatewayMerchantId': 'exampleGatewayMerchantId'
+            }
+        };
+
+        const cardPaymentMethod = {
+            type: 'CARD',
+            parameters: {
+                allowedAuthMethods: allowedCardAuthMethods,
+                allowedCardNetworks: allowedCardNetworks
+            },
+            tokenizationSpecification: tokenizationSpecification
+        };
+
+        const transactionInfo = {
+            totalPriceStatus: 'FINAL',
+            totalPrice: '50.00',
+            currencyCode: 'USD'
+        };
+
+        function getTransactionInfo() {
+            return transactionInfo;
+        }
+
+        function processPayment(paymentData) {
+            console.log('Payment successful', paymentData);
+        }
+
+        onGooglePayLoaded();
+    </script>
+</body>
+</html>
