@@ -101,7 +101,7 @@
             paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
             paymentDataRequest.transactionInfo = getTransactionInfo();
             paymentDataRequest.merchantInfo = {
-                merchantId: '01234567890123456789',
+                merchantId: '5552536221',
                 merchantName: 'TreePlace.App'
             };
             return paymentDataRequest;
@@ -112,7 +112,7 @@
             apiVersionMinor: 0
         };
 
-        const allowedCardNetworks = ["AMEX", "DISCOVER", "MASTERCARD", "VISA"];
+        const allowedCardNetworks = ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"];
         const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
 
         const tokenizationSpecification = {
@@ -126,4 +126,11 @@
         const cardPaymentMethod = {
             type: 'CARD',
             parameters: {
-                allowedAuth
+                allowedAuthMethods: allowedCardAuthMethods,
+                allowedCardNetworks: allowedCardNetworks
+            },
+            tokenizationSpecification: tokenizationSpecification
+        };
+
+        const transactionInfo = {
+            total
