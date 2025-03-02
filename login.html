@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704544852112670" crossorigin="anonymous"></script>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -18,69 +17,108 @@
         gtag('config', 'G-LPKDX195WT');
     </script>
     <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-container h2 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            text-align: left;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #219150;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+        .register-link {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .register-link a {
+            color: #27ae60;
+            text-decoration: none;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <h1>TreePlace.App</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html#about" class="btn" data-translate="about">About</a></li>
-                    <li><a href="how-it-works.html" class="btn" data-translate="how_it_works">How It Works</a></li>
-                    <li><a href="map.html" class="btn" data-translate="map">Map</a></li>
-                    <li><a href="index.html#get-involved" class="btn" data-translate="get_involved">Get Involved</a></li>
-                    <li><a href="index.html#contact" class="btn" data-translate="contact">Contact</a></li>
-                    <li><a href="checkout.html" class="btn primary" data-translate="donate">Donate</a></li>
-                    <li><a href="login.html" class="btn primary" data-translate="login">Login</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section id="login" class="section">
-        <div class="container">
-            <h2>Login</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn primary">Login</button>
-                </div>
-                <div id="loginError" class="error-message" style="display: none;">Incorrect username or password</div>
-                <div class="form-group">
-                    <p>Don't have an account? <a href="register.html">Register here</a></p>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="social-media">
-                <a href="https://facebook.com" target="_blank" class="btn primary"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com" target="_blank" class="btn primary"><i class="fab fa-twitter"></i></a>
-                <a href="https://instagram.com" target="_blank" class="btn primary"><i class="fab fa-instagram"></i></a>
-                <a href="https://linkedin.com" target="_blank" class="btn primary"><i class="fab fa-linkedin-in"></i></a>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
             </div>
-            <p>&copy; 2025 TreePlace.App. All rights reserved.</p>
-            <p data-translate="footer_credits">Directed by Ms. Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Alpha-C</p>
-        </div>
-    </footer>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Login</button>
+            </div>
+            <div id="loginError" class="error-message">Incorrect username or password</div>
+            <div class="register-link">
+                <p>Don't have an account? <a href="register.html">Register here</a></p>
+            </div>
+        </form>
+    </div>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
-            // Simulate a login check (replace with real authentication logic)
             if (username === 'user' && password === 'password') {
                 window.location.href = 'index.html';
             } else {
@@ -89,4 +127,5 @@
         });
     </script>
 </body>
+
 </html>
