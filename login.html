@@ -21,11 +21,36 @@
         body {
             font-family: 'Exo 2', sans-serif;
             background: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+        }
+        header {
+            background: #27ae60;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
         }
         .login-container {
             background: white;
@@ -35,6 +60,7 @@
             text-align: center;
             width: 100%;
             max-width: 400px;
+            margin: 50px auto;
         }
         .login-container h2 {
             margin-bottom: 1rem;
@@ -93,6 +119,22 @@
 </head>
 
 <body>
+    <header>
+        <div class="logo">
+            <a href="index.html">TreePlace.App</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="index.html#get-involved">Get Involved</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="checkout.html">Donate</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="login-container">
         <h2>Login</h2>
         <form id="loginForm">
@@ -113,7 +155,6 @@
             </div>
         </form>
     </div>
-
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
