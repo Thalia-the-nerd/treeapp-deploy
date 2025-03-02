@@ -51,6 +51,7 @@
         nav ul li a {
             color: white;
             text-decoration: none;
+            font-weight: bold;
         }
         .login-container {
             background: white;
@@ -59,7 +60,7 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 350px;
             margin: 50px auto;
         }
         .login-container h2 {
@@ -68,20 +69,20 @@
         }
         .form-group {
             margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
             text-align: left;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #555;
         }
         .form-group input {
-            width: 100%;
-            padding: 10px;
+            width: 90%;
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1rem;
+            display: block;
+            margin: auto;
+        }
+        .form-group input::placeholder {
+            color: #aaa;
+            font-style: italic;
         }
         .btn {
             display: block;
@@ -139,12 +140,10 @@
         <h2>Login</h2>
         <form id="loginForm">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn">Login</button>
