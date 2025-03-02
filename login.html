@@ -20,15 +20,20 @@ This is a wayyy better now.
     </script>
     <script src="script.js" defer></script>
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
             font-family: 'Exo 2', sans-serif;
             background: #f4f7f6;
-            margin: 0;
+            height: 100%;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
         }
         header {
             background: #27ae60;
@@ -66,13 +71,12 @@ This is a wayyy better now.
         }
         .login-container {
             background: white;
-            padding: 3rem;
+            padding: 2rem;
             border-radius: 10px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 100%;
             max-width: 400px;
-            margin-top: 70px;
         }
         .login-container h2 {
             margin-bottom: 1.5rem;
