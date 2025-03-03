@@ -1,4 +1,9 @@
 # treeapp-deploy
-Nuh uh
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?size=30&lines=Touch+some+grass.)](https://git.io/typing-svg)
+This is a prod database
+all changes deploy in under 1 minutes
+check treeplace.app
+dont mess up stuff
+please keep links the same
+make it look nuce
+i will upload prod database soon and backup database
+Thanx -Thalia :3
