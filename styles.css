@@ -110,3 +110,21 @@ nav ul li a:hover {
     borderRadius: 5;
 }
 
+/* From Uiverse.io by SteveBloX */ 
+button {
+  width: 150px;
+  height: 60px;
+  border: 3px solid #6FD276;
+  border-radius: 45px;
+  transition: all 0.3s;
+  cursor: pointer;
+  background: white;
+  font-size: 1.2em;
+  font-weight: 550;
+}
+
+button:hover {
+  background: #6FD276;
+  color: white;
+  font-size: 1.5em;
+}
