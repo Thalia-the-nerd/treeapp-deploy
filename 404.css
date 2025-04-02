@@ -1,114 +1,181 @@
-/* From Uiverse.io by NlghtM4re */
+:root {
+    --primary-color: #2ecc71;
+    --primary-dark: #27ae60;
+    --secondary-color: #34495e;
+    --accent-color: #4CAF50;
+    --text-color: #ffffff;
+    --light-bg: #1a1a1a;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --transition: all 0.3s ease;
+    --gradient: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --card-bg: #2d2d2d;
+    --card-border: #404040;
+    --bg-color: #1a1a1a;
+}
+
 body {
-  font-family: 'Exo 2', sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-  text-align: center;
-  padding: 50px;
+    font-family: 'Exo 2', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+    line-height: 1.6;
 }
 
 .container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 h1 {
-  font-size: 3em;
-  margin-bottom: 20px;
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    text-shadow: var(--shadow);
 }
 
 p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: var(--text-color);
 }
 
 .btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 1em;
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--gradient);
+    color: var(--white);
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
 }
 
 .btn:hover {
-  background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
 }
 
 .hl-reference {
-  font-style: italic;
-  margin-top: 30px;
-  color: #777;
+    font-style: italic;
+    margin-top: 30px;
+    color: var(--text-color);
+    opacity: 0.7;
 }
 
+/* Tree Animation */
 .tree {
-  position: relative;
-  width: 50px;
-  height: 50px;
-  transform-style: preserve-3d;
-  transform: rotateX(-20deg) rotateY(30deg);
-  animation: treeAnimate 5s linear infinite;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(30deg);
+    animation: treeAnimate 5s linear infinite;
 }
 
 @keyframes treeAnimate {
-  0% {
-    transform: rotateX(-20deg) rotateY(360deg);
-  }
-  100% {
-    transform: rotateX(-20deg) rotateY(0deg);
-  }
+    0% {
+        transform: rotateX(-20deg) rotateY(360deg);
+    }
+    100% {
+        transform: rotateX(-20deg) rotateY(0deg);
+    }
 }
 
 .tree div {
-  position: absolute;
-  top: -50px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transform: translateY(calc(25px * var(--x))) translateZ(0px);
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: translateY(calc(25px * var(--x))) translateZ(0px);
 }
 
 .tree div.branch span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, #69c069, #77dd77);
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  border-bottom: 5px solid #00000019;
-  transform-origin: bottom;
-  transform: rotateY(calc(90deg * var(--i))) rotateX(30deg) translateZ(28.5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+    transform-origin: bottom;
+    transform: rotateY(calc(90deg * var(--i))) rotateX(30deg) translateZ(28.5px);
 }
 
 .tree div.stem span {
-  position: absolute;
-  top: 110px;
-  left: calc(50% - 7.5px);
-  width: 15px;
-  height: 50%;
-  background: linear-gradient(90deg, #bb4622, #df7214);
-  border-bottom: 5px solid #00000019;
-  transform-origin: bottom;
-  transform: rotateY(calc(90deg * var(--i))) translateZ(7.5px);
+    position: absolute;
+    top: 110px;
+    left: calc(50% - 7.5px);
+    width: 15px;
+    height: 50%;
+    background: linear-gradient(90deg, #bb4622, #df7214);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+    transform-origin: bottom;
+    transform: rotateY(calc(90deg * var(--i))) translateZ(7.5px);
 }
 
 .shadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  filter: blur(20px);
-  transform-style: preserve-3d;
-  transform: rotateX(90deg) translateZ(-65px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    filter: blur(20px);
+    transform-style: preserve-3d;
+    transform: rotateX(90deg) translateZ(-65px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Focus Styles */
+:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
 }
