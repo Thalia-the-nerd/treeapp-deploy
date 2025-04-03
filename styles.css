@@ -14,7 +14,6 @@
     --glass-border: rgba(255, 255, 255, 0.2);
     --card-bg: #2d2d2d;
     --card-border: #404040;
-    --loading-color: var(--primary-color);
     --scroll-top-bg: rgba(46, 204, 113, 0.9);
     --bg-color: #1a1a1a;
     --header-bg: rgba(26, 26, 26, 0.95);
@@ -514,27 +513,6 @@ footer::before {
     }
 }
 
-/* Loading Animation */
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    transition: opacity 0.5s ease-out;
-}
-
-.loading-overlay .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .tree {
     position: relative;
     width: 50px;
@@ -703,18 +681,6 @@ footer::before {
 
 .skip-link:focus {
     top: 0;
-}
-
-/* Loading Skeleton Animation */
-.skeleton {
-    background: linear-gradient(90deg, var(--light-bg) 25%, var(--card-bg) 50%, var(--light-bg) 75%);
-    background-size: 200% 100%;
-    animation: loading 0.5s;
-}
-
-@keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
 }
 
 /* Remove settings-related styles */
