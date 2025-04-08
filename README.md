@@ -8,4 +8,4 @@ make it look nice
 i will upload prod database soon and backup database
 Thanx -Thalia :3
 
-### Note to Franco: Please make sure to sign the ipa BEFORE uploading it, Thanks
+#### Note to Franco: Please make sure to sign the ipa BEFORE uploading it, Thanks
