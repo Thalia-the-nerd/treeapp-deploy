@@ -3,82 +3,656 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy & Terms of Use - TreePlace.App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Legal Babble Go Brrrr</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Scroll-to-Top Icon (optional, but included in CSS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Add specific styles for legal docs if needed, or adjust existing ones */
+        .legal-section h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-dark);
+            font-size: 2em; /* Slightly larger main section headings */
+        }
+        .legal-section h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.5em; /* Article headings */
+        }
+         .legal-section h4 {
+            color: var(--accent-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600; /* Make section titles bolder */
+            font-size: 1.1em;
+         }
+        .legal-section ul, .legal-section ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        .legal-section li {
+            margin-bottom: 0.5rem;
+        }
+        .legal-section a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .legal-section a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        .legal-section strong {
+            color: var(--accent-color); /* Keep highlighting for emphasis */
+            font-weight: 600;
+        }
+        .placeholder-text { /* Style for placeholders */
+            background-color: rgba(255, 255, 0, 0.2); /* Light yellow highlight */
+            padding: 0 0.2em;
+            border-radius: 3px;
+            font-style: italic;
+            color: #eee; /* Lighter text for placeholder */
+        }
+        .toc ol {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+             margin-bottom: 0.7rem;
+        }
+        .toc a {
+            font-weight: 500;
+        }
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .category-table th, .category-table td {
+            border: 1px solid var(--card-border);
+            padding: 0.8rem;
+            text-align: left;
+        }
+         .category-table th {
+            background-color: var(--secondary-color);
+            color: var(--white);
+         }
+        .category-table td:last-child {
+             text-align: center;
+             font-weight: bold;
+         }
+         /* Specific spacing for bylaws */
+        #bylaws .text-box {
+            margin-bottom: 1.5rem; /* Slightly less space between articles */
+        }
+        #bylaws h3 {
+            margin-bottom: 1.5rem; /* More space after Article title */
+        }
+         #bylaws h4 {
+            margin-top: 1.8rem; /* More space before Section title */
+            margin-bottom: 0.5rem;
+         }
+          #bylaws h4:first-of-type {
+            margin-top: 0; /* Remove top margin for the first section in an article */
+         }
+    </style>
 </head>
 <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header>
         <div class="container">
-            <h1>TreePlace.App</h1>
+            <h1>Legal Docs</h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="how-it-works.html">How It Works</a></li>
-                    <li><a href="map.html">Map</a></li>
-                    <li><a href="privacy-policy-terms.html" class="btn primary">Privacy & Terms</a></li>
+                    <li><a href="#privacy-policy">Privacy Policy</a></li>
+                    <li><a href="#terms-of-use">Terms of Use</a></li>
+                    <li><a href="#bylaws">Bylaws</a></li> {/* <!-- ADDED THIS LINK --> */}
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section id="privacy-policy" class="section">
+    <main id="main-content">
+
+        <!-- Privacy Policy Section -->
+        <section id="privacy-policy" class="section legal-section">
             <div class="container">
-                <h2>Privacy Policy</h2>
-                <p>Last updated February 05, 2025</p>
-                <article>
-                    <p>
-                        This Privacy Notice for TreeAPP ("we," "us," or "our") describes how and why we might access, collect, store, use, and/or
-                        share ("process") your personal information when you use our services ("Services"), including when you:
-                    </p>
+                <h2>PRIVACY POLICY</h2>
+                <div class="text-box">
+                    <p><strong>Last updated February 05, 2025</strong></p>
+
+                    <p>This Privacy Notice for TreeAPP ("<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>"), describes how and why we might access, collect, store, use, and/or share ("<strong>process</strong>") your personal information when you use our services ("<strong>Services</strong>"), including when you:</p>
                     <ul>
-                        <li>Visit our website at <a href="https://treeplace.app">treeplace.app</a>, or any website of ours that links to this Privacy Notice</li>
+                        <li>Visit our website at <a href="https://treeplace.app" target="_blank" rel="noopener noreferrer">treeplace.app</a>, or any website of ours that links to this Privacy Notice</li>
                         <li>Download and use our mobile application (Treeplace.app), or any other application of ours that links to this Privacy Notice</li>
                         <li>Engage with us in other related ways, including any sales, marketing, or events</li>
                     </ul>
-                    <p>
-                        Questions or concerns? Reading this Privacy Notice will help you understand your privacy rights and choices. If you still have any questions or concerns, please contact us at <a href="mailto:Thaliathenerder@gmail.com">Thaliathenerder@gmail.com</a>.
-                    </p>
-                </article>
-                <article>
-                    <h3>Summary of Key Points</h3>
-                    <ul>
-                        <li><strong>What personal information do we process?</strong> Learn more <a href="#information-we-collect">here</a>.</li>
-                        <li><strong>Do we process sensitive personal information?</strong> We do not process sensitive personal information.</li>
-                        <li><strong>Do we collect any information from third parties?</strong> We do not collect any information from third parties.</li>
-                    </ul>
-                </article>
-                <article id="information-we-collect">
-                    <h3>1. What Information Do We Collect?</h3>
-                    <p>In short: We collect personal information that you provide to us.</p>
-                    <p>The personal information we collect depends on the context of your interactions with us and may include:</p>
-                    <ul>
-                        <li>Names</li>
-                        <li>Email addresses</li>
-                        <li>Billing addresses</li>
-                        <li>Payment data</li>
-                    </ul>
-                </article>
-                <article id="processing-information">
-                    <h3>2. How Do We Process Your Information?</h3>
-                    <p>We process your personal information to provide, improve, and administer our Services, communicate with you, and for security purposes.</p>
-                </article>
-                <article id="sharing-information">
-                    <h3>3. When and With Whom Do We Share Your Personal Information?</h3>
-                    <p>We may share your information with:</p>
-                    <ul>
-                        <li>Ad networks</li>
-                        <li>Data analytics services</li>
-                        <li>Payment processors</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
+                    <p><strong>Questions or concerns?</strong> Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at <a href="mailto:Thaliathenerder@gmail.com">Thaliathenerder@gmail.com</a>.</p>
+                </div>
 
-        <section id="terms-of-use" class="section">
+                <div class="text-box toc">
+                    <h3>SUMMARY OF KEY POINTS</h3>
+                    <p><em>This summary provides key points from our Privacy Notice, but you can find out more details about any of these topics by clicking the link following each key point or by using our table of contents below to find the section you are looking for.</em></p>
+                    <ul>
+                        <li><strong>What personal information do we process?</strong> When you visit, use, or navigate our Services, we may process personal information depending on how you interact with us and the Services, the choices you make, and the products and features you use. <a href="#privacy-1">Learn more about personal information you disclose to us</a>.</li>
+                        <li><strong>Do we process any sensitive personal information?</strong> Some of the information may be considered "special" or "sensitive" in certain jurisdictions, for example your racial or ethnic origins, sexual orientation, and religious beliefs. We do not process sensitive personal information.</li>
+                        <li><strong>Do we collect any information from third parties?</strong> We do not collect any information from third parties.</li>
+                        <li><strong>How do we process your information?</strong> We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law. We may also process your information for other purposes with your consent. We process your information only when we have a valid legal reason to do so. <a href="#privacy-2">Learn more about how we process your information</a>.</li>
+                        <li><strong>In what situations and with which types of parties do we share personal information?</strong> We may share information in specific situations and with specific categories of third parties. <a href="#privacy-3">Learn more about when and with whom we share your personal information</a>.</li>
+                        <li><strong>How do we keep your information safe?</strong> We have adequate organizational and technical processes and procedures in place to protect your personal information. However, no electronic transmission over the internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security and improperly collect, access, steal, or modify your information. <a href="#privacy-6">Learn more about how we keep your information safe</a>.</li>
+                        <li><strong>What are your rights?</strong> Depending on where you are located geographically, the applicable privacy law may mean you have certain rights regarding your personal information. <a href="#privacy-7">Learn more about your privacy rights</a>.</li>
+                        <li><strong>How do you exercise your rights?</strong> The easiest way to exercise your rights is by visiting <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGpxKihlm0q-gR3GTC3W41HUauZ24Bbus0TNkYc2R63gr_RA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">this form</a>, or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws.</li>
+                    </ul>
+                    <p>Want to learn more about what we do with any information we collect? <a href="#privacy-policy">Review the Privacy Notice in full</a>.</p>
+                </div>
+
+                <div class="text-box toc">
+                    <h3>TABLE OF CONTENTS</h3>
+                    <ol>
+                        <li><a href="#privacy-1">1. WHAT INFORMATION DO WE COLLECT?</a></li>
+                        <li><a href="#privacy-2">2. HOW DO WE PROCESS YOUR INFORMATION?</a></li>
+                        <li><a href="#privacy-3">3. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</a></li>
+                        <li><a href="#privacy-4">4. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</a></li>
+                        <li><a href="#privacy-5">5. HOW LONG DO WE KEEP YOUR INFORMATION?</a></li>
+                        <li><a href="#privacy-6">6. HOW DO WE KEEP YOUR INFORMATION SAFE?</a></li>
+                        <li><a href="#privacy-7">7. WHAT ARE YOUR PRIVACY RIGHTS?</a></li>
+                        <li><a href="#privacy-8">8. CONTROLS FOR DO-NOT-TRACK FEATURES</a></li>
+                        <li><a href="#privacy-9">9. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</a></li>
+                        <li><a href="#privacy-10">10. DO WE MAKE UPDATES TO THIS NOTICE?</a></li>
+                        <li><a href="#privacy-11">11. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</a></li>
+                        <li><a href="#privacy-12">12. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</a></li>
+                    </ol>
+                </div>
+
+                <!-- Privacy Section 1 -->
+                <div id="privacy-1" class="text-box">
+                    <h3>1. WHAT INFORMATION DO WE COLLECT?</h3>
+                    {... Privacy Section 1 content ...}
+                </div>
+                <!-- Privacy Section 2 -->
+                <div id="privacy-2" class="text-box">
+                    <h3>2. HOW DO WE PROCESS YOUR INFORMATION?</h3>
+                     {... Privacy Section 2 content ...}
+               </div>
+                <!-- Privacy Section 3 -->
+                 <div id="privacy-3" class="text-box">
+                    <h3>3. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</h3>
+                     {... Privacy Section 3 content ...}
+                </div>
+                <!-- Privacy Section 4 -->
+                <div id="privacy-4" class="text-box">
+                    <h3>4. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</h3>
+                    {... Privacy Section 4 content ...}
+                </div>
+                <!-- Privacy Section 5 -->
+                <div id="privacy-5" class="text-box">
+                   <h3>5. HOW LONG DO WE KEEP YOUR INFORMATION?</h3>
+                   {... Privacy Section 5 content ...}
+                </div>
+                <!-- Privacy Section 6 -->
+                <div id="privacy-6" class="text-box">
+                    <h3>6. HOW DO WE KEEP YOUR INFORMATION SAFE?</h3>
+                   {... Privacy Section 6 content ...}
+                </div>
+                <!-- Privacy Section 7 -->
+                <div id="privacy-7" class="text-box">
+                    <h3>7. WHAT ARE YOUR PRIVACY RIGHTS?</h3>
+                    {... Privacy Section 7 content ...}
+                </div>
+                <!-- Privacy Section 8 -->
+                <div id="privacy-8" class="text-box">
+                    <h3>8. CONTROLS FOR DO-NOT-TRACK FEATURES</h3>
+                    {... Privacy Section 8 content ...}
+                </div>
+                <!-- Privacy Section 9 -->
+                <div id="privacy-9" class="text-box">
+                    <h3>9. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</h3>
+                     {... Privacy Section 9 content ...}
+                     <table class="category-table">
+                         {... Privacy Section 9 table content ...}
+                     </table>
+                     {... rest of Privacy Section 9 content ...}
+                </div>
+                <!-- Privacy Section 10 -->
+                <div id="privacy-10" class="text-box">
+                    <h3>10. DO WE MAKE UPDATES TO THIS NOTICE?</h3>
+                    {... Privacy Section 10 content ...}
+                </div>
+                <!-- Privacy Section 11 -->
+                <div id="privacy-11" class="text-box">
+                    <h3>11. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</h3>
+                    {... Privacy Section 11 content ...}
+                </div>
+                <!-- Privacy Section 12 -->
+                <div id="privacy-12" class="text-box">
+                    <h3>12. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</h3>
+                    {... Privacy Section 12 content ...}
+                </div>
+            </div><!-- /.container -->
+        </section><!-- /#privacy-policy -->
+
+
+        <!-- Terms of Use Section -->
+        <section id="terms-of-use" class="section legal-section">
             <div class="container">
-                <h2>Terms of Use</h2>
-                <p>Last updated __________</p>
-                <article>
-                    <h3>Agreement to Our Legal Terms</h3>
-                    <
+                 <h2>TERMS OF USE</h2>
+                 <div class="text-box">
+                    <p><strong>Last updated __________</strong></p>
+                    <h3>AGREEMENT TO OUR LEGAL TERMS</h3>
+                     {... Terms Section Agreement content ...}
+                </div>
+
+                <div class="text-box toc">
+                    <h3>TABLE OF CONTENTS</h3>
+                     {... Terms Table of Contents ...}
+                </div>
+
+                 <!-- Terms Section 1 -->
+                 <div id="terms-1" class="text-box">
+                    <h3>1. OUR SERVICES</h3>
+                     {... Terms Section 1 content ...}
+                 </div>
+                 <!-- Terms Section 2 -->
+                 <div id="terms-2" class="text-box">
+                    <h3>2. INTELLECTUAL PROPERTY RIGHTS</h3>
+                    {... Terms Section 2 content ...}
+                 </div>
+                <!-- Terms Section 3 -->
+                 <div id="terms-3" class="text-box">
+                    <h3>3. USER REPRESENTATIONS</h3>
+                    {... Terms Section 3 content ...}
+                 </div>
+                <!-- Terms Section 4 -->
+                 <div id="terms-4" class="text-box">
+                    <h3>4. PROHIBITED ACTIVITIES</h3>
+                    {... Terms Section 4 content ...}
+                 </div>
+                <!-- Terms Section 5 -->
+                 <div id="terms-5" class="text-box">
+                    <h3>5. USER GENERATED CONTRIBUTIONS</h3>
+                    {... Terms Section 5 content ...}
+                 </div>
+                <!-- Terms Section 6 -->
+                 <div id="terms-6" class="text-box">
+                    <h3>6. CONTRIBUTION LICENSE</h3>
+                    {... Terms Section 6 content ...}
+                 </div>
+                <!-- Terms Section 7 -->
+                 <div id="terms-7" class="text-box">
+                    <h3>7. SERVICES MANAGEMENT</h3>
+                    {... Terms Section 7 content ...}
+                 </div>
+                <!-- Terms Section 8 -->
+                 <div id="terms-8" class="text-box">
+                    <h3>8. TERM AND TERMINATION</h3>
+                    {... Terms Section 8 content ...}
+                 </div>
+                <!-- Terms Section 9 -->
+                 <div id="terms-9" class="text-box">
+                    <h3>9. MODIFICATIONS AND INTERRUPTIONS</h3>
+                    {... Terms Section 9 content ...}
+                 </div>
+                <!-- Terms Section 10 -->
+                 <div id="terms-10" class="text-box">
+                    <h3>10. GOVERNING LAW</h3>
+                    {... Terms Section 10 content ...}
+                 </div>
+                <!-- Terms Section 11 -->
+                 <div id="terms-11" class="text-box">
+                    <h3>11. DISPUTE RESOLUTION</h3>
+                     {... Terms Section 11 content ...}
+                 </div>
+                <!-- Terms Section 12 -->
+                 <div id="terms-12" class="text-box">
+                    <h3>12. CORRECTIONS</h3>
+                     {... Terms Section 12 content ...}
+                 </div>
+                <!-- Terms Section 13 -->
+                 <div id="terms-13" class="text-box">
+                    <h3>13. DISCLAIMER</h3>
+                     {... Terms Section 13 content ...}
+                 </div>
+                <!-- Terms Section 14 -->
+                 <div id="terms-14" class="text-box">
+                    <h3>14. LIMITATIONS OF LIABILITY</h3>
+                     {... Terms Section 14 content ...}
+                 </div>
+                <!-- Terms Section 15 -->
+                 <div id="terms-15" class="text-box">
+                    <h3>15. INDEMNIFICATION</h3>
+                     {... Terms Section 15 content ...}
+                 </div>
+                <!-- Terms Section 16 -->
+                 <div id="terms-16" class="text-box">
+                    <h3>16. USER DATA</h3>
+                    {... Terms Section 16 content ...}
+                 </div>
+                <!-- Terms Section 17 -->
+                 <div id="terms-17" class="text-box">
+                    <h3>17. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</h3>
+                    {... Terms Section 17 content ...}
+                 </div>
+                <!-- Terms Section 18 -->
+                 <div id="terms-18" class="text-box">
+                    <h3>18. MISCELLANEOUS</h3>
+                    {... Terms Section 18 content ...}
+                 </div>
+                <!-- Terms Section 19 -->
+                 <div id="terms-19" class="text-box">
+                    <h3>19. CONTACT US</h3>
+                    {... Terms Section 19 content ...}
+                 </div>
+            </div><!-- /.container -->
+        </section><!-- /#terms-of-use -->
+
+        <!-- Bylaws Section -->
+        <section id="bylaws" class="section legal-section">
+            <div class="container">
+                <h2>BYLAWS OF TREEPLACE.APP</h2>
+
+                <!-- Article I -->
+                <div class="text-box">
+                    <h3>Article I: Name and Purpose</h3>
+                    <h4>Section 1.1 Name</h4>
+                    <p>The name of this organization shall be TreePlace.app, hereinafter referred to as "the Organization."</p>
+
+                    <h4>Section 1.2 Purpose</h4>
+                    <p>The purpose of the Organization is to operate exclusively for charitable purposes within the meaning of Section 501(c)(3) of the Internal Revenue Code. The specific purposes of the Organization include:</p>
+                    <ul>
+                        <li>Connecting individuals and communities to resources for planting and caring for trees.</li>
+                        <li>Educating the public about the environmental, social, and economic benefits of trees.</li>
+                        <li>Facilitating collaborative tree-planting projects.</li>
+                        <li>Developing and maintaining a digital platform to support the Organization's mission.</li>
+                        <li>Advocating for policies that support urban forestry and tree conservation.</li>
+                        <li>Promoting research related to urban forestry.</li>
+                    </ul>
+
+                    <h4>Section 1.3 Mission Statement</h4>
+                    <p>TreePlace.app's mission is to foster a greener, healthier world by empowering individuals and communities to plant and care for trees.</p>
+
+                    <h4>Section 1.4 Vision Statement</h4>
+                    <p>TreePlace.app envisions a world where every community enjoys the benefits of a thriving urban forest.</p>
+                </div>
+
+                <!-- Article II -->
+                <div class="text-box">
+                    <h3>Article II: Offices</h3>
+                    <h4>Section 2.1 Principal Office</h4>
+                    <p>The principal office of the Organization shall be located at <span class="placeholder-text">[Address]</span>, or at such other place as the Board of Directors may designate.</p>
+
+                    <h4>Section 2.2 Registered Office</h4>
+                    <p>The Organization shall have and continuously maintain in the State of Florida a registered office, which may be, but need not be, identical with its principal office, and shall have a registered agent whose office is identical with such registered office.</p>
+                </div>
+
+                <!-- Article III -->
+                <div class="text-box">
+                    <h3>Article III: Membership</h3>
+                    <h4>Section 3.1 Membership</h4>
+                    <p>The organization shall have members.</p>
+
+                    <h4>Section 3.2 Eligibility</h4>
+                    <p>Any individual or entity that supports the purposes of the Organization shall be eligible for membership.</p>
+
+                    <h4>Section 3.3 Classes of Members</h4>
+                    <p>The Board of Directors may establish different classes of membership with varying rights and privileges. The classes of members, and their rights, shall be defined in the Organization's policies and procedures.</p>
+
+                    <h4>Section 3.4 Membership Dues</h4>
+                    <p>The Board of Directors may establish a schedule of membership dues. Members may be required to pay dues to maintain their membership in good standing.</p>
+
+                    <h4>Section 3.5 Voting Rights</h4>
+                    <p>Each member in good standing shall be entitled to one vote on matters submitted to the membership for a vote. The Board of Directors may establish rules regarding member voting rights.</p>
+
+                    <h4>Section 3.6 Meetings of Members</h4>
+                    <ul>
+                        <li><strong>Annual Meeting:</strong> The Organization shall hold an annual meeting of the members for the purpose of electing directors, receiving reports, and conducting other business. The annual meeting shall be held at a time and place designated by the Board of Directors.</li>
+                        <li><strong>Special Meetings:</strong> Special meetings of the members may be called by the President, the Board of Directors, or upon the written request of <span class="placeholder-text">[Number]</span> percent of the members.</li>
+                        <li><strong>Notice of Meetings:</strong> Written notice of all meetings of the members shall be given to each member not less than <span class="placeholder-text">[Number]</span> days nor more than <span class="placeholder-text">[Number]</span> days before the date of the meeting. The notice shall state the time, place, and purpose of the meeting.</li>
+                        <li><strong>Quorum:</strong> <span class="placeholder-text">[Number]</span> percent of the members entitled to vote, present in person or represented by proxy, shall constitute a quorum at any meeting of the members.</li>
+                        <li><strong>Proxies:</strong> Members may vote in person or by proxy. Proxies must be in writing and signed by the member, and must be filed with the Secretary of the Organization before the meeting.</li>
+                        <li><strong>Action Without a Meeting:</strong> Any action required or permitted to be taken by the members of the Organization may be taken without a meeting if all members shall consent in writing to such action.</li>
+                    </ul>
+
+                    <h4>Section 3.7 Termination of Membership</h4>
+                    <p>Membership may be terminated for any of the following reasons:</p>
+                    <ul>
+                        <li>Failure to pay dues, if applicable.</li>
+                        <li>Resignation by the member.</li>
+                        <li>Action by the Board of Directors for conduct that is seriously prejudicial to the purposes or interests of the Organization. Termination for cause shall require a two-thirds vote of the entire Board of Directors, provided that the member shall be given an opportunity to be heard before the Board.</li>
+                    </ul>
+                </div>
+
+                 <!-- Article IV -->
+                <div class="text-box">
+                    <h3>Article IV: Board of Directors</h3>
+                    <h4>Section 4.1 General Powers</h4>
+                    <p>The affairs of the Organization shall be managed by its Board of Directors. The Board of Directors shall have all powers necessary or convenient for the administration of the Organization and for accomplishing the purposes of the Organization.</p>
+
+                    <h4>Section 4.2 Number, Qualifications, Election, and Terms</h4>
+                    <ul>
+                        <li><strong>Number:</strong> The Board of Directors shall consist of not less than <span class="placeholder-text">[Number]</span> nor more than <span class="placeholder-text">[Number]</span> directors. The initial number of directors shall be <span class="placeholder-text">[Number]</span>. Within these limits, the number of directors may be increased or decreased from time to time by amendment to these bylaws, but no decrease shall have the effect of shortening the term of any incumbent director.</li>
+                        <li><strong>Qualifications:</strong> Directors shall be individuals who are committed to the purposes of the Organization and who have the skills and experience necessary to further its mission.</li>
+                        <li><strong>Election:</strong> Directors shall be elected by the members of the Organization at the annual meeting of the members.</li>
+                        <li><strong>Terms:</strong> The term of office for directors shall be for life.</li>
+                        <li><strong>Staggered Terms:</strong> The terms of the directors shall be staggered such that approximately one-third of the directors are elected each year. The initial Board of Directors shall determine the staggering of terms.</li>
+                        <li><strong>Employee Representative:</strong> In addition to the directors elected by the members, there shall be one (1) voting representative of the employees of the Organization on the Board of Directors. The employee representative shall be selected by the employees of the Organization in accordance with procedures established by the Board of Directors. The employee representative shall serve a term of one (1) year and shall be eligible for re-selection, but shall not serve more than <span class="placeholder-text">[Number]</span> consecutive terms.</li>
+                        <li><strong>Voting Rights:</strong> Each director shall be entitled to one vote on all matters coming before the Board of Directors.</li>
+                    </ul>
+
+                    <h4>Section 4.3 Vacancies</h4>
+                    <p>Any vacancy occurring on the Board of Directors may be filled by the affirmative vote of a majority of the remaining directors, though less than a quorum of the Board of Directors. A director elected to fill a vacancy shall serve for the unexpired term of his or her predecessor in office.</p>
+
+                    <h4>Section 4.4 Removal of Directors</h4>
+                    <p>A director may be removed from office by a two-thirds vote of the members of the Organization at a special meeting called for that purpose. A director may be removed by a two-thirds vote of the entire Board of Directors for:</p>
+                    <ul>
+                        <li>Missing three (3) consecutive regular meetings of the Board of Directors without an excuse acceptable to the Board of Directors.</li>
+                        <li>Conduct that is seriously prejudicial to the purposes or interests of the Organization.</li>
+                    </ul>
+
+                    <h4>Section 4.5 Resignation</h4>
+                    <p>Any director may resign at any time by giving written notice to the President or the Secretary of the Organization. Although the director shall continue to serve until a successor is elected by the members.</p>
+
+                    <h4>Section 4.6 Compensation</h4>
+                    <p>Directors shall serve without compensation, except that they may be reimbursed for reasonable expenses incurred in the performance of their duties.</p>
+
+                    <h4>Section 4.7 Meetings of the Board of Directors</h4>
+                     <ul>
+                        <li><strong>Regular Meetings:</strong> The Board of Directors shall hold regular meetings at least <span class="placeholder-text">[Number]</span> times per year. The time and place of regular meetings shall be determined by the Board of Directors.</li>
+                        <li><strong>Special Meetings:</strong> Special meetings of the Board of Directors may be called by the President or by any <span class="placeholder-text">[Number]</span> directors. The notice of the special meeting shall state the purpose(s) of the meeting.</li>
+                        <li><strong>Notice of Meetings:</strong> Notice of all meetings of the Board of Directors shall be given to each director not less than <span class="placeholder-text">[Number]</span> days nor more than <span class="placeholder-text">[Number]</span> days before the date of the meeting. The notice shall state the time, place, and purpose of the meeting.</li>
+                        <li><strong>Quorum:</strong> A majority of the directors shall constitute a quorum for the transaction of business at any meeting of the Board of Directors.</li>
+                        <li><strong>Action Without a Meeting:</strong> Any action required or permitted to be taken by the Board of Directors of the Organization may be taken without a meeting if all members of the Board shall consent in writing to such action.</li>
+                        <li><strong>Participation by Electronic Means:</strong> Directors may participate in any meeting of the Board of Directors by means of a conference telephone or similar communications equipment by means of which all persons participating in the meeting can hear each other, and such participation shall constitute presence in person at the meeting.</li>
+                    </ul>
+
+                    <h4>Section 4.8 Committees of the Board of Directors</h4>
+                    <ul>
+                        <li><strong>Establishment:</strong> The Board of Directors may establish one or more committees to carry out specific tasks. Committees may be standing or ad hoc.</li>
+                        <li><strong>Membership:</strong> Committees shall consist of one or more directors. The President shall appoint the members of committees, subject to the approval of the Board of Directors.</li>
+                        <li><strong>Powers:</strong> Committees shall have only the powers specifically delegated to them by the Board of Directors.</li>
+                        <li><strong>Rules:</strong> Each committee shall adopt rules for its own governance and shall report its activities to the Board of Directors.</li>
+                        <li><strong>Executive Committee:</strong> The Board of Directors may establish an Executive Committee, which shall have the authority to act on behalf of the Board of Directors between meetings of the Board, to the extent permitted by law. The Executive Committee shall consist of the President, Vice President, Secretary, and Treasurer, and any other directors appointed by the President with the approval of the Board of Directors.</li>
+                        <li><strong>Finance Committee:</strong> The Board of Directors shall establish a Finance Committee, which shall be responsible for overseeing the financial affairs of the Organization, including the preparation of the budget, monitoring expenditures, and ensuring compliance with financial policies.</li>
+                        <li><strong>Nominating Committee:</strong> The Board of Directors shall establish a Nominating Committee, which shall be responsible for identifying and recommending candidates for election as directors and officers.</li>
+                    </ul>
+
+                    <h4>Section 4.9 Conflict of Interest</h4>
+                    <p>Any director, officer, or member of a committee who has a direct or indirect interest in any transaction with the Organization shall disclose the nature of his or her interest to the Board of Directors or the committee.</p>
+                    <p>A director shall not vote or participate in any action of the Board of Directors concerning a transaction in which the director has a direct or indirect interest, except that the director may be counted in determining the presence of a quorum at the meeting of the Board of Directors that considers the transaction.</p>
+                    <p>The minutes of the meeting of the Board of Directors shall reflect that the disclosure was made and that the director did not participate in the vote.</p>
+                    <p>The Board of Directors shall adopt a Conflict of Interest Policy to further define conflicts of interest and establish procedures for addressing them.</p>
+
+                    <h4>Section 4.10 Employee Vote of No Confidence</h4>
+                    <p>Thirty percent (30%) of all paid employees of the Organization may petition the Board of Directors to hold a vote of no confidence in one or more directors. The petition must be in writing and signed by the required number of employees.</p>
+                    <p>Upon receipt of a valid petition, the Board of Directors shall call a special meeting of the employees to conduct the vote of no confidence. The meeting shall be held within <span class="placeholder-text">[Number]</span> days of receipt of the petition.</p>
+                    <p>If a majority of the employees vote to express no confidence in a director, that director shall be removed from office.</p>
+                    <p>Following the removal of a director under this section, the members of the Organization shall hold an election to fill the vacancy. The former director may be a candidate in this election.</p>
+                    <p>Until a new Board of Directors is elected and installed, all actions of the Board of Directors must be approved by a majority vote of all paid employees of the Organization. This requirement shall not apply if the only director removed by a vote of no confidence is the Employee Representative as defined in Section 4.2.</p>
+                </div>
+
+                <!-- Article V -->
+                <div class="text-box">
+                    <h3>Article V: Officers and Employees</h3>
+                    <h4>Section 5.1 Officers</h4>
+                    <p>The officers of the Organization shall be a President, one or more Vice Presidents, a Secretary, and a Treasurer. The Board of Directors may appoint such other officers and agents as it shall deem necessary, who shall hold their offices for such terms and shall exercise such powers and perform such duties as shall be determined from time to time by the Board of Directors.</p>
+
+                    <h4>Section 5.2 Election and Term of Office</h4>
+                    <p>The officers of the Organization shall be elected by the Board of Directors at the first regular meeting of the Board of Directors following the annual meeting of the members.</p>
+                    <p>Officers shall serve for a term of one year and shall be eligible for re-election.</p>
+
+                    <h4>Section 5.3 Qualifications</h4>
+                    <p>Officers shall be directors of the Organization.</p>
+
+                    <h4>Section 5.4 Removal</h4>
+                    <p>Any officer may be removed by the Board of Directors whenever in its judgment the best interests of the Organization would be served thereby.</p>
+
+                    <h4>Section 5.5 Resignation</h4>
+                    <p>Any officer may resign at any time by giving written notice to the President or the Secretary of the Organization. The resignation shall take effect at the time specified in the notice, and unless otherwise specified in the notice, the acceptance of the resignation shall not be necessary to make it effective.</p>
+
+                    <h4>Section 5.6 Vacancies</h4>
+                    <p>A vacancy in any office because of death, resignation, removal, disqualification, or otherwise, may be filled by the Board of Directors.</p>
+
+                    <h4>Section 5.7 Duties of Officers</h4>
+                    <ul>
+                        <li><strong>President:</strong> The President shall be the principal executive officer of the Organization and shall preside at all meetings of the members and the Board of Directors. The President shall have general supervision over the affairs of the Organization and shall perform all duties incident to the office of President and such other duties as may be prescribed by the Board of Directors from time to time.</li>
+                        <li><strong>Vice President:</strong> In the absence of the President or in the event of the President's inability to act, the Vice President (or in the event there shall be more than one Vice President, the Vice Presidents in the order designated by the Board of Directors) shall perform the duties of the President, and when so acting, shall have all the powers of and be subject to all the restrictions upon the President. The Vice President shall perform such other duties as from time to time may be assigned to him or her by the President or by the Board of Directors.</li>
+                        <li><strong>Secretary:</strong> The Secretary shall keep the minutes of the meetings of the members and of the Board of Directors; see that all notices are duly given in accordance with the provisions of these bylaws or as required by law; be custodian of the corporate records of the Organization; and in general perform all duties incident to the office of Secretary and such other duties as from time to time may be assigned to him or her by the President or by the Board of Directors.</li>
+                        <li><strong>Treasurer:</strong> The Treasurer shall have charge and custody of and be responsible for all funds and securities of the Organization; receive and give receipts for moneys due and payable to the Organization from any source whatsoever, and deposit all such moneys in the name of the Organization in such banks, trust companies, or other depositories as shall be selected in accordance with the provisions of these bylaws; and in general perform all of the duties incident to the office of Treasurer and such other duties as from time to time may be assigned to him or her by the President or by the Board of Directors.</li>
+                    </ul>
+
+                    <h4>Section 5.8 Compensation</h4>
+                    <p>Officers shall serve without compensation, except that they may be reimbursed for reasonable expenses incurred in the performance of their duties.</p>
+
+                    <h4>Section 5.9 Employees</h4>
+                    <p>The Organization may hire employees to carry out its mission. The terms and conditions of employment shall be determined by the Executive Director, subject to the approval of the Board of Directors.</p>
+
+                    <h4>Section 5.10 Employee Representation</h4>
+                    <p>Employees shall have the right to form employee associations and to bargain collectively with the Organization on matters of wages, benefits, and working conditions. The Board of Directors shall establish policies and procedures to ensure that employees have a voice in the governance of the Organization. A designated employee representative shall be a voting member of the Board of Directors.</p>
+                </div>
+
+                <!-- Article VI -->
+                <div class="text-box">
+                    <h3>Article VI: Contracts, Checks, Deposits, and Funds</h3>
+                    <h4>Section 6.1 Contracts</h4>
+                    <p>The Board of Directors may authorize any officer or officers, agent or agents, in the name of and on behalf of the Organization, to enter into any contract or execute and deliver any instrument, and such authority may be general or confined to specific instances.</p>
+
+                    <h4>Section 6.2 Checks, Drafts, Etc.</h4>
+                    <p>All checks, drafts, or other orders for the payment of money, notes, or other evidences of indebtedness issued in the name of the Organization shall be signed by such officer or officers, agent or agents of the Organization and in such manner as shall from time to time be determined by resolution of the Board of Directors. In the absence of such determination by the Board of Directors, such instruments shall be signed by the Treasurer or an Assistant Treasurer and countersigned by the President or a Vice President of the Organization.</p>
+
+                    <h4>Section 6.3 Deposits</h4>
+                    <p>All funds of the Organization shall be deposited from time to time to the credit of the Organization in such banks, trust companies, or other depositories as the Board of Directors may select.</p>
+
+                    <h4>Section 6.4 Gifts</h4>
+                    <p>The Board of Directors may accept on behalf of the Organization any contribution, gift, bequest, or devise for the general purposes or for any special purpose of the Organization.</p>
+                </div>
+
+                <!-- Article VII -->
+                <div class="text-box">
+                    <h3>Article VII: Books and Records</h3>
+                    <h4>Section 7.1 Books and Records</h4>
+                    <p>The Organization shall keep correct and complete books and records of account and shall also keep minutes of the proceedings of its members, Board of Directors, and committees having any of the authority of the Board of Directors, and shall keep at the registered or principal office of the Organization a record of the names and addresses of the members entitled to vote. All books and records of the Organization shall be open to inspection by any member entitled to vote, or his or her agent or attorney, for any proper purpose at any reasonable time.</p>
+
+                    <h4>Section 7.2 Annual Report</h4>
+                    <p>The Board of Directors shall present to the members an annual report concerning the activities and financial condition of the Organization.</p>
+                </div>
+
+                <!-- Article VIII -->
+                <div class="text-box">
+                    <h3>Article VIII: Fiscal Year</h3>
+                    <h4>Section 8.1 Fiscal Year</h4>
+                    <p>The fiscal year of the Organization shall begin on <span class="placeholder-text">[Month]</span> 1 and end on <span class="placeholder-text">[Month]</span> 31.</p>
+                </div>
+
+                 <!-- Article IX -->
+                <div class="text-box">
+                    <h3>Article IX: Exempt Activities Limitation</h3>
+                    <h4>Section 9.1 Exempt Activities</h4>
+                    <p>Notwithstanding any other provision of these bylaws, no director, officer, employee, or representative of this Organization shall take any action or carry on any activity on behalf of the Organization which would violate the requirements of Section 501(c)(3) of the Internal Revenue Code, as amended, and the regulations thereunder, including but not limited to the following:</p>
+                    <ul>
+                        <li>No part of the net earnings of the Organization shall inure to the benefit of, or be distributable to its members, directors, officers, or other private persons, except that the Organization shall be authorized and empowered to pay reasonable compensation for services rendered and to make payments and distributions in furtherance of the purposes set forth in Article I hereof.</li>
+                        <li>No substantial part of the activities of the Organization shall be the carrying on of propaganda, or otherwise attempting to influence legislation (except as otherwise provided by Section 501(h) of the Internal Revenue Code), and the Organization shall not participate in, or intervene in (including the publishing or distributing of statements) any political campaign on behalf of any candidate for public office.</li>
+                        <li>The Organization shall not carry on any other activities not permitted to be carried on by an organization exempt from federal income tax under Section 501(c)(3) of the Internal Revenue Code.</li>
+                    </ul>
+                </div>
+
+                <!-- Article X -->
+                <div class="text-box">
+                    <h3>Article X: Indemnification</h3>
+                    <h4>Section 10.1 Indemnification</h4>
+                    <p>The Organization shall indemnify its directors and officers to the fullest extent permitted by law. The Organization may indemnify its employees and other agents to the fullest extent permitted by law.</p>
+                </div>
+
+                <!-- Article XI -->
+                <div class="text-box">
+                    <h3>Article XI: Insurance</h3>
+                    <h4>Section 11.1 Insurance</h4>
+                    <p>The Organization shall have the power to purchase and maintain insurance on behalf of any person who is or was a director, officer, employee, or agent of the Organization against any liability asserted against him or her and incurred by him or her in any such capacity, or arising out of his or her status as such, whether or not the Organization would have the power to indemnify him or her against such liability under the provisions of Article X.</p>
+                </div>
+
+                <!-- Article XII -->
+                <div class="text-box">
+                    <h3>Article XII: Approval of Major Changes</h3>
+                    <h4>Section 12.1 Approval of Major Changes</h4>
+                    <p>Notwithstanding any other provision of these bylaws, the following actions shall require approval by a majority vote of all paid employees of the Organization, in addition to any approval required by the Board of Directors:</p>
+                    <ul>
+                        <li>Any change to the annual budget that exceeds <span class="placeholder-text">[Percentage]%</span> of the total budget.</li>
+                        <li>Any other action deemed by the Board of Directors to be a major change to the operations or direction of the Organization.</li>
+                    </ul>
+                </div>
+
+                <!-- Article XIII -->
+                <div class="text-box">
+                    <h3>Article XIII: Amendments</h3>
+                    <h4>Section 13.1 Amendments</h4>
+                    <p>These bylaws may be amended by a two-thirds vote of the Board of Directors, provided that notice of the proposed amendment shall have been given to each director at least <span class="placeholder-text">[Number]</span> days prior to the meeting at which the amendment is to be considered. Amendments may also be made by a two-thirds vote of the members.</p>
+                </div>
+
+            </div><!-- /.container -->
+        </section><!-- /#bylaws -->
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p style="text-align: center;">© 2025 __________ All rights reserved. Legal Information.</p>
+            <!-- Social media links could go here if needed, styled by .social-media -->
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Simple JS for Scroll to Top Button -->
+    <script>
+        const scrollTopBtn = document.querySelector('.scroll-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // Show button after scrolling 300px
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body>
+</html>
