@@ -109,41 +109,35 @@ document.addEventListener('DOMContentLoaded', () => {
     images.forEach(img => imageObserver.observe(img));
 });
 
-// Mobile Menu Toggle
-const createMobileMenu = () => {
-    const header = document.querySelector('header');
-    const nav = header.querySelector('nav');
-    const menuButton = document.createElement('button');
-    menuButton.className = 'mobile-menu-button';
-    menuButton.setAttribute('aria-label', 'Toggle menu');
-    menuButton.innerHTML = '<i class="fas fa-bars"></i>';
-    
-    header.insertBefore(menuButton, nav);
-    
-    menuButton.addEventListener('click', () => {
-        nav.classList.toggle('active');
-        menuButton.innerHTML = nav.classList.contains('active') 
-            ? '<i class="fas fa-times"></i>' 
-            : '<i class="fas fa-bars"></i>';
-    });
-};
+function initializeHamburgerMenu() {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const nav = document.querySelector('nav');
+    const body = document.body;
 
-// Initialize mobile menu on small screens
-if (window.innerWidth <= 768) {
-    createMobileMenu();
+    hamburgerMenu.addEventListener('click', function() {
+        hamburgerMenu.classList.toggle('active');
+        nav.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!hamburgerMenu.contains(event.target) && !nav.contains(event.target)) {
+            hamburgerMenu.classList.remove('active');
+            nav.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+    });
+
+    // Close menu on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            hamburgerMenu.classList.remove('active');
+            nav.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+    });
 }
 
-// Handle window resize
-window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768) {
-        if (!document.querySelector('.mobile-menu-button')) {
-            createMobileMenu();
-        }
-    } else {
-        const menuButton = document.querySelector('.mobile-menu-button');
-        if (menuButton) {
-            menuButton.remove();
-            nav.classList.remove('active');
-        }
-    }
-});
+// Initialize hamburger menu when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeHamburgerMenu);

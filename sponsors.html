@@ -20,23 +20,18 @@
 <body>
     <header>
         <div class="container">
-            <h1>TreePlace.App</h1>
+            <h1><a href="https://treeplace.app">TreePlace.App</a></h1>
             <div class="header-controls">
-                <!-- Language Selector -->
-                <div class="language-selector">
-                    <select id="language-select">
-                        <option value="en">English</option>
-                        <option value="es">Español</option>
-                        <option value="fr">Français</option>
-                    </select>
-                </div>
-                
                 <!-- Dark Mode Toggle -->
                 <button id="dark-mode-toggle" class="theme-toggle">
                     <i class="fas fa-moon"></i>
                 </button>
+                <!-- Hamburger Menu -->
+                <button id="hamburger-menu" class="hamburger-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
-            <nav>
+            <nav id="main-nav">
                 <ul>
                     <li><a href="index.html#about" class="btn" data-translate="about">About</a></li>
                     <li><a href="how-it-works.html" class="btn" data-translate="how_it_works">How It Works</a></li>

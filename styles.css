@@ -131,7 +131,9 @@ header .container {
 
 @media (max-width: 768px) {
     .header-controls {
-        display: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
     
     .header-controls.mobile-visible {
@@ -260,7 +262,7 @@ nav ul li a:hover {
 
 /* Interactive Features Section */
 #interactive-features {
-    background: var(--card-bg);
+    background: linear-gradient(180deg, var(--light-bg) 0%, transparent 100%);
     padding: 4rem 0;
 }
 
@@ -1352,5 +1354,429 @@ footer::before {
     .tree-actions .btn {
         width: 100%;
     }
+}
+
+/* Hamburger Menu Styles */
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.hamburger-menu:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--header-bg);
+        padding: 1rem;
+        box-shadow: var(--shadow);
+        border-top: 1px solid var(--glass-border);
+        z-index: 1000;
+    }
+
+    nav.active {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    nav ul li a {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Header Link Styles */
+header h1 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Responsive Navigation */
+@media screen and (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
+
+    #main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--background-color);
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    #main-nav.active {
+        display: block;
+    }
+
+    #main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #main-nav ul li {
+        margin: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .header-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 768px) {
+    .header-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .hamburger-menu {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        cursor: pointer;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .hamburger-menu:hover {
+        color: var(--primary-color);
+        transform: scale(1.1);
+    }
+
+    #main-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--background-color);
+        padding: 2rem 1rem;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    #main-nav.active {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    #main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 4rem;
+    }
+
+    #main-nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    #main-nav ul li a {
+        display: block;
+        padding: 1rem;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    #main-nav ul li a:hover {
+        color: var(--primary-color);
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .tree-feature {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .team {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .get-involved-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .get-involved-buttons .btn {
+        width: 100%;
+    }
+
+    .social-media {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .social-media a {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Additional Mobile Optimizations */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .feature-card i {
+        font-size: 2rem;
+    }
+
+    .counter {
+        font-size: 2.5rem;
+    }
+
+    .team-photo {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    /* Improve touch targets */
+    button, 
+    .btn, 
+    a {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 0.8rem 1.2rem;
+    }
+
+    /* Improve form elements */
+    input[type="email"],
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        font-size: 16px; /* Prevent zoom on iOS */
+        padding: 0.8rem;
+    }
+
+    /* Adjust spacing */
+    .section {
+        padding: 3rem 0;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* Improve readability */
+    .text-box {
+        padding: 1.5rem;
+    }
+
+    .text-box p {
+        margin-bottom: 1rem;
+    }
+
+    /* Optimize images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Improve button layout */
+    .get-involved-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .get-involved-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Improve gallery layout */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    /* Improve testimonials */
+    .testimonial {
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    /* Improve tree feature layout */
+    .tree-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+    }
+
+    .tree-description ul {
+        padding-left: 1rem;
+    }
+
+    /* Improve social media buttons */
+    .social-media {
+        gap: 0.8rem;
+    }
+
+    .social-media a {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    /* Further optimize for very small screens */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tree-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        padding: 1rem;
+    }
+
+    .team-member {
+        padding: 1rem;
+    }
+
+    .step {
+        padding: 1rem;
+    }
+}
+
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Improve tap highlights */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Improve form focus states */
+input:focus,
+button:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Improve button active states */
+button:active,
+.btn:active {
+    transform: scale(0.98);
 }
 
