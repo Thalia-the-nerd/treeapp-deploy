@@ -1,5 +1,5 @@
 # TreeApp Deploy
-#FRANCO DO NOT EDIT IM UPLOADING SMTH TONIGHT NO CODE CHANGES OK
+#FRANCO i updated it check it out im such a good girl
 ## Project Overview
 TreeApp Deploy is a production database application that allows for rapid deployment of changes within a minute. The primary URL for the application is [treeplace.app](https://treeplace.app). This repository contains the necessary files and instructions for deploying and maintaining the application.
 
