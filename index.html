@@ -11,17 +11,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3x/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="script.js" defer></script>
+    <script src="animations.js" defer></script>
+    <script src="interactive.js" defer></script>
+    <script src="technical.js" defer></script>
+</head>
 <body>
     <header>
         <div class="container">
             <h1>TreePlace.App</h1>
+            <div class="header-controls">
+                <!-- Dark Mode Toggle -->
+                <button id="dark-mode-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#about" class="btn" data-translate="about">About</a></li>
                     <li><a href="how-it-works.html" class="btn" data-translate="how_it_works">How It Works</a></li>
                     <li><a href="map.html" class="btn" data-translate="map">Map</a></li>
                     <li><a href="#get-involved" class="btn" data-translate="get_involved">Get Involved</a></li>
+                    <li><a href="sponsors.html" class="btn" data-translate="sponsors">Sponsors</a></li>
                     <li><a href="#contact" class="btn" data-translate="contact">Contact</a></li>
                     <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn" data-translate="donate">Donate</a></li>
                 </ul>
@@ -31,8 +43,150 @@
 
     <section id="hero">
         <div class="container">
-            <h2 class="animate-text" data-translate="hero_title">Join Us in Making Miami Greener</h2>
-            <p class="animate-text" data-translate="hero_subtitle">Help us plant trees and make Miami a greener, healthier place to live.</p>
+            <h2 class="animate-text parallax" data-speed="0.3" data-translate="hero_title">Join Us in Making Miami Greener</h2>
+            <p class="animate-text parallax" data-speed="0.4" data-translate="hero_subtitle">Help us plant trees and make Miami a greener, healthier place to live.</p>
+        </div>
+    </section>
+
+    <section id="interactive-features" class="section">
+        <div class="container">
+            <div class="features-grid">
+                <!-- Newsletter Subscription -->
+                <div class="feature-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Stay Updated</h3>
+                    <p>Subscribe to our newsletter for tree planting updates and environmental news.</p>
+                    <form class="newsletter-form" id="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn primary">Subscribe</button>
+                    </form>
+                </div>
+
+                <!-- Tree Counter -->
+                <div class="feature-card">
+                    <i class="fas fa-tree"></i>
+                    <h3>Trees Planted</h3>
+                    <div class="counter" id="tree-counter">
+                        <span class="number">0</span>
+                        <span class="label">Trees</span>
+                    </div>
+                    <p>Help us reach our goal of planting 10,000 trees in Miami!</p>
+                </div>
+
+                <!-- Tree Benefit Calculator -->
+                <div class="feature-card">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Tree Impact Calculator</h3>
+                    <p>Calculate the environmental impact of your planted trees.</p>
+                    <div class="calculator" id="tree-calculator">
+                        <input type="number" placeholder="Number of trees" min="1">
+                        <button class="btn primary">Calculate Impact</button>
+                        <div class="results" style="display: none;">
+                            <p>Annual CO2 Absorption: <span class="co2">0</span> kg</p>
+                            <p>Water Filtered: <span class="water">0</span> gallons</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Gallery -->
+                <div class="feature-card">
+                    <i class="fas fa-images"></i>
+                    <h3>Community Gallery</h3>
+                    <p>See the trees our community has planted.</p>
+                    <div class="gallery-preview" id="gallery-preview">
+                        <div class="gallery-grid">
+                            <!-- Gallery items will be loaded dynamically -->
+                        </div>
+                        <a href="gallery.html" class="btn primary">View All Photos</a>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="feature-card">
+                    <i class="fas fa-quote-left"></i>
+                    <h3>Community Stories</h3>
+                    <div class="testimonials" id="testimonials">
+                        <div class="testimonial-slider">
+                            <!-- Testimonials will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tree-of-the-month" class="section">
+        <div class="container">
+            <h2>Tree of the Month</h2>
+            <div class="tree-feature">
+                <div class="tree-image">
+                    <img src="gumbo-limbo.jpg" alt="Gumbo Limbo Tree" id="tree-of-month-image">
+                    <div class="tree-badges">
+                        <span class="badge native">Native</span>
+                        <span class="badge drought-resistant">Drought Resistant</span>
+                        <span class="badge wildlife-friendly">Wildlife Friendly</span>
+                    </div>
+                </div>
+                <div class="tree-info">
+                    <h3>Gumbo Limbo</h3>
+                    <p class="scientific-name">Bursera simaruba</p>
+                    <div class="tree-stats">
+                        <div class="stat">
+                            <i class="fas fa-ruler-vertical"></i>
+                            <span>Height: 30-40 ft</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-ruler-horizontal"></i>
+                            <span>Spread: 25-35 ft</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-sun"></i>
+                            <span>Sun: Full to Partial</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-tint"></i>
+                            <span>Water: Low</span>
+                        </div>
+                    </div>
+                    <div class="tree-description">
+                        <p>The Gumbo Limbo, affectionately known as the "Tourist Tree" due to its distinctive red, peeling bark that resembles sunburned tourists, is a beloved native tree of South Florida. This versatile tree has been a vital part of Miami's ecosystem for centuries, known for its rapid growth, beautiful copper-colored bark, and remarkable adaptability to Miami's unique climate.</p>
+                        
+                        <h4>Historical Significance:</h4>
+                        <p>Indigenous peoples used the Gumbo Limbo's resin for various medicinal purposes, earning it the nickname "the healing tree." Its wood was traditionally used for making furniture and canoes, while its bark was used in traditional medicine.</p>
+                        
+                        <h4>Growing Conditions:</h4>
+                        <p>Perfectly suited for Miami's climate, the Gumbo Limbo thrives in our sandy soils and salty conditions. It's particularly well-adapted to coastal areas and can withstand hurricane-force winds, making it an excellent choice for urban landscaping in South Florida.</p>
+                        
+                        <h4>Benefits:</h4>
+                        <ul>
+                            <li>Fast-growing shade tree (can grow up to 3 feet per year)</li>
+                            <li>Attracts birds, butterflies, and other wildlife</li>
+                            <li>Excellent salt and wind tolerance</li>
+                            <li>Low maintenance once established</li>
+                            <li>Drought resistant</li>
+                            <li>Natural air purifier</li>
+                            <li>Helps reduce urban heat island effect</li>
+                        </ul>
+                        
+                        <h4>Care Instructions:</h4>
+                        <p>While the Gumbo Limbo is relatively low-maintenance, here are some tips for optimal growth:</p>
+                        <ul>
+                            <li>Plant in well-draining soil</li>
+                            <li>Water regularly during first year</li>
+                            <li>Prune only to remove dead or damaged branches</li>
+                            <li>Fertilize lightly in spring and summer</li>
+                        </ul>
+                    </div>
+                    <div class="tree-actions">
+                        <button class="btn primary" id="plant-this-tree">
+                            <i class="fas fa-seedling"></i> Plant This Tree
+                        </button>
+                        <button class="btn secondary" id="learn-more-tree">
+                            <i class="fas fa-book"></i> Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

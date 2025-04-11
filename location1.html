@@ -1,17 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <link rel="icon" type="image/png" href="logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location 1 - Plant Trees in Miami</title>
+    <title>Miami Beach Park - TreePlace.App</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3x/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="script.js" defer></script>
+    <script src="animations.js" defer></script>
+    <script src="interactive.js" defer></script>
+    <script src="technical.js" defer></script>
+    <style>
+        .location-hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .location-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .location-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            color: white;
+        }
+        
+        .location-hero-overlay h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .location-hero-overlay p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .location-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .location-info-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--card-border);
+        }
+        
+        .location-info-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+        
+        .info-icon {
+            color: var(--primary-color);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+        
+        .info-content h3 {
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        
+        .info-content p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .location-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .gallery-caption {
+            padding: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+        
+        .location-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .location-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-hero {
+                height: 300px;
+            }
+            
+            .location-hero-overlay h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
     <header>
         <div class="container">
-           
+            <h1>TreePlace.App</h1>
+            <div class="header-controls">
+                <button id="dark-mode-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about" class="btn">About</a></li>
+                    <li><a href="how-it-works.html" class="btn">How It Works</a></li>
+                    <li><a href="map.html" class="btn active">Map</a></li>
+                    <li><a href="index.html#get-involved" class="btn">Get Involved</a></li>
+                    <li><a href="sponsors.html" class="btn">Sponsors</a></li>
+                    <li><a href="index.html#contact" class="btn">Contact</a></li>
+                    <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="location-hero">
+                <img src="https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Miami Beach Park">
+                <div class="location-hero-overlay">
+                    <h1>Miami Beach Park</h1>
+                    <p>4601 Collins Ave, Miami Beach, FL 33140</p>
+                </div>
+            </div>
+            
+            <div class="location-details">
+                <div class="location-info-card">
+                    <h2>About This Location</h2>
+                    <p>Miami Beach Park is a beautiful coastal park with sandy soil perfect for native trees. This location offers stunning ocean views and is a popular spot for community gatherings. The park is managed by the City of Miami Beach and is open to the public year-round.</p>
+                    
+                    <h3>Why This Location?</h3>
+                    <p>This location was selected for tree planting because:</p>
+                    <ul>
+                        <li>The sandy soil is well-draining and suitable for many native tree species</li>
+                        <li>The park receives plenty of sunlight, essential for tree growth</li>
+                        <li>The location is easily accessible to volunteers</li>
+                        <li>Adding trees will enhance the park's beauty and provide shade for visitors</li>
+                        <li>The trees will help reduce coastal erosion and provide habitat for wildlife</li>
+                    </ul>
+                    
+                    <h3>Recommended Tree Species</h3>
+                    <p>Based on the soil conditions and climate, we recommend planting the following tree species at this location:</p>
+                    <ul>
+                        <li>Gumbo Limbo (Bursera simaruba) - Native, salt-tolerant, fast-growing</li>
+                        <li>Sea Grape (Coccoloba uvifera) - Native, salt-tolerant, provides edible fruit</li>
+                        <li>Mangrove (Rhizophora mangle) - Native, excellent for coastal protection</li>
+                        <li>Pigeon Plum (Coccoloba diversifolia) - Native, drought-tolerant</li>
+                        <li>Jamaica Caper (Capparis cynophallophora) - Native, salt-tolerant, attracts butterflies</li>
+                    </ul>
+                    
+                    <div class="location-actions">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_oNytXfR0bK_CbckfsF7tAMk5aaDIszYX2UeaEFVwfQ1V8w/viewform?usp=dialog" class="btn primary">Plant Here</a>
+                        <a href="map.html" class="btn secondary">Back to Map</a>
+                    </div>
+                </div>
+                
+                <div class="location-info-card">
+                    <h2>Location Details</h2>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Address</h3>
+                            <p>4601 Collins Ave, Miami Beach, FL 33140</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Next Planting Event</h3>
+                            <p>June 15, 2025 - 9:00 AM - 1:00 PM</p>
+                            <a href="mailto:support@treeplace.app?subject=RSVP%20Miami%20Beach%20Park%20Planting" class="btn primary">RSVP Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Trees Planted</h3>
+                            <p>127 trees have been planted at this location so far.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Volunteers</h3>
+                            <p>Over 300 volunteers have participated in planting events at this location.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Parking</h3>
+                            <p>Free parking is available at the park. Please arrive 15 minutes before the event start time.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Park Size</h3>
+                            <p>12.5 acres of land available for tree planting</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Temperature Reduction</h3>
+                            <p>Trees planted have reduced local temperature by 3.2°F</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Water Absorption</h3>
+                            <p>Trees absorb approximately 2,500 gallons of stormwater annually</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Wind Protection</h3>
+                            <p>Trees provide wind protection for 85% of the park area</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Carbon Absorption</h3>
+                            <p>Trees absorb approximately 1.8 tons of CO2 annually</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Photo Gallery</h2>
+            <div class="location-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Miami Beach Park View">
+                    <div class="gallery-caption">Park entrance with ocean view</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tree Planting Event">
+                    <div class="gallery-caption">Community tree planting event</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mature Trees">
+                    <div class="gallery-caption">Mature trees providing shade</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Wildlife">
+                    <div class="gallery-caption">Wildlife attracted to the trees</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="btn primary"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" class="btn primary"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" class="btn primary"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="btn primary"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2025 Treeplace.app All rights reserved.</p>
+            <p>Directed by Ms. Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Beta-R-81</p>
+        </div>
+    </footer>
+</body>
+</html> 

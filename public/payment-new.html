@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" 
+     type="image/png" 
+     href="logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TreePlace.App - Payment</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3x/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="payment-animations.js" defer></script>
+    <style>
+        .payment-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-option {
+            padding: 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: #4CAF50;
+            transform: translateY(-5px);
+        }
+
+        .payment-option.selected {
+            border-color: #4CAF50;
+            background: #f1f8e9;
+        }
+
+        .payment-option h3 {
+            margin: 0 0 1rem 0;
+            color: #333;
+        }
+
+        .payment-option .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .checkout-button:hover {
+            background: #388E3C;
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: #666;
+        }
+
+        .secure-badge i {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .payment-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+
+        /* Sponsors Section Styles */
+        #sponsors {
+            background-color: #f9f9f9;
+            padding: 4rem 0;
+        }
+        
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .sponsor-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .sponsor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .sponsor-logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background: #f1f8e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .sponsor-logo-placeholder i {
+            font-size: 3rem;
+            color: #4CAF50;
+        }
+        
+        .sponsor-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .sponsor-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .sponsors-cta {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .sponsors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sponsors-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sponsors-cta .btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>TreePlace.App</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about" class="btn" data-translate="about">About</a></li>
+                    <li><a href="how-it-works.html" class="btn" data-translate="how_it_works">How It Works</a></li>
+                    <li><a href="map.html" class="btn" data-translate="map">Map</a></li>
+                    <li><a href="index.html#get-involved" class="btn" data-translate="get_involved">Get Involved</a></li>
+                    <li><a href="index.html#contact" class="btn" data-translate="contact">Contact</a></li>
+                    <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn" data-translate="donate">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="payment-container">
+                <div class="payment-header">
+                    <h2>Choose Your Contribution</h2>
+                    <p>Support our mission to make Miami greener</p>
+                </div>
+
+                <div class="payment-options">
+                    <div class="payment-option" data-price-id="price_single_tree">
+                        <h3>Single Tree</h3>
+                        <div class="price">$10</div>
+                        <p>Plant one tree in Miami</p>
+                    </div>
+                    <div class="payment-option" data-price-id="price_tree_bundle">
+                        <h3>Tree Bundle</h3>
+                        <div class="price">$50</div>
+                        <p>Plant five trees in Miami</p>
+                    </div>
+                    <div class="payment-option" data-price-id="price_grove_starter">
+                        <h3>Grove Starter</h3>
+                        <div class="price">$100</div>
+                        <p>Plant ten trees in Miami</p>
+                    </div>
+                </div>
+
+                <button id="checkout-button" class="checkout-button">Continue to Payment</button>
+
+                <div class="secure-badge">
+                    <i class="fas fa-lock"></i>
+                    <span>Secure Payment by Stripe</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sponsors" class="section">
+        <div class="container">
+            <h2>Our Sponsors</h2>
+            <p class="section-intro">We're grateful for the support of organizations that share our vision for a greener Miami.</p>
+            
+            <div class="sponsors-grid">
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-placeholder">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Corporate Partner</h3>
+                    <p>Supporting our mission to make Miami greener through sustainable initiatives and community engagement.</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-placeholder">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Environmental Foundation</h3>
+                    <p>Dedicated to preserving natural habitats and promoting environmental education in South Florida.</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-placeholder">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Educational Institution</h3>
+                    <p>Partnering with us to inspire the next generation of environmental stewards through hands-on learning.</p>
+                </div>
+                
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-placeholder">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Community Organization</h3>
+                    <p>Working together to strengthen our community through environmental initiatives and volunteer programs.</p>
+                </div>
+            </div>
+            
+            <div class="sponsors-cta">
+                <a href="sponsors.html" class="btn primary">View All Sponsors</a>
+                <a href="index.html#contact" class="btn primary">Become a Sponsor</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="btn primary"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" class="btn primary"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" class="btn primary"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="btn primary"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2025 Treeplace.app All rights reserved.</p>
+            <p>Directed by Ms. Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Beta-R-81</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Stripe
+            const stripe = Stripe('pk_test_your_publishable_key');
+            let selectedPriceId = 'price_single_tree';
+
+            // Payment option selection
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const checkoutButton = document.getElementById('checkout-button');
+
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Update selected price ID
+                    selectedPriceId = option.dataset.priceId;
+                });
+            });
+
+            // Checkout button click handler
+            checkoutButton.addEventListener('click', async () => {
+                try {
+                    // Create a checkout session on your server
+                    const response = await fetch('/create-checkout-session', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            priceId: selectedPriceId
+                        })
+                    });
+
+                    const session = await response.json();
+
+                    // Redirect to Stripe Checkout
+                    const result = await stripe.redirectToCheckout({
+                        sessionId: session.id
+                    });
+
+                    if (result.error) {
+                        console.error(result.error);
+                    }
+                } catch (err) {
+                    console.error('Error:', err);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

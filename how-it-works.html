@@ -1,70 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <link rel="icon" 
+     type="image/png" 
+     href="logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How It Works - TreePlace.App</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3x/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704544852112670" crossorigin="anonymous"></script>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-LPKDX195WT');
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="script.js" defer></script>
+    <script src="animations.js" defer></script>
+    <script src="interactive.js" defer></script>
+    <script src="technical.js" defer></script>
 </head>
-
 <body>
     <header>
         <div class="container">
             <h1>TreePlace.App</h1>
+            <div class="header-controls">
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <select id="language-select">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="dark-mode-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
             <nav>
                 <ul>
-                    <li><a href="index.html#about" data-translate="about">About</a></li>
-                    <li><a href="how-it-works.html" data-translate="how_it_works">How It Works</a></li>
-                    <li><a href="map.html" data-translate="map">Map</a></li>
-                    <li><a href="index.html#get-involved" data-translate="get_involved">Get Involved</a></li>
-                    <li><a href="index.html#contact" data-translate="contact">Contact</a></li>
-                    <li><a href="https://www.patreon.com/treeplace" class="btn" data-translate="donate">Donate</a></li>
+                    <li><a href="index.html#about" class="btn" data-translate="about">About</a></li>
+                    <li><a href="how-it-works.html" class="btn active" data-translate="how_it_works">How It Works</a></li>
+                    <li><a href="map.html" class="btn" data-translate="map">Map</a></li>
+                    <li><a href="index.html#get-involved" class="btn" data-translate="get_involved">Get Involved</a></li>
+                    <li><a href="sponsors.html" class="btn" data-translate="sponsors">Sponsors</a></li>
+                    <li><a href="index.html#contact" class="btn" data-translate="contact">Contact</a></li>
+                    <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn" data-translate="donate">Donate</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section id="how-it-works" class="section">
+    <section id="hero" class="section">
         <div class="container">
-            <h2 data-translate="how_it_works_title">How It Works</h2>
-            <div class="steps">
-                <div class="step">
+            <h2 class="animate-text parallax" data-speed="0.3">How TreePlace.App Works</h2>
+            <p class="animate-text parallax" data-speed="0.4">Our simple process makes it easy to plant trees and make Miami greener.</p>
+        </div>
+    </section>
+
+    <section id="process" class="section">
+        <div class="container">
+            <h2>How TreePlace.App Works</h2>
+            <div class="process-steps">
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">1</div>
                     <i class="fas fa-map-marker-alt"></i>
-                    <h3 data-translate="step_1_title">Explore Locations</h3>
-                    <p data-translate="step_1_text">Discover various locations in Miami where you can plant a tree. We have identified key areas that would benefit from increased green spaces, including urban neighborhoods, parks, and school grounds. By planting trees in these locations, we can help create a more balanced and sustainable urban environment. Each location is carefully selected based on its potential to provide environmental, social, and economic benefits to the community.</p>
+                    <h3>Choose a Location</h3>
+                    <p>Browse our interactive map to find the perfect spot for your tree. We'll help you identify suitable locations based on soil type, sunlight, and space availability.</p>
                 </div>
-                <div class="step">
+
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">2</div>
                     <i class="fas fa-tree"></i>
-                    <h3 data-translate="step_2_title">Choose a Tree</h3>
-                    <p data-translate="step_2_text">Select the type of tree that best suits the location and your preferences. We offer a variety of native and climate-appropriate tree species to ensure successful growth and long-term sustainability. Our team can provide guidance on the best tree species for your chosen location based on soil type, sunlight, and water availability. By choosing the right tree, you can help create a thriving ecosystem that supports local wildlife and enhances the beauty of the area.</p>
+                    <h3>Select Your Tree</h3>
+                    <p>Choose from our curated selection of native and climate-appropriate trees. Each tree comes with detailed information about its growth requirements and benefits.</p>
                 </div>
-                <div class="step">
-                    <i class="fas fa-donate"></i>
-                    <h3 data-translate="step_3_title">Make a Donation</h3>
-                    <p data-translate="step_3_text">Your contribution helps cover the costs of planting, maintenance, and monitoring. Donations go directly towards purchasing trees, soil amendments, and necessary tools. Additionally, your support helps fund educational programs and community outreach efforts to promote environmental stewardship. By donating, you are making a tangible difference in our ability to create a greener, healthier Miami for current and future generations.</p>
+
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Schedule Planting</h3>
+                    <p>Pick a date that works for you and join our community planting event. Our experts will guide you through the entire process.</p>
                 </div>
-                <div class="step">
+
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">4</div>
                     <i class="fas fa-hands-helping"></i>
-                    <h3 data-translate="step_4_title">We Plant</h3>
-                    <p data-translate="step_4_text">Our dedicated team will plant the tree and take care of its initial growth needs. We ensure that each tree is properly planted and receives the necessary care during its critical establishment period. This includes regular watering, mulching, and protection from pests and diseases. By providing the right care, we can help each tree thrive and reach its full potential, contributing to a healthier and more sustainable environment.</p>
+                    <h3>Plant Together</h3>
+                    <p>Join our community of volunteers and plant your tree. We'll provide all the necessary tools and guidance to ensure successful planting.</p>
                 </div>
-                <div class="step">
-                    <i class="fas fa-heart"></i>
-                    <h3 data-translate="step_5_title">Enjoy the Impact</h3>
-                    <p data-translate="step_5_text">Visit your tree and enjoy the positive impact you've made on Miami's environment! Our team will keep you updated on the progress of your tree, and you are welcome to visit and see the difference you have made. Trees provide numerous benefits, including improved air quality, reduced urban heat, and enhanced beauty and biodiversity. By planting a tree, you are leaving a lasting legacy that will benefit the community for years to come.</p>
+
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">5</div>
+                    <i class="fas fa-leaf"></i>
+                    <h3>Track Growth</h3>
+                    <p>Monitor your tree's growth through our app. Receive care reminders and connect with other tree planters in your area.</p>
                 </div>
-            </
+            </div>
+        </div>
+    </section>
+
+    <section id="requirements" class="section">
+        <div class="container">
+            <h2>What You Need to Know</h2>
+            <div class="requirements-grid">
+                <div class="requirement-card animate-on-scroll">
+                    <i class="fas fa-clock"></i>
+                    <h3>Time Commitment</h3>
+                    <p>Planting typically takes 1-2 hours, including orientation and cleanup. Follow-up care is minimal but important for tree survival.</p>
+                </div>
+
+                <div class="requirement-card animate-on-scroll">
+                    <i class="fas fa-tools"></i>
+                    <h3>Equipment</h3>
+                    <p>We provide all necessary tools and materials. Just bring comfortable clothes, closed-toe shoes, and your enthusiasm!</p>
+                </div>
+
+                <div class="requirement-card animate-on-scroll">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Group Size</h3>
+                    <p>Planting events can accommodate individuals or groups. Family and friends are welcome to join!</p>
+                </div>
+
+                <div class="requirement-card animate-on-scroll">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Certification</h3>
+                    <p>No prior experience needed. Our experts will train you in proper tree planting techniques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="get-started" class="section">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <div class="cta-buttons">
+                <a href="map.html" class="btn primary">Find a Location</a>
+                <a href="mailto:support@treeplace.app" class="btn secondary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="btn primary"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" class="btn primary"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" class="btn primary"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="btn primary"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2025 Treeplace.app All rights reserved.</p>
+            <p data-translate="footer_credits">Directed by Ms. Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Beta-R-81</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ toggle functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-question i');
+                
+                question.addEventListener('click', () => {
+                    // Toggle active class
+                    item.classList.toggle('active');
+                    
+                    // Toggle answer visibility
+                    if (item.classList.contains('active')) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        answer.style.maxHeight = '0';
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

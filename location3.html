@@ -1,18 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <link rel="icon" type="image/png" href="logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location 3 - Plant Trees in Miami</title>
+    <title>Little Havana Tree Corridor - TreePlace.App</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3x/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="script.js" defer></script>
+    <script src="animations.js" defer></script>
+    <script src="interactive.js" defer></script>
+    <script src="technical.js" defer></script>
+    <style>
+        .location-hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .location-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .location-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            color: white;
+        }
+        
+        .location-hero-overlay h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .location-hero-overlay p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .location-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .location-info-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--card-border);
+        }
+        
+        .location-info-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+        
+        .info-icon {
+            color: var(--primary-color);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+        
+        .info-content h3 {
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        
+        .info-content p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .location-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .gallery-caption {
+            padding: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+        
+        .location-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .location-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-hero {
+                height: 300px;
+            }
+            
+            .location-hero-overlay h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
     <header>
         <div class="container">
-            <h1>Plant Trees in Miami</h1>
+            <h1>TreePlace.App</h1>
+            <div class="header-controls">
+                <button id="dark-mode-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
             <nav>
-               
+                <ul>
+                    <li><a href="index.html#about" class="btn">About</a></li>
+                    <li><a href="how-it-works.html" class="btn">How It Works</a></li>
+                    <li><a href="map.html" class="btn active">Map</a></li>
+                    <li><a href="index.html#get-involved" class="btn">Get Involved</a></li>
+                    <li><a href="sponsors.html" class="btn">Sponsors</a></li>
+                    <li><a href="index.html#contact" class="btn">Contact</a></li>
+                    <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="location-hero">
+                <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Little Havana Tree Corridor">
+                <div class="location-hero-overlay">
+                    <h1>Little Havana Tree Corridor</h1>
+                    <p>SW 8th St, Miami, FL 33135</p>
+                </div>
+            </div>
+            
+            <div class="location-details">
+                <div class="location-info-card">
+                    <h2>About This Location</h2>
+                    <p>Little Havana Tree Corridor is a vibrant urban corridor in Little Havana that's being transformed into a green oasis. This project aims to create a continuous canopy of trees along SW 8th St, also known as Calle Ocho, the heart of Miami's Cuban community. The corridor stretches for several blocks and will provide shade, reduce urban heat, and enhance the neighborhood's beauty.</p>
+                    
+                    <h3>Why This Location?</h3>
+                    <p>This location was selected for tree planting because:</p>
+                    <ul>
+                        <li>Little Havana is an urban heat island with limited tree coverage</li>
+                        <li>The corridor has wide sidewalks suitable for tree planting</li>
+                        <li>The project will create a continuous green pathway through the neighborhood</li>
+                        <li>Trees will provide shade for pedestrians and reduce street temperatures</li>
+                        <li>The project has strong community support from local residents and businesses</li>
+                    </ul>
+                    
+                    <h3>Recommended Tree Species</h3>
+                    <p>Based on the urban environment and climate, we recommend planting the following tree species at this location:</p>
+                    <ul>
+                        <li>Royal Palm (Roystonea regia) - Iconic Florida palm, provides excellent shade</li>
+                        <li>Live Oak (Quercus virginiana) - Long-lived native tree with wide canopy</li>
+                        <li>Gumbo Limbo (Bursera simaruba) - Fast-growing native with distinctive bark</li>
+                        <li>Mahogany (Swietenia mahagoni) - Native hardwood with dense canopy</li>
+                        <li>Black Olive (Bucida buceras) - Salt-tolerant with attractive foliage</li>
+                    </ul>
+                    
+                    <div class="location-actions">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_oNytXfR0bK_CbckfsF7tAMk5aaDIszYX2UeaEFVwfQ1V8w/viewform?usp=dialog" class="btn primary">Plant Here</a>
+                        <a href="map.html" class="btn secondary">Back to Map</a>
+                    </div>
+                </div>
+                
+                <div class="location-info-card">
+                    <h2>Location Details</h2>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Address</h3>
+                            <p>SW 8th St, Miami, FL 33135</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Next Planting Event</h3>
+                            <p>June 29, 2025 - 9:00 AM - 3:00 PM</p>
+                            <a href="mailto:support@treeplace.app?subject=RSVP%20Little%20Havana%20Tree%20Corridor%20Phase%202" class="btn primary">RSVP Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Trees Planted</h3>
+                            <p>156 trees have been planted at this location so far.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Volunteers</h3>
+                            <p>Over 400 volunteers have participated in planting events at this location.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Parking</h3>
+                            <p>Street parking is available along SW 8th St and side streets. Please arrive 15 minutes before the event start time.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Corridor Length</h3>
+                            <p>1.8 miles of urban corridor with trees planted</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Temperature Reduction</h3>
+                            <p>Trees have reduced street temperature by 4.7°F during peak hours</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Business Impact</h3>
+                            <p>42 local businesses report increased foot traffic due to tree canopy</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-walking"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Pedestrian Activity</h3>
+                            <p>Pedestrian activity increased by 28% after tree planting</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Carbon Absorption</h3>
+                            <p>Trees absorb approximately 2.3 tons of CO2 annually</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Photo Gallery</h2>
+            <div class="location-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Little Havana Street View">
+                    <div class="gallery-caption">SW 8th St (Calle Ocho) before tree planting</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Community Planting Event">
+                    <div class="gallery-caption">Community members participating in tree planting</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Newly Planted Trees">
+                    <div class="gallery-caption">Newly planted trees along the corridor</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Local Business Support">
+                    <div class="gallery-caption">Local businesses supporting the tree corridor project</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="btn primary"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" class="btn primary"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" class="btn primary"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="btn primary"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2025 Treeplace.app All rights reserved.</p>
+            <p>Directed by Ms. Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Beta-R-81</p>
+        </div>
+    </footer>
+</body>
+</html> 

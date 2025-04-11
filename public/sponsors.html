@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" 
+     type="image/png" 
+     href="logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TreePlace.App - Our Sponsors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3x/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LPKDX195WT"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="script.js" defer></script>
+    <script src="animations.js" defer></script>
+    <style>
+        .sponsors-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 3rem;
+        }
+        
+        .sponsors-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .sponsors-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .sponsor-category {
+            margin-bottom: 4rem;
+        }
+        
+        .sponsor-category h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .sponsor-category h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #4CAF50;
+        }
+        
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .sponsor-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .sponsor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .sponsor-logo-placeholder {
+            width: 150px;
+            height: 150px;
+            background: #f1f8e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .sponsor-logo-placeholder i {
+            font-size: 4rem;
+            color: #4CAF50;
+        }
+        
+        .sponsor-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .sponsor-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sponsor-card .sponsor-link {
+            display: inline-block;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .sponsor-card .sponsor-link:hover {
+            color: #388E3C;
+        }
+        
+        .become-sponsor {
+            background: #f9f9f9;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .become-sponsor h2 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .become-sponsor p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .sponsor-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .benefit-card i {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .benefit-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .sponsors-hero {
+                padding: 4rem 0;
+            }
+            
+            .sponsors-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .sponsors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sponsor-benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>TreePlace.App</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about" class="btn" data-translate="about">About</a></li>
+                    <li><a href="how-it-works.html" class="btn" data-translate="how_it_works">How It Works</a></li>
+                    <li><a href="map.html" class="btn" data-translate="map">Map</a></li>
+                    <li><a href="index.html#get-involved" class="btn" data-translate="get_involved">Get Involved</a></li>
+                    <li><a href="sponsors.html" class="btn" data-translate="sponsors">Sponsors</a></li>
+                    <li><a href="index.html#contact" class="btn" data-translate="contact">Contact</a></li>
+                    <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn" data-translate="donate">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="sponsors-hero">
+        <div class="container">
+            <h1>Our Sponsors</h1>
+            <p>We're grateful for the support of organizations that share our vision for a greener Miami. Together, we're making a difference.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="sponsor-category">
+                <h2>Corporate Partners</h2>
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Corporate Partner</h3>
+                        <p>Supporting our mission to make Miami greener through sustainable initiatives and community engagement.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3>Local Business</h3>
+                        <p>Committed to environmental sustainability and supporting local environmental initiatives in Miami.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Retail Partner</h3>
+                        <p>Helping us reach more people and spread awareness about the importance of trees in urban environments.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sponsor-category">
+                <h2>Environmental Organizations</h2>
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Environmental Foundation</h3>
+                        <p>Dedicated to preserving natural habitats and promoting environmental education in South Florida.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3>Conservation Group</h3>
+                        <p>Working to protect and restore natural ecosystems while educating the public about environmental stewardship.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Urban Greening Initiative</h3>
+                        <p>Focused on increasing green spaces in urban areas to improve air quality and community well-being.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sponsor-category">
+                <h2>Educational Partners</h2>
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>Educational Institution</h3>
+                        <p>Partnering with us to inspire the next generation of environmental stewards through hands-on learning.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Research Center</h3>
+                        <p>Conducting studies on urban tree planting and providing valuable data to improve our initiatives.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3>Educational Program</h3>
+                        <p>Developing curriculum and educational materials to teach students about environmental science and tree care.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sponsor-category">
+                <h2>Community Partners</h2>
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Community Organization</h3>
+                        <p>Working together to strengthen our community through environmental initiatives and volunteer programs.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Neighborhood Association</h3>
+                        <p>Engaging local residents in tree planting events and promoting green spaces in their communities.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-placeholder">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Volunteer Group</h3>
+                        <p>Mobilizing volunteers to participate in tree planting events and community clean-up initiatives.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="become-sponsor">
+        <div class="container">
+            <h2>Become a Sponsor</h2>
+            <p>Join our network of sponsors and help us make Miami greener. Your support enables us to plant more trees, educate more people, and create a more sustainable future for our community.</p>
+            
+            <div class="sponsor-benefits">
+                <div class="benefit-card">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Visibility</h3>
+                    <p>Gain exposure to our growing community of environmentally conscious supporters.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Partnership</h3>
+                    <p>Build meaningful relationships with other organizations committed to environmental sustainability.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Impact</h3>
+                    <p>Make a tangible difference in your community by supporting tree planting initiatives.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Recognition</h3>
+                    <p>Receive acknowledgment for your contribution to environmental conservation efforts.</p>
+                </div>
+            </div>
+            
+            <a href="index.html#contact" class="btn primary">Contact Us to Become a Sponsor</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="btn primary"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" class="btn primary"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" class="btn primary"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="btn primary"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2025 Treeplace.app All rights reserved.</p>
+            <p>Directed by Ms. Albarran<br>Made by Thalia Webb and Franco Betancourt<br>Version Beta-R-81</p>
+        </div>
+    </footer>
+</body>
+</html> 
