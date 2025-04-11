@@ -1233,3 +1233,124 @@ footer::before {
     overflow-wrap: break-word; /* Ensures long text wraps properly */
 }
 
+.tree-feature {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--card-border);
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+}
+
+.tree-image {
+    position: relative;
+}
+
+.tree-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.tree-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: var(--glass-bg);
+    color: var(--text-color);
+    border: 1px solid var(--glass-border);
+}
+
+.tree-info {
+    color: var(--text-color);
+}
+
+.tree-info h3 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.scientific-name {
+    font-style: italic;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.tree-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat i {
+    color: var(--primary-color);
+}
+
+.tree-description {
+    margin: 2rem 0;
+}
+
+.tree-description h4 {
+    color: var(--primary-color);
+    margin: 1.5rem 0 0.5rem;
+}
+
+.tree-description ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tree-description ul li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.tree-description ul li:before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+}
+
+.tree-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .tree-feature {
+        grid-template-columns: 1fr;
+    }
+    
+    .tree-actions {
+        flex-direction: column;
+    }
+    
+    .tree-actions .btn {
+        width: 100%;
+    }
+}
+
