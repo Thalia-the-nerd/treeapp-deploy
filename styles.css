@@ -2125,8 +2125,8 @@ button:active,
 }
 
 .step-card p {
-    color: var(--text-secondary);
-    margin-bottom: 0;
+    color: var(--text-color);
+    opacity: 0.9;
     line-height: 1.6;
 }
 
@@ -2164,7 +2164,7 @@ button:active,
 
 .counter-description {
     font-size: 1.2rem;
-    color: var(--text-secondary);
+    color: var(--text-color);
     margin: 1.5rem 0;
     max-width: 600px;
 }
@@ -2254,75 +2254,93 @@ button:active,
 }
 
 .impact-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 1rem;
+    background: #000000;
     padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .impact-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: rgba(76, 175, 80, 0.5);
 }
 
-.impact-icon {
-    font-size: 2.5rem;
-    color: #007bff;
+.impact-card h3 {
+    color: var(--text-color);
     margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
-/* Wildlife Connection Section */
-.wildlife-section {
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
+.impact-card p {
+    color: var(--text-color);
+    opacity: 0.9;
+    line-height: 1.6;
 }
 
-.wildlife-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+.impact-stats .stat {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
 }
 
-.wildlife-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.impact-stats .label {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 0.9rem;
 }
 
-.wildlife-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+/* Dark Mode Styles */
+body.dark-mode .impact-card {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(76, 175, 80, 0.3);
 }
 
-.wildlife-icon {
-    font-size: 2.5rem;
-    color: #4caf50;
-    margin-bottom: 1rem;
+body.dark-mode .impact-card h3,
+body.dark-mode .impact-card p,
+body.dark-mode .impact-stats .label {
+    color: var(--white);
 }
 
-/* Responsive Design for New Sections */
+body.dark-mode .impact-stats .stat {
+    color: var(--primary-color);
+}
+
+body.dark-mode .impact-stats {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
-    .stories-grid,
-    .impact-grid,
-    .wildlife-grid {
+    .care-grid,
+    .faq-grid,
+    .impact-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
     }
 
-    .story-card,
-    .impact-card,
-    .wildlife-card {
+    .counter-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .care-card,
+    .faq-item,
+    .impact-card {
         padding: 1.5rem;
     }
 
-    .story-icon,
-    .impact-icon,
-    .wildlife-icon {
-        font-size: 2rem;
+    .impact-stats .stat {
+        font-size: 1.5rem;
     }
 }
 

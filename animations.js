@@ -4,38 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const treeCounter = document.getElementById('tree-counter');
     if (treeCounter) {
         const numberElement = treeCounter.querySelector('.number');
-        
-        // Animate counter from 0 to 5000
-        anime({
-            targets: numberElement,
-            innerHTML: [0, 5000],
-            round: 1,
-            easing: 'easeInOutExpo',
-            duration: 2000,
-            delay: 500,
-            update: function(anim) {
-                numberElement.textContent = anim.animations[0].currentValue;
-            }
-        });
+        if (numberElement) {
+            numberElement.textContent = '0';
+        }
     }
     
     // Tree Counter Animation for How It Works page
     const treeCounterHowItWorks = document.getElementById('tree-counter-how-it-works');
     if (treeCounterHowItWorks) {
         const numberElement = treeCounterHowItWorks.querySelector('.number');
-        
-        // Animate counter from 0 to 5000
-        anime({
-            targets: numberElement,
-            innerHTML: [0, 5000],
-            round: 1,
-            easing: 'easeInOutExpo',
-            duration: 2000,
-            delay: 500,
-            update: function(anim) {
-                numberElement.textContent = anim.animations[0].currentValue;
-            }
-        });
+        if (numberElement) {
+            numberElement.textContent = '0';
+        }
     }
 
     // Process Steps Animation

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const treeCounter = document.getElementById('tree-counter');
     if (treeCounter) {
         const targetTrees = 10000; // Your target number
-        const currentTrees = 5000; // Current number (this would come from your backend)
+        const currentTrees = 0000; // Current number (this would come from your backend)
         
         anime({
             targets: treeCounter.querySelector('.number'),

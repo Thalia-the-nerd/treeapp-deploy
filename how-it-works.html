@@ -99,79 +99,21 @@
             <h2>Our Impact So Far</h2>
             <div class="counter-container">
                 <div class="counter" id="tree-counter-how-it-works">
-                    <span class="number">0</span>
+                    <span class="number" id="tree-count">0</span>
                     <span class="label">Trees Planted</span>
                 </div>
-                <p class="counter-description">Help us reach our goal of planting 10,000 trees in Miami by 2025!</p>
+                <div class="counter-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="co2-reduction">0</span>
+                        <span class="stat-label">Tons of CO₂ Reduced</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="water-saved">0</span>
+                        <span class="stat-label">Gallons of Water Saved</span>
+                    </div>
+                </div>
+                <p class="counter-description">Join us in our mission to plant 10,000 trees in Miami by 2025! Be among the first to make a difference.</p>
                 <a href="index.html#get-involved" class="btn primary">Get Involved</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tree Stories Section -->
-    <section class="tree-stories-section">
-        <div class="container">
-            <h2 class="section-title">Tree Stories</h2>
-            <p class="section-description">Every tree has a story. Share yours and connect with others through the trees you plant.</p>
-            
-            <div class="stories-grid">
-                <div class="story-card">
-                    <div class="story-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3>Personal Memories</h3>
-                    <p>Attach photos, videos, and stories to your trees. Create lasting memories for generations to come.</p>
-                </div>
-                
-                <div class="story-card">
-                    <div class="story-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3>Digital Memory Book</h3>
-                    <p>Document your tree's growth journey with our digital memory book feature.</p>
-                </div>
-                
-                <div class="story-card">
-                    <div class="story-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Family Connections</h3>
-                    <p>Link trees to your family tree, creating a living legacy for future generations.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Urban Heat Impact Section -->
-    <section class="heat-impact-section">
-        <div class="container">
-            <h2 class="section-title">Urban Heat Impact</h2>
-            <p class="section-description">See how your trees are helping cool Miami's urban environment.</p>
-            
-            <div class="impact-grid">
-                <div class="impact-card">
-                    <div class="impact-icon">
-                        <i class="fas fa-temperature-low"></i>
-                    </div>
-                    <h3>Temperature Reduction</h3>
-                    <p>Track how your trees are reducing local temperatures and combating urban heat islands.</p>
-                </div>
-                
-                <div class="impact-card">
-                    <div class="impact-icon">
-                        <i class="fas fa-umbrella-beach"></i>
-                    </div>
-                    <h3>Shade Coverage</h3>
-                    <p>Visualize the shade coverage provided by your trees across different times of day.</p>
-                </div>
-                
-                <div class="impact-card">
-                    <div class="impact-icon">
-                        <i class="fas fa-wind"></i>
-                    </div>
-                    <h3>Cooling Effect</h3>
-                    <p>See real-time data on how your trees are improving local air circulation and cooling.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -205,6 +147,113 @@
                     </div>
                     <h3>Wildlife Corridors</h3>
                     <p>See how your trees connect with others to form wildlife-friendly pathways.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tree Care Section -->
+    <section id="tree-care" class="section">
+        <div class="container">
+            <h2>Tree Care Guide</h2>
+            <div class="care-grid">
+                <div class="care-card animate-on-scroll">
+                    <i class="fas fa-tint"></i>
+                    <h3>Watering</h3>
+                    <p>New trees need regular watering. We'll provide a customized watering schedule based on your tree species and local conditions.</p>
+                    <ul class="care-tips">
+                        <li>First year: Water 2-3 times per week</li>
+                        <li>Second year: Water 1-2 times per week</li>
+                        <li>After establishment: Water during dry spells</li>
+                    </ul>
+                </div>
+
+                <div class="care-card animate-on-scroll">
+                    <i class="fas fa-cut"></i>
+                    <h3>Pruning</h3>
+                    <p>Regular pruning helps maintain tree health and structure. Our experts will guide you through proper pruning techniques.</p>
+                    <ul class="care-tips">
+                        <li>Remove dead or damaged branches</li>
+                        <li>Maintain proper spacing between branches</li>
+                        <li>Follow species-specific pruning guidelines</li>
+                    </ul>
+                </div>
+
+                <div class="care-card animate-on-scroll">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Fertilization</h3>
+                    <p>Proper nutrition ensures healthy growth. We'll help you choose the right fertilizer and application schedule.</p>
+                    <ul class="care-tips">
+                        <li>Use slow-release fertilizers</li>
+                        <li>Apply in early spring or fall</li>
+                        <li>Follow package instructions carefully</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item animate-on-scroll">
+                    <h3>What types of trees do you plant?</h3>
+                    <p>We focus on native and climate-appropriate trees that are well-suited to Miami's environment. Each tree is carefully selected based on local conditions and community needs.</p>
+                </div>
+
+                <div class="faq-item animate-on-scroll">
+                    <h3>How do I choose the right location?</h3>
+                    <p>Our interactive map helps you identify suitable locations based on soil type, sunlight, and space availability. We also consider underground utilities and future growth space.</p>
+                </div>
+
+                <div class="faq-item animate-on-scroll">
+                    <h3>What happens after I plant a tree?</h3>
+                    <p>You'll receive regular care reminders and can track your tree's growth through our app. Our team provides ongoing support and maintenance guidance.</p>
+                </div>
+
+                <div class="faq-item animate-on-scroll">
+                    <h3>Can I plant a tree in memory of someone?</h3>
+                    <p>Yes! We offer a special memorial tree program where you can dedicate a tree to a loved one. You can add photos, stories, and memories to your tree's digital profile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Environmental Impact Section -->
+    <section id="environmental-impact" class="section">
+        <div class="container">
+            <h2>Environmental Impact per Tree</h2>
+            <div class="impact-grid">
+                <div class="impact-card animate-on-scroll">
+                    <i class="fas fa-temperature-low"></i>
+                    <h3>Urban Heat Reduction</h3>
+                    <p>Each mature tree can reduce local temperatures by 2-8°F through shade and evapotranspiration.</p>
+                    <div class="impact-stats">
+                        <span class="stat">2-8°F</span>
+                        <span class="label">Temperature Reduction</span>
+                    </div>
+                </div>
+
+                <div class="impact-card animate-on-scroll">
+                    <i class="fas fa-wind"></i>
+                    <h3>Air Quality</h3>
+                    <p>A mature tree can absorb up to 48 pounds of carbon dioxide per year and produce oxygen for 4 people.</p>
+                    <div class="impact-stats">
+                        <span class="stat">48 lbs</span>
+                        <span class="label">CO₂ Absorbed Annually</span>
+                    </div>
+                </div>
+
+                <div class="impact-card animate-on-scroll">
+                    <i class="fas fa-tint"></i>
+                    <h3>Water Management</h3>
+                    <p>Trees help manage stormwater by intercepting rainfall and reducing runoff, preventing flooding.</p>
+                    <div class="impact-stats">
+                        <span class="stat">1,000+</span>
+                        <span class="label">Gallons of Water Intercepted Annually</span>
+                    </div>
                 </div>
             </div>
         </div>
