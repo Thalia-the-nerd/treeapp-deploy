@@ -211,8 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Functionality
     const hamburgerMenu = document.getElementById('hamburger-menu');
     const mainNav = document.getElementById('main-nav');
+    const header = document.querySelector('header');
     const body = document.body;
     let lastScrollTop = 0;
+    let isScrolling = false;
 
     if (hamburgerMenu && mainNav) {
         const toggleMenu = (show) => {
@@ -226,18 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.classList.toggle('fa-bars', !show);
                 icon.classList.toggle('fa-times', show);
             }
-            
-            // Set ARIA attributes for accessibility
-            hamburgerMenu.setAttribute('aria-expanded', show);
-            mainNav.setAttribute('aria-hidden', !show);
         };
-
-        // Initialize ARIA attributes
-        hamburgerMenu.setAttribute('aria-expanded', 'false');
-        hamburgerMenu.setAttribute('aria-controls', 'main-nav');
-        mainNav.setAttribute('aria-hidden', 'true');
-        mainNav.setAttribute('role', 'navigation');
-        mainNav.setAttribute('aria-label', 'Main navigation');
 
         hamburgerMenu.addEventListener('click', () => {
             toggleMenu(!mainNav.classList.contains('active'));
@@ -261,23 +252,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Handle scroll behavior
         window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Close menu if scrolling while it's open
-            if (mainNav.classList.contains('active')) {
-                toggleMenu(false);
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    // Don't hide header if menu is open
+                    if (!mainNav.classList.contains('active')) {
+                        if (scrollTop > lastScrollTop && scrollTop > 100) {
+                            // Scrolling down
+                            header.classList.add('nav-hidden');
+                        } else {
+                            // Scrolling up
+                            header.classList.remove('nav-hidden');
+                        }
+                    }
+                    
+                    lastScrollTop = scrollTop;
+                    isScrolling = false;
+                });
             }
-            
-            // Hide/show menu based on scroll direction
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down
-                mainNav.classList.add('nav-hidden');
-            } else {
-                // Scrolling up
-                mainNav.classList.remove('nav-hidden');
-            }
-            
-            lastScrollTop = scrollTop;
+            isScrolling = true;
         });
 
         // Close menu on window resize
@@ -286,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleMenu(false);
             }
         });
-        
+
         // Handle keyboard navigation
         hamburgerMenu.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' || event.key === ' ') {
@@ -294,30 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleMenu(!mainNav.classList.contains('active'));
             }
         });
-        
-        // Trap focus within menu when open
-        mainNav.addEventListener('keydown', (event) => {
-            if (!mainNav.classList.contains('active')) return;
-            
-            const focusableElements = mainNav.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
-            const firstFocusable = focusableElements[0];
-            const lastFocusable = focusableElements[focusableElements.length - 1];
-            
-            if (event.key === 'Tab') {
-                if (event.shiftKey) {
-                    if (document.activeElement === firstFocusable) {
-                        event.preventDefault();
-                        lastFocusable.focus();
-                    }
-                } else {
-                    if (document.activeElement === lastFocusable) {
-                        event.preventDefault();
-                        firstFocusable.focus();
-                    }
-                }
-            }
-            
-            if (event.key === 'Escape') {
+
+        // Close menu with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && mainNav.classList.contains('active')) {
                 toggleMenu(false);
             }
         });
