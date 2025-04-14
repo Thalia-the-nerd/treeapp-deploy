@@ -38,6 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
             for (const line of lines) {
                 if (line.startsWith('# Version:')) {
                     version = line.split(':')[1].trim();
+                    // Update version number in all version spans
+                    document.querySelectorAll('.version-number').forEach(span => {
+                        span.textContent = version;
+                    });
                 }
                 if (line.startsWith('#') || !line.trim()) continue; // Skip comments and empty lines
                 const [key, value, date] = line.split('|');
@@ -51,12 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
-
-            // Update version number in footer
-            const versionElements = document.querySelectorAll('.version-number');
-            versionElements.forEach(element => {
-                element.textContent = version;
-            });
 
             // Update total trees planted
             stats.total_trees_planted = totalTrees;
