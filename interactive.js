@@ -21,19 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tree Counter Animation
     const treeCounter = document.getElementById('tree-counter');
     if (treeCounter) {
-        const targetTrees = 10000; // Your target number
-        const currentTrees = 0000; // Current number (this would come from your backend)
-        
-        anime({
-            targets: treeCounter.querySelector('.number'),
-            innerHTML: [0, currentTrees],
-            round: 1,
-            duration: 2000,
-            easing: 'easeOutExpo',
-            update: function(anim) {
-                treeCounter.querySelector('.number').textContent = anim.animations[0].currentValue;
-            }
-        });
+        const numberElement = treeCounter.querySelector('.number');
+        if (numberElement) {
+            numberElement.textContent = '0';
+        }
     }
 
     // Tree Calculator
@@ -161,4 +152,4 @@ function showNotification(message, type = 'info') {
             notification.remove();
         }, 300);
     }, 3000);
-} 
+}
