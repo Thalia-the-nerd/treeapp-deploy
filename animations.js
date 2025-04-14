@@ -1,6 +1,44 @@
 // Animations for TreePlace.App
 document.addEventListener('DOMContentLoaded', () => {
-    // Animate elements on scroll
+    // Tree Counter Animation
+    const treeCounter = document.getElementById('tree-counter');
+    if (treeCounter) {
+        const numberElement = treeCounter.querySelector('.number');
+        
+        // Animate counter from 0 to 5000
+        anime({
+            targets: numberElement,
+            innerHTML: [0, 5000],
+            round: 1,
+            easing: 'easeInOutExpo',
+            duration: 2000,
+            delay: 500,
+            update: function(anim) {
+                numberElement.textContent = anim.animations[0].currentValue;
+            }
+        });
+    }
+    
+    // Tree Counter Animation for How It Works page
+    const treeCounterHowItWorks = document.getElementById('tree-counter-how-it-works');
+    if (treeCounterHowItWorks) {
+        const numberElement = treeCounterHowItWorks.querySelector('.number');
+        
+        // Animate counter from 0 to 5000
+        anime({
+            targets: numberElement,
+            innerHTML: [0, 5000],
+            round: 1,
+            easing: 'easeInOutExpo',
+            duration: 2000,
+            delay: 500,
+            update: function(anim) {
+                numberElement.textContent = anim.animations[0].currentValue;
+            }
+        });
+    }
+
+    // Process Steps Animation
     const animateOnScroll = () => {
         const elements = document.querySelectorAll('.animate-on-scroll');
         
@@ -9,12 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const windowHeight = window.innerHeight;
             
             if (elementPosition < windowHeight - 100) {
-                element.classList.add('animated');
+                element.classList.add('visible');
             }
         });
     };
-    
-    // Run on load and scroll
+
+    // Run animation on page load and scroll
     window.addEventListener('load', animateOnScroll);
     window.addEventListener('scroll', animateOnScroll);
     
@@ -129,5 +167,78 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 600,
             easing: 'easeOutQuad'
         });
+    });
+
+    // Tree Stories Animation
+    const animateStories = () => {
+        const storyCards = document.querySelectorAll('.story-card');
+        
+        storyCards.forEach((card, index) => {
+            anime({
+                targets: card,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                delay: index * 200,
+                duration: 800,
+                easing: 'easeOutQuad'
+            });
+        });
+    };
+
+    // Urban Heat Impact Animation
+    const animateHeatImpact = () => {
+        const impactCards = document.querySelectorAll('.impact-card');
+        
+        impactCards.forEach((card, index) => {
+            anime({
+                targets: card,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                delay: index * 200,
+                duration: 800,
+                easing: 'easeOutQuad'
+            });
+        });
+    };
+
+    // Wildlife Connection Animation
+    const animateWildlife = () => {
+        const wildlifeCards = document.querySelectorAll('.wildlife-card');
+        
+        wildlifeCards.forEach((card, index) => {
+            anime({
+                targets: card,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                delay: index * 200,
+                duration: 800,
+                easing: 'easeOutQuad'
+            });
+        });
+    };
+
+    // Run animations when sections come into view
+    const observerOptions = {
+        threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('tree-stories-section')) {
+                    animateStories();
+                } else if (entry.target.classList.contains('heat-impact-section')) {
+                    animateHeatImpact();
+                } else if (entry.target.classList.contains('wildlife-section')) {
+                    animateWildlife();
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe new sections
+    document.querySelectorAll('.tree-stories-section, .heat-impact-section, .wildlife-section').forEach(section => {
+        observer.observe(section);
     });
 }); 

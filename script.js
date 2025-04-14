@@ -27,17 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const treeCounter = document.getElementById('tree-counter');
     if (treeCounter) {
         const numberElement = treeCounter.querySelector('.number');
-        if (numberElement) {
+        
             // Animate counter from 0 to 5000
             anime({
                 targets: numberElement,
                 innerHTML: [0, 5000],
                 round: 1,
+            easing: 'easeInOutExpo',
                 duration: 2000,
-                easing: 'easeOutExpo',
-                delay: 500
+            delay: 500,
+            update: function(anim) {
+                numberElement.textContent = anim.animations[0].currentValue;
+            }
             });
-        }
     }
 
     // Initialize tree calculator
@@ -161,4 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Process steps animation
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementPosition < windowHeight - 100) {
 }); 
