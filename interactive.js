@@ -75,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const img = document.createElement('img');
             img.src = image.src;
             img.alt = image.alt;
+            img.onerror = () => {
+                img.src = 'placeholder.jpg'; // Fallback image
+                img.alt = 'Image not available';
+            };
             galleryGrid.appendChild(img);
         });
     }
@@ -101,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         
         let currentTestimonial = 0;
+        let testimonialInterval;
         
         function showTestimonial(index) {
             const testimonial = sampleTestimonials[index];
@@ -125,10 +130,20 @@ document.addEventListener('DOMContentLoaded', () => {
         showTestimonial(currentTestimonial);
         
         // Auto-rotate testimonials
-        setInterval(() => {
+        testimonialInterval = setInterval(() => {
             currentTestimonial = (currentTestimonial + 1) % sampleTestimonials.length;
             showTestimonial(currentTestimonial);
         }, 5000);
+
+        // Cleanup function
+        const cleanup = () => {
+            if (testimonialInterval) {
+                clearInterval(testimonialInterval);
+            }
+        };
+
+        // Clean up on page unload
+        window.addEventListener('unload', cleanup);
     }
 });
 

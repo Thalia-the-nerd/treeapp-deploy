@@ -1714,7 +1714,7 @@ header h1 a {
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--background-color);
+        background: var(--header-bg);
         padding: 1rem;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         z-index: 1000;
@@ -1773,10 +1773,11 @@ header h1 a {
         left: 0;
         width: 100%;
         height: 100vh;
-        background: var(--background-color);
+        background: var(--header-bg);
         padding: 2rem 1rem;
         z-index: 1000;
         overflow-y: auto;
+        backdrop-filter: blur(10px);
     }
 
     #main-nav.active {
@@ -1800,13 +1801,37 @@ header h1 a {
         display: block;
         padding: 1rem;
         font-size: 1.2rem;
-        color: var(--text-color);
-        text-decoration: none;
-        transition: color 0.3s ease;
+        border-radius: var(--border-radius-md);
+        transition: background-color 0.3s ease;
     }
 
     #main-nav ul li a:hover {
-        color: var(--primary-color);
+        background-color: var(--hover-bg);
+    }
+
+    /* Ensure the menu is accessible when open */
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /* Add a close button at the top of the menu */
+    #main-nav::before {
+        content: "Menu";
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    /* Ensure all links are properly styled and have good touch targets */
+    #main-nav ul li a.btn {
+        min-height: 48px; /* Minimum touch target size */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .container {

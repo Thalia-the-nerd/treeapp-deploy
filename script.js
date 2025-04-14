@@ -16,17 +16,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize language selector
     const languageSelect = document.getElementById('language-select');
     if (languageSelect) {
+        const translations = {
+            'en': {
+                'home': 'Home',
+                'about': 'About',
+                'locations': 'Locations',
+                'contact': 'Contact',
+                // Add more translations as needed
+            },
+            'es': {
+                'home': 'Inicio',
+                'about': 'Acerca de',
+                'locations': 'Ubicaciones',
+                'contact': 'Contacto',
+                // Add more translations as needed
+            }
+        };
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            // Store language preference
+            localStorage.setItem('preferred-language', lang);
+        }
+
         languageSelect.addEventListener('change', () => {
             const selectedLanguage = languageSelect.value;
-            // In a real implementation, this would load language files
-            console.log(`Language changed to: ${selectedLanguage}`);
+            updateLanguage(selectedLanguage);
         });
+
+        // Load saved language preference
+        const savedLanguage = localStorage.getItem('preferred-language');
+        if (savedLanguage && translations[savedLanguage]) {
+            languageSelect.value = savedLanguage;
+            updateLanguage(savedLanguage);
+        }
     }
 
     // Function to fetch and update stats
     async function updateStats() {
         try {
             const response = await fetch('stats.txt');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.text();
             
             // Parse the stats file
@@ -47,11 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const [key, value, date] = line.split('|');
                 if (key && value) {
                     const numValue = parseInt(value);
-                    stats[key] = numValue;
-                    
-                    // Add to total if it's a location stat (not a main stat)
-                    if (!key.startsWith('total_') && key !== 'date_updated') {
-                        totalTrees += numValue;
+                    if (!isNaN(numValue)) {
+                        stats[key] = numValue;
+                        
+                        // Add to total if it's a location stat (not a main stat)
+                        if (!key.startsWith('total_') && key !== 'date_updated') {
+                            totalTrees += numValue;
+                        }
                     }
                 }
             }
@@ -116,6 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const input = treeCalculator.querySelector('input');
                 if (input && input.value) {
                     const treeCount = parseInt(input.value);
+                    if (isNaN(treeCount) || treeCount < 0) {
+                        showNotification('Please enter a valid positive number of trees', 'error');
+                        return;
+                    }
                     const co2Amount = treeCount * 22; // kg per year
                     const waterAmount = treeCount * 100; // gallons per year
                     
@@ -144,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize parallax effects
     const parallaxElements = document.querySelectorAll('.parallax');
     if (parallaxElements.length > 0) {
-        window.addEventListener('scroll', () => {
+        const handleScroll = () => {
             const scrollPosition = window.scrollY;
             
             parallaxElements.forEach(element => {
@@ -152,26 +195,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 const yPos = -(scrollPosition * speed);
                 element.style.transform = `translateY(${yPos}px)`;
             });
-        });
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Cleanup function
+        const cleanup = () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+
+        // Clean up on page unload
+        window.addEventListener('unload', cleanup);
     }
 
     // Mobile Menu Functionality
     const hamburgerMenu = document.getElementById('hamburger-menu');
     const mainNav = document.getElementById('main-nav');
     const body = document.body;
+    let lastScrollTop = 0;
 
     if (hamburgerMenu && mainNav) {
-        hamburgerMenu.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            hamburgerMenu.classList.toggle('active');
-            body.classList.toggle('menu-open');
+        const toggleMenu = (show) => {
+            mainNav.classList.toggle('active', show);
+            hamburgerMenu.classList.toggle('active', show);
+            body.classList.toggle('menu-open', show);
             
             // Toggle between hamburger and close icon
             const icon = hamburgerMenu.querySelector('i');
             if (icon) {
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
+                icon.classList.toggle('fa-bars', !show);
+                icon.classList.toggle('fa-times', show);
             }
+            
+            // Set ARIA attributes for accessibility
+            hamburgerMenu.setAttribute('aria-expanded', show);
+            mainNav.setAttribute('aria-hidden', !show);
+        };
+
+        // Initialize ARIA attributes
+        hamburgerMenu.setAttribute('aria-expanded', 'false');
+        hamburgerMenu.setAttribute('aria-controls', 'main-nav');
+        mainNav.setAttribute('aria-hidden', 'true');
+        mainNav.setAttribute('role', 'navigation');
+        mainNav.setAttribute('aria-label', 'Main navigation');
+
+        hamburgerMenu.addEventListener('click', () => {
+            toggleMenu(!mainNav.classList.contains('active'));
         });
 
         // Close menu when clicking outside
@@ -179,48 +248,77 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!mainNav.contains(event.target) && 
                 !hamburgerMenu.contains(event.target) && 
                 mainNav.classList.contains('active')) {
-                mainNav.classList.remove('active');
-                hamburgerMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-                
-                // Reset icon
-                const icon = hamburgerMenu.querySelector('i');
-                if (icon) {
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                }
+                toggleMenu(false);
             }
         });
 
         // Close menu when clicking a link
         mainNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                hamburgerMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-                
-                // Reset icon
-                const icon = hamburgerMenu.querySelector('i');
-                if (icon) {
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                }
+                toggleMenu(false);
             });
+        });
+
+        // Handle scroll behavior
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Close menu if scrolling while it's open
+            if (mainNav.classList.contains('active')) {
+                toggleMenu(false);
+            }
+            
+            // Hide/show menu based on scroll direction
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                mainNav.classList.add('nav-hidden');
+            } else {
+                // Scrolling up
+                mainNav.classList.remove('nav-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
         });
 
         // Close menu on window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
-                mainNav.classList.remove('active');
-                hamburgerMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-                
-                // Reset icon
-                const icon = hamburgerMenu.querySelector('i');
-                if (icon) {
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
+                toggleMenu(false);
+            }
+        });
+        
+        // Handle keyboard navigation
+        hamburgerMenu.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleMenu(!mainNav.classList.contains('active'));
+            }
+        });
+        
+        // Trap focus within menu when open
+        mainNav.addEventListener('keydown', (event) => {
+            if (!mainNav.classList.contains('active')) return;
+            
+            const focusableElements = mainNav.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+            
+            if (event.key === 'Tab') {
+                if (event.shiftKey) {
+                    if (document.activeElement === firstFocusable) {
+                        event.preventDefault();
+                        lastFocusable.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusable) {
+                        event.preventDefault();
+                        firstFocusable.focus();
+                    }
                 }
+            }
+            
+            if (event.key === 'Escape') {
+                toggleMenu(false);
             }
         });
     }
