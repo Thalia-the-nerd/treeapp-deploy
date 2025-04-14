@@ -23,24 +23,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize tree counter
-    const treeCounter = document.getElementById('tree-counter');
-    if (treeCounter) {
-        const numberElement = treeCounter.querySelector('.number');
-        
-            // Animate counter from 0 to 5000
-            anime({
-                targets: numberElement,
-                innerHTML: [0, 5000],
-                round: 1,
-            easing: 'easeInOutExpo',
-                duration: 2000,
-            delay: 500,
-            update: function(anim) {
-                numberElement.textContent = anim.animations[0].currentValue;
+    // Function to fetch and update stats
+    async function updateStats() {
+        try {
+            const response = await fetch('stats.txt');
+            const data = await response.text();
+            
+            // Parse the stats file
+            const stats = {};
+            const lines = data.split('\n');
+            let totalTrees = 0;
+            
+            for (const line of lines) {
+                if (line.startsWith('#') || !line.trim()) continue; // Skip comments and empty lines
+                const [key, value, date] = line.split('|');
+                if (key && value) {
+                    const numValue = parseInt(value);
+                    stats[key] = numValue;
+                    
+                    // Add to total if it's a location stat (not a main stat)
+                    if (!key.startsWith('total_') && key !== 'date_updated') {
+                        totalTrees += numValue;
+                    }
+                }
             }
+
+            // Update total trees planted
+            stats.total_trees_planted = totalTrees;
+            
+            // Calculate derived stats
+            stats.total_co2_reduction_tons = Math.round(totalTrees * 0.022); // 22kg CO2 per tree per year = 0.022 tons
+            stats.total_water_saved_gallons = totalTrees * 100; // 100 gallons per tree per year
+
+            // Update tree counter
+            const treeCounter = document.getElementById('tree-counter');
+            if (treeCounter) {
+                const numberElement = treeCounter.querySelector('.number');
+                if (numberElement) {
+                    numberElement.textContent = totalTrees;
+                }
+            }
+
+            // Update stats in the impact section
+            const treeCount = document.getElementById('tree-count');
+            const co2Reduction = document.getElementById('co2-reduction');
+            const waterSaved = document.getElementById('water-saved');
+            
+            if (treeCount) treeCount.textContent = totalTrees;
+            if (co2Reduction) co2Reduction.textContent = stats.total_co2_reduction_tons;
+            if (waterSaved) waterSaved.textContent = stats.total_water_saved_gallons;
+
+            // Update location stats if they exist
+            const locationStats = document.querySelectorAll('.location-stat');
+            locationStats.forEach(stat => {
+                const locationName = stat.getAttribute('data-location');
+                if (locationName && stats[locationName]) {
+                    const numberElement = stat.querySelector('.number');
+                    if (numberElement) {
+                        numberElement.textContent = stats[locationName];
+                    }
+                }
             });
+        } catch (error) {
+            console.error('Error loading stats:', error);
+        }
     }
+
+    // Update stats when the page loads
+    updateStats();
+
+    // Update stats every 5 minutes
+    setInterval(updateStats, 5 * 60 * 1000);
 
     // Initialize tree calculator
     const treeCalculator = document.getElementById('tree-calculator');
@@ -174,3 +227,57 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (elementPosition < windowHeight - 100) {
 }); 
+
+// Tree Counter and Stats Animation
+function updateTreeStats() {
+    const treeCount = document.getElementById('tree-count');
+    const co2Reduction = document.getElementById('co2-reduction');
+    const waterSaved = document.getElementById('water-saved');
+    
+    // Updated values to reflect 0 trees planted
+    const stats = {
+        trees: 0,
+        co2Tons: 0,
+        waterGallons: 0
+    };
+
+    // Animate the numbers
+    function animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.textContent = value.toLocaleString();
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // Start animations
+    animateValue(treeCount, 0, stats.trees, 2000);
+    animateValue(co2Reduction, 0, stats.co2Tons, 2000);
+    animateValue(waterSaved, 0, stats.waterGallons, 2000);
+}
+
+// Initialize stats when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    updateTreeStats();
+});
+
+// Update stats when the counter section comes into view
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            updateTreeStats();
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const counterSection = document.getElementById('tree-counter-section');
+if (counterSection) {
+    observer.observe(counterSection);
+} 

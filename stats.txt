@@ -1,0 +1,7 @@
+# TreePlace.App Statistics
+# Format: location_name|trees_planted|date_updated
+
+# Location Statistics
+Central Park|0|2024-03-21
+Riverside Park|0|2024-03-21
+Prospect Park|0|2024-03-21 
