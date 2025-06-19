@@ -20,8 +20,6 @@ TreePlace.App is a community-driven platform dedicated to making Miami greener b
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- npm (v6 or higher)
 - Git
 
 ### Installation
@@ -30,23 +28,6 @@ TreePlace.App is a community-driven platform dedicated to making Miami greener b
    ```bash
    git clone https://github.com/Thalia-the-nerd/treeapp-deploy.git
    ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd treeapp-deploy
-   ```
-
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Start the development server:
-   ```bash
-   npm start
-   ```
-
-5. Open your browser and navigate to `http://localhost:3000`
 
 ## 🛠️ Development
 
