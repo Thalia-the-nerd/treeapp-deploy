@@ -1,130 +1,339 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const usersTable = document.querySelector('#users-table tbody');
-    const eventsTable = document.querySelector('#events-table tbody');
-    const createEventForm = document.getElementById('create-event-form');
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll(".admin-section");
+  const userModal = document.getElementById("edit-user-modal");
+  const qrCodeModal = document.getElementById("qr-code-modal");
+  const closeButtons = document.querySelectorAll(".close-button");
 
-    // Fetch and display users
-    fetch('/api/users')
-        .then(response => response.json())
-        .then(users => {
-            users.forEach(user => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.username}</td>
-                    <td>${user.email}</td>
-                    <td><input type="number" value="${user.timeDonated || 0}" data-id="${user._id}" data-field="timeDonated"></td>
-                    <td><input type="number" value="${user.moneyDonated || 0}" data-id="${user._id}" data-field="moneyDonated"></td>
-                    <td><input type="checkbox" ${user.isAdmin ? 'checked' : ''} data-id="${user._id}" data-field="isAdmin"></td>
-                    <td><button data-id="${user._id}" class="update-user">Update</button></td>
-                `;
-                usersTable.appendChild(row);
-            });
+  // --- Basic Setup & Navigation ---
+  if (!localStorage.getItem("isAdmin")) {
+    window.location.href = "login.html";
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const targetId = link.getAttribute("href").substring(1);
+      if (!document.getElementById(targetId)) return;
+
+      e.preventDefault();
+
+      navLinks.forEach((l) => l.classList.remove("active"));
+      sections.forEach((s) => s.classList.remove("active"));
+
+      link.classList.add("active");
+      document.getElementById(targetId).classList.add("active");
+
+      // Load content for the clicked section
+      if (targetId === "users") loadUsers();
+      if (targetId === "events") loadEvents();
+      if (targetId === "notifications") loadNotifications();
+    });
+  });
+
+  closeButtons.forEach(button => {
+    button.onclick = () => {
+        userModal.style.display = "none";
+        qrCodeModal.style.display = "none";
+    }
+  });
+
+  window.onclick = (event) => {
+    if (event.target == userModal || event.target == qrCodeModal) {
+      userModal.style.display = "none";
+      qrCodeModal.style.display = "none";
+    }
+  };
+
+  // --- API Fetch Functions ---
+  const fetchData = async (url) => {
+    const response = await fetch(url, {
+      headers: { "x-admin": "true" },
+    });
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return response.json();
+  };
+
+  // --- User Management ---
+  const loadUsers = async (query = "") => {
+    try {
+      const url = query ? `/api/users?search=${query}` : "/api/users";
+      const users = await fetchData(url);
+      const container = document.getElementById("users-table-container");
+      container.innerHTML = `
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Money Donated</th>
+                            <th>Time Donated</th>
+                            <th>Admin?</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${users
+                          .map(
+                            (user) => `
+                            <tr>
+                                <td>${user.username}</td>
+                                <td>${user.email}</td>
+                                <td>${(user.moneyDonated || 0).toFixed(2)}</td>
+                                <td>${(user.timeDonated || 0).toFixed(1)} hrs</td>
+                                <td>${user.isAdmin ? "Yes" : "No"}</td>
+                                <td>
+                                    <button class="btn btn-sm primary edit-user-btn" data-id="${user._id}">Edit</button>
+                                    <a href="user-details.html?id=${user._id}" class="btn btn-sm info">View</a>
+                                </td>
+                            </tr>
+                        `,
+                          )
+                          .join("")}
+                    </tbody>
+                </table>
+            `;
+      document.querySelectorAll(".edit-user-btn").forEach((button) => {
+        button.addEventListener("click", () =>
+          openEditUserModal(users.find((u) => u._id === button.dataset.id)),
+        );
+      });
+    } catch (error) {
+      console.error("Failed to load users:", error);
+      document.getElementById("users-table-container").innerHTML =
+        '<p class="error">Could not load users.</p>';
+    }
+  };
+
+  const userSearchInput = document.getElementById("user-search-input");
+  const userSearchBtn = document.getElementById("user-search-btn");
+
+  userSearchBtn.addEventListener("click", () => {
+    loadUsers(userSearchInput.value);
+  });
+
+  userSearchInput.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+        loadUsers(userSearchInput.value);
+    }
+  });
+
+  const openEditUserModal = (user) => {
+    document.getElementById("edit-userId").value = user._id;
+    document.getElementById("edit-username").value = user.username;
+    document.getElementById("edit-moneyDonated").value = user.moneyDonated || 0;
+    document.getElementById("edit-timeDonated").value = user.timeDonated || 0;
+    document.getElementById("edit-isAdmin").checked = user.isAdmin;
+    userModal.style.display = "block";
+  };
+
+  document
+    .getElementById("edit-user-form")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const userId = document.getElementById("edit-userId").value;
+      const body = {
+        moneyDonated: parseFloat(
+          document.getElementById("edit-moneyDonated").value,
+        ),
+        timeDonated: parseFloat(
+          document.getElementById("edit-timeDonated").value,
+        ),
+        isAdmin: document.getElementById("edit-isAdmin").checked,
+      };
+
+      try {
+        await fetch(`/api/users/${userId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "x-admin": "true",
+          },
+          body: JSON.stringify(body),
         });
-
-    // Fetch and display events
-    fetch('/api/events')
-        .then(response => response.json())
-        .then(events => {
-            events.forEach(event => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${event.name}</td>
-                    <td>${new Date(event.date).toLocaleDateString()}</td>
-                    <td>${event.location}</td>
-                    <td>
-                        <button data-id="${event._id}" class="get-qr-code">Get QR Code</button>
-                        <button data-id="${event._id}" class="delete-event">Delete</button>
-                    </td>
-                `;
-                eventsTable.appendChild(row);
-            });
-        });
-
-    // Handle user updates
-    usersTable.addEventListener('click', (e) => {
-        if (e.target.classList.contains('update-user')) {
-            const button = e.target;
-            const id = button.dataset.id;
-            const row = button.closest('tr');
-            const timeDonated = row.querySelector('[data-field="timeDonated"]').value;
-            const moneyDonated = row.querySelector('[data-field="moneyDonated"]').value;
-            const isAdmin = row.querySelector('[data-field="isAdmin"]').checked;
-
-            fetch(`/api/users/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ timeDonated, moneyDonated, isAdmin })
-            }).then(response => {
-                if (response.ok) {
-                    alert('User updated successfully');
-                } else {
-                    alert('Failed to update user');
-                }
-            });
-        }
+        userModal.style.display = "none";
+        loadUsers(); // Refresh the list
+      } catch (error) {
+        console.error("Failed to update user:", error);
+      }
     });
 
-    // Handle event creation
-    createEventForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('event-name').value;
-        const date = document.getElementById('event-date').value;
-        const location = document.getElementById('event-location').value;
+  // --- Event Management ---
+  const loadEvents = async () => {
+    try {
+      const events = await fetchData("/api/events");
+      const container = document.getElementById("events-table-container");
+      container.innerHTML = `
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Attendance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${events
+                          .map(
+                            (event) => `
+                            <tr>
+                                <td>${event.name}</td>
+                                <td>${new Date(event.date).toLocaleString()}</td>
+                                <td>${event.location}</td>
+                                <td>${event.attendance.length}</td>
+                                <td>
+                                    <button class="btn btn-sm info qr-code-btn" data-id="${event._id}">QR Code</button>
+                                    <button class="btn btn-sm danger delete-event-btn" data-id="${event._id}">Delete</button>
+                                </td>
+                            </tr>
+                        `,
+                          )
+                          .join("")}
+                    </tbody>
+                </table>
+            `;
+      document.querySelectorAll(".delete-event-btn").forEach((button) => {
+        button.addEventListener("click", () => deleteEvent(button.dataset.id));
+      });
+      document.querySelectorAll(".qr-code-btn").forEach((button) => {
+        button.addEventListener("click", () => generateQrCode(button.dataset.id));
+      });
+    } catch (error) {
+      console.error("Failed to load events:", error);
+      document.getElementById("events-table-container").innerHTML =
+        '<p class="error">Could not load events.</p>';
+    }
+  };
 
-        fetch('/api/events', {
+  const deleteEvent = async (eventId) => {
+    if (!confirm("Are you sure you want to delete this event?")) return;
+    try {
+      await fetch(`/api/events/${eventId}`, {
+        method: "DELETE",
+        headers: { "x-admin": "true" },
+      });
+      loadEvents(); // Refresh
+    } catch (error) {
+      console.error("Failed to delete event:", error);
+    }
+  };
+
+  const generateQrCode = (eventId) => {
+    window.open(`qr-code-page.html?eventId=${eventId}`, '_blank');
+  };
+
+  document
+    .getElementById("create-event-form")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData();
+      formData.append("name", document.getElementById("eventName").value);
+      formData.append("date", document.getElementById("eventDate").value);
+      formData.append("location", document.getElementById("eventLocation").value);
+
+      try {
+        await fetch("/api/events", {
+          method: "POST",
+          headers: {
+            "x-admin": "true",
+          },
+          body: formData,
+        });
+        e.target.reset();
+        loadEvents(); // Refresh
+      } catch (error) {
+        console.error("Failed to create event:", error);
+      }
+    });
+
+  // --- Notifications ---
+  const loadNotifications = async () => {
+    try {
+      const notifications = await fetchData("/api/notifications");
+      const container = document.getElementById("notifications-list");
+      if (notifications.length === 0) {
+        container.innerHTML = "<p>No notifications yet.</p>";
+        return;
+      }
+      container.innerHTML = notifications
+        .map(
+          (n) => `
+                <div class="notification-item">
+                    <p><strong>${n.username}</strong>: ${n.message}</p>
+                    <span class="timestamp">${new Date(n.timestamp).toLocaleString()}</span>
+                </div>
+            `,
+        )
+        .join("");
+    } catch (error) {
+      console.error("Failed to load notifications:", error);
+      document.getElementById("notifications-list").innerHTML =
+        '<p class="error">Could not load notifications.</p>';
+    }
+  };
+
+  // --- Initial Load ---
+  loadUsers();
+});
+
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
+
+  const input = document.getElementById("eventLocation");
+  const autocomplete = new google.maps.places.Autocomplete(input);
+
+  autocomplete.bindTo("bounds", map);
+
+  const marker = new google.maps.Marker({
+    map: map,
+    anchorPoint: new google.maps.Point(0, -29),
+  });
+
+  autocomplete.addListener("place_changed", () => {
+    marker.setVisible(false);
+    const place = autocomplete.getPlace();
+
+    if (!place.geometry) {
+      // User entered the name of a Place that was not suggested and
+      // pressed the Enter key, or the Place Details request failed.
+      window.alert("No details available for input: '" + place.name + "'");
+      return;
+    }
+
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17); // Why 17? Because it looks good.
+    }
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+  });
+}
+
+document.getElementById('logout-button').addEventListener('click', async function() {
+    const username = localStorage.getItem('username');
+    if (username) {
+        await fetch('/api/logout', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, date, location })
-        }).then(response => {
-            if (response.ok) {
-                alert('Event created successfully');
-                location.reload();
-            } else {
-                alert('Failed to create event');
-            }
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username })
         });
-    });
+    }
 
-    // Handle event deletion
-    eventsTable.addEventListener('click', (e) => {
-        if (e.target.classList.contains('delete-event')) {
-            const button = e.target;
-            const id = button.dataset.id;
+    // Clear local storage or any session variables
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('isAdmin');
 
-            if (confirm('Are you sure you want to delete this event?')) {
-                fetch(`/api/events/${id}`, {
-                    method: 'DELETE'
-                }).then(response => {
-                    if (response.ok) {
-                        alert('Event deleted successfully');
-                        location.reload();
-                    } else {
-                        alert('Failed to delete event');
-                    }
-                });
-            }
-        }
-    });
-
-    // Handle "Get QR Code" button click
-    eventsTable.addEventListener('click', (e) => {
-        if (e.target.classList.contains('get-qr-code')) {
-            const eventId = e.target.dataset.id;
-            fetch(`/api/events/${eventId}/qr-code`)
-                .then(response => response.json())
-                .then(data => {
-                    const qrCodeContainer = document.getElementById('qr-code-container');
-                    qrCodeContainer.innerHTML = `<img src="${data.qrCodeUrl}" alt="Event QR Code">`;
-                    const modal = document.getElementById('qr-code-modal');
-                    modal.style.display = 'block';
-                });
-        }
-    });
-
-    // Close the modal
-    const closeButton = document.querySelector('.close-button');
-    closeButton.addEventListener('click', () => {
-        const modal = document.getElementById('qr-code-modal');
-        modal.style.display = 'none';
-    });
+    // Redirect to login page
+    window.location.href = 'login.html';
 });

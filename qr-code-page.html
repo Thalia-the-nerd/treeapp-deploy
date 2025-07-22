@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event QR Code - TreePlace.App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--light-bg);
+        }
+        .qr-code-container {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+        .qr-code-container h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        .qr-code-container img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="qr-code-container">
+        <h1>Event QR Code</h1>
+        <div id="qr-code-display">
+            <!-- QR code will be loaded here by JavaScript -->
+        </div>
+    </div>
+    <script src="qr-code-page.js"></script>
+</body>
+</html>

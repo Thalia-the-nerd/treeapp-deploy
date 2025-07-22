@@ -3,61 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Admin Dashboard - TreePlace.App</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Admin Panel</h1>
-        <div id="admin-content">
-            <h2>Users</h2>
-            <table id="users-table">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Hours Donated</th>
-                        <th>Money Donated</th>
-                        <th>Admin</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">TreePlace.App</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" id="logout-button">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-            <h2>Events</h2>
-            <table id="events-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Location</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+    <div class="admin-container">
+        <main class="admin-main">
+            <div class="admin-nav-buttons">
+                <a href="#users" class="nav-link btn active">Users</a>
+                <a href="#events" class="nav-link btn">Events</a>
+                <a href="#notifications" class="nav-link btn">Notifications</a>
+            </div>
 
-            <h2>Create Event</h2>
-            <form id="create-event-form">
-                <input type="text" id="event-name" placeholder="Event Name" required>
-                <input type="date" id="event-date" required>
-                <input type="text" id="event-location" placeholder="Event Location" required>
-                <button type="submit">Create Event</button>
+            <section id="users" class="admin-section active">
+                <div class="admin-card">
+                    <h2>User Management</h2>
+                    <div class="admin-form">
+                        <div class="form-group">
+                            <input type="text" id="user-search-input" placeholder="Search by username or email...">
+                            <button id="user-search-btn" class="btn primary">Search</button>
+                        </div>
+                    </div>
+                    <div id="users-table-container">
+                        <!-- Users table will be loaded here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="events" class="admin-section">
+                <div class="admin-card">
+                    <h2>Event Management</h2>
+                    <div class="admin-form">
+                        <h3>Create New Event</h3>
+                        <form id="create-event-form">
+                            <div class="form-group">
+                                <label for="eventName">Event Name</label>
+                                <input type="text" id="eventName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDate">Event Date</label>
+                                <input type="datetime-local" id="eventDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventLocation">Event Location</label>
+                                <input type="text" id="eventLocation" required>
+                                <div id="map" style="height: 400px; width: 100%; margin-top: 1rem;"></div>
+                            </div>
+                            <button type="submit" class="btn primary">Create Event</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <h3>Current Events</h3>
+                    <div id="events-table-container">
+                        <!-- Events table will be loaded here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="notifications" class="admin-section">
+                <div class="admin-card">
+                    <h2>Notifications Feed</h2>
+                    <div id="notifications-list">
+                        <!-- Notifications will be loaded here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="edit-user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Edit User</h2>
+            <form id="edit-user-form" class="admin-form">
+                <input type="hidden" id="edit-userId">
+                <div class="form-group">
+                    <label for="edit-username">Username</label>
+                    <input type="text" id="edit-username" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="edit-moneyDonated">Money Donated</label>
+                    <input type="number" id="edit-moneyDonated" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="edit-timeDonated">Time Donated (hours)</label>
+                    <input type="number" id="edit-timeDonated" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="edit-isAdmin">
+                        <input type="checkbox" id="edit-isAdmin"> Is Admin?
+                    </label>
+                </div>
+                <button type="submit" class="btn primary">Save Changes</button>
             </form>
         </div>
     </div>
 
+    <!-- QR Code Modal -->
     <div id="qr-code-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h2>Event QR Code</h2>
-            <div id="qr-code-container"></div>
+            <div id="qr-code-container">
+                <!-- QR Code will be loaded here -->
+            </div>
         </div>
     </div>
 
+    
+
     <script src="admin.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvhtcVPgwIxDVwn8KQfp7pfTIPH8cBWzg&libraries=places&callback=initMap"></script>
 </body>
 </html>
