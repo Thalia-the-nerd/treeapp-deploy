@@ -21,6 +21,8 @@ TreePlace.App is a community-driven platform dedicated to making Miami greener b
 
 ### Prerequisites
 - Git
+- Node.js
+- MongoDB
 
 ### Installation
 
@@ -28,6 +30,51 @@ TreePlace.App is a community-driven platform dedicated to making Miami greener b
    ```bash
    git clone https://github.com/Thalia-the-nerd/treeapp-deploy.git
    ```
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+### Backend Setup
+
+1.  **Install and Run MongoDB:**
+
+    If you don't have MongoDB installed, you can download it from the official website: [https://www.mongodb.com/try/download/community](https://www.mongodb.com/try/download/community)
+
+    On many Linux distributions, you can install it using your package manager. For example, on Ubuntu/Debian:
+    ```bash
+    sudo apt update
+    sudo apt install -y mongodb
+    ```
+    Once installed, make sure the MongoDB service is running:
+    ```bash
+    sudo systemctl start mongod
+    sudo systemctl enable mongod
+    ```
+
+2.  **Seed the database:**
+
+    You can use the MongoDB shell (`mongosh`) to insert some initial data.
+    ```bash
+    mongosh
+    ```
+    Inside the shell, run the following commands:
+    ```javascript
+    use treeApp
+    db.stats.insertOne({
+        "location1": 100,
+        "location2": 250,
+        "location3": 150
+    })
+    ```
+
+### Running the Application
+
+1.  Start the server:
+    ```bash
+    npm start
+    ```
+2.  Open your browser and navigate to `http://localhost:3000` (or your machine's IP address).
 
 ## 🛠️ Development
 

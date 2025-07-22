@@ -60,39 +60,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch and update stats
     async function updateStats() {
         try {
-            const response = await fetch('stats.txt');
+            const response = await fetch('/api/stats');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const data = await response.text();
+            const stats = await response.json();
             
-            // Parse the stats file
-            const stats = {};
-            const lines = data.split('\n');
             let totalTrees = 0;
-            let version = '1.0.0'; // Default version
-            
-            for (const line of lines) {
-                if (line.startsWith('# Version:')) {
-                    version = line.split(':')[1].trim();
-                    // Update version number in all version spans
-                    document.querySelectorAll('.version-number').forEach(span => {
-                        span.textContent = version;
-                    });
-                }
-                if (line.startsWith('#') || !line.trim()) continue; // Skip comments and empty lines
-                const [key, value, date] = line.split('|');
-                if (key && value) {
-                    const numValue = parseInt(value);
-                    if (!isNaN(numValue)) {
-                        stats[key] = numValue;
-                        
-                        // Add to total if it's a location stat (not a main stat)
-                        if (!key.startsWith('total_') && key !== 'date_updated') {
-                            totalTrees += numValue;
-                        }
+            if (stats && typeof stats === 'object') {
+                // If stats is an object, calculate totalTrees
+                totalTrees = Object.values(stats).reduce((acc, val) => {
+                    if (typeof val === 'number') {
+                        return acc + val;
                     }
-                }
+                    return acc;
+                }, 0);
+            } else {
+                // Fallback for older data format
+                totalTrees = stats || 0;
             }
 
             // Update total trees planted

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TreePlace.App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3x/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">TreePlace.App</a></h1>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html" class="btn">Home</a></li>
+                    <li><a href="sponsors.html" class="btn">Sponsors</a></li>
+                    <li><a href="#" id="logout-button" class="btn">Logout</a></li>
+                    <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="dashboard-container">
+                <h2>Welcome, <span id="username"></span>!</h2>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Money Donated</h3>
+                        <p>$<span id="money-donated">0</span></p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Time Donated</h3>
+                        <p><span id="time-donated">0</span> hours</p>
+                    </div>
+                </div>
+                <div class="dashboard-locations">
+                    <h3>Planting Locations</h3>
+                    <div class="locations-grid">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Treeplace.app All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="dashboard.js"></script>
+</body>
+</html>
