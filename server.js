@@ -100,7 +100,15 @@ app.get("/api/stats", async (req, res) => {
 // API endpoint for user signup
 app.post("/api/signup", async (req, res) => {
   try {
-    const { firstName, lastName, username, email, password } = req.body;
+    const {
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+      isBusiness,
+      businessName,
+    } = req.body;
     const usersCollection = db.collection(usersCollectionName);
 
     // Check if user already exists
@@ -130,6 +138,8 @@ app.post("/api/signup", async (req, res) => {
       moneyDonated: 0,
       timeDonated: 0,
       isAdmin: false,
+      isBusiness: isBusiness || false,
+      businessName: isBusiness ? businessName : null,
       isSuspended: false,
       isFlagged: false,
       badges: [],
@@ -187,7 +197,7 @@ app.get("/api/verify", async (req, res) => {
 // API endpoint for user login
 app.post("/api/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, isBusiness } = req.body;
     const usersCollection = db.collection(usersCollectionName);
 
     const user = await usersCollection.findOne({
@@ -195,19 +205,23 @@ app.post("/api/login", async (req, res) => {
     });
 
     if (!user) {
-      return res.status(400).send("Invalid username or password.");
+      return res.status(400).json({ success: false, message: "Invalid username or password." });
     }
 
     if (!user.isVerified) {
       return res
         .status(400)
-        .send("Please verify your email before logging in.");
+        .json({ success: false, message: "Please verify your email before logging in." });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).send("Invalid username or password.");
+      return res.status(400).json({ success: false, message: "Invalid username or password." });
+    }
+
+    if (isBusiness && !user.isBusiness) {
+      return res.status(403).json({ success: false, message: "You are not a business user." });
     }
 
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -220,10 +234,11 @@ app.post("/api/login", async (req, res) => {
       message: "Login successful.",
       username: user.username,
       isAdmin: user.isAdmin,
+      isBusiness: user.isBusiness,
     });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error logging in.");
+    res.status(500).json({ success: false, message: "Error logging in." });
   }
 });
 
@@ -312,6 +327,7 @@ app.get("/api/user/dashboard", async (req, res) => {
       moneyDonated: user.moneyDonated || 0,
       timeDonated: user.timeDonated || 0,
       nextEvent: eventDetails,
+      businessName: user.businessName,
     });
   } catch (err) {
     console.error("Error fetching user dashboard data:", err);
@@ -396,6 +412,11 @@ function isAdmin(req, res, next) {
 // Admin panel route
 app.get("/admin", (req, res) => {
   res.sendFile(__dirname + "/admin.html");
+});
+
+// Business dashboard route
+app.get("/business-dashboard", (req, res) => {
+  res.sendFile(__dirname + "/business-dashboard.html");
 });
 
 // API endpoint to get all users
