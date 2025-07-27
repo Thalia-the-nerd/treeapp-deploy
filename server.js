@@ -328,6 +328,7 @@ app.get("/api/user/dashboard", async (req, res) => {
       timeDonated: user.timeDonated || 0,
       nextEvent: eventDetails,
       businessName: user.businessName,
+      badges: user.badges || [],
     });
   } catch (err) {
     console.error("Error fetching user dashboard data:", err);

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Login - TreePlace.App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3x/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1><a href="index.html">TreePlace.App</a></h1>
+        <nav id="main-nav">
+          <ul>
+            <li><a href="index.html" class="btn">Home</a></li>
+            <li><a href="sponsors.html" class="btn">Sponsors</a></li>
+            <li><a href="login.html" class="btn">Login</a></li>
+            <li>
+              <a
+                href="https://www.patreon.com/c/treeplace/membership"
+                class="btn"
+                >Donate</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <div class="auth-container">
+          <h2>Business Login</h2>
+          <form id="business-login-form">
+            <div class="form-group">
+              <label for="username">Business Username or Email</label>
+              <input type="text" id="username" name="username" required />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" required />
+            </div>
+            <button type="submit" class="btn primary">Login</button>
+          </form>
+          <div class="auth-links">
+            <a href="forgot-password.html">Forgot Password?</a>
+            <p>Don't have a business account? <a href="business-signup.html">Sign Up</a></p>
+            <p>Not a business? <a href="login.html">User Login</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Treeplace.app All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="business-login.js"></script>
+  </body>
+</html>

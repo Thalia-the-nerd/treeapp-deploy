@@ -111,6 +111,17 @@ document.addEventListener("DOMContentLoaded", () => {
           createRewardCard(nextTimeReward, data.timeDonated),
         );
       }
+
+      // Populate badges
+      const badgesContainer = document.getElementById("badges-container");
+      badgesContainer.innerHTML = "";
+      if (data.badges && data.badges.length > 0) {
+          data.badges.forEach(badge => {
+              badgesContainer.appendChild(createBadgeCard(badge));
+          });
+      } else {
+          badgesContainer.innerHTML = "<p>No badges earned yet. Keep up the great work!</p>";
+      }
     })
     .catch((error) => {
       console.error("Error fetching dashboard data:", error);
@@ -140,6 +151,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="progress-text">${currentDisplay} / ${reward.threshold} ${unit}</p>
             </div>
         `;
+    return card;
+  }
+
+  function createBadgeCard(badge) {
+    const card = document.createElement("div");
+    card.className = "feature-card badge-card";
+    card.innerHTML = `
+        <i class="fas fa-medal"></i>
+        <div class="badge-info">
+            <h4>${badge.name}</h4>
+            <p>${badge.description}</p>
+        </div>
+    `;
     return card;
   }
 
