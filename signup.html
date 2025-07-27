@@ -60,18 +60,11 @@
               <label for="password">Password</label>
               <input type="password" id="password" name="password" required />
             </div>
-            <div class="form-group">
-              <input type="checkbox" id="is-business" name="is-business" />
-              <label for="is-business">Register as a business</label>
-            </div>
-            <div class="form-group" id="business-name-group" style="display: none;">
-              <label for="business-name">Business Name</label>
-              <input type="text" id="business-name" name="business-name" />
-            </div>
             <button type="submit" class="btn primary">Sign Up</button>
           </form>
           <div class="auth-links">
             <p>Already have an account? <a href="login.html">Login</a></p>
+            <p>Are you a business? <a href="business-signup.html">Sign up here</a></p>
           </div>
         </div>
       </div>
@@ -83,11 +76,6 @@
       </div>
     </footer>
     <script>
-      document.getElementById('is-business').addEventListener('change', function () {
-        const businessNameGroup = document.getElementById('business-name-group');
-        businessNameGroup.style.display = this.checked ? 'block' : 'none';
-      });
-
       document
         .getElementById("signup-form")
         .addEventListener("submit", async (e) => {
@@ -97,8 +85,6 @@
           const username = document.getElementById("username").value;
           const email = document.getElementById("email").value;
           const password = document.getElementById("password").value;
-          const isBusiness = document.getElementById("is-business").checked;
-          const businessName = document.getElementById("business-name").value;
 
           const response = await fetch("/api/signup", {
             method: "POST",
@@ -111,8 +97,7 @@
               username,
               email,
               password,
-              isBusiness,
-              businessName,
+              isBusiness: false,
             }),
           });
 

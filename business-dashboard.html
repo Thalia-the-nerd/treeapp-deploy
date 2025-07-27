@@ -40,6 +40,34 @@
           <!-- Locations will be populated by JavaScript -->
         </div>
       </section>
+
+      <section id="sponsorship-management" style="margin-top: 2rem">
+        <h3>Sponsorship Management</h3>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h4>Edit Sponsorship Details</h4>
+            <form id="sponsorship-form">
+              <label for="sponsor-name">Sponsor Name</label>
+              <input type="text" id="sponsor-name" name="sponsor-name" required>
+              <label for="sponsor-description">Sponsor Description</label>
+              <textarea id="sponsor-description" name="sponsor-description" rows="4" required></textarea>
+              <label for="sponsor-logo">Sponsor Logo URL</label>
+              <input type="url" id="sponsor-logo" name="sponsor-logo">
+              <button type="submit" class="btn primary">Save Changes</button>
+            </form>
+          </div>
+          <div class="feature-card">
+            <h4>Sponsorship Tier</h4>
+            <p>Your current tier: <span id="current-tier">Bronze</span></p>
+            <button id="upgrade-tier" class="btn primary">Upgrade Tier</button>
+          </div>
+          <div class="feature-card">
+            <h4>Contact Admin</h4>
+            <p>Have questions or need help with your sponsorship?</p>
+            <button id="contact-admin" class="btn secondary">Contact Admin</button>
+          </div>
+        </div>
+      </section>
     </main>
     </div>
 

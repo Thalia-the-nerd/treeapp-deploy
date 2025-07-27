@@ -361,9 +361,15 @@ function updateTreeStats() {
   }
 
   // Start animations
-  animateValue(treeCount, 0, stats.trees, 2000);
-  animateValue(co2Reduction, 0, stats.co2Tons, 2000);
-  animateValue(waterSaved, 0, stats.waterGallons, 2000);
+  if(treeCount) {
+    animateValue(treeCount, 0, stats.trees, 2000);
+  }
+  if(co2Reduction) {
+    animateValue(co2Reduction, 0, stats.co2Tons, 2000);
+  }
+  if(waterSaved) {
+    animateValue(waterSaved, 0, stats.waterGallons, 2000);
+  }
 }
 
 // Initialize stats when the page loads
@@ -387,4 +393,583 @@ const observer = new IntersectionObserver(
 const counterSection = document.getElementById("tree-counter-section");
 if (counterSection) {
   observer.observe(counterSection);
+}
+
+// --- animations.js ---
+// Animations for TreePlace.App
+document.addEventListener("DOMContentLoaded", () => {
+  // Tree Counter Animation
+  const treeCounter = document.getElementById("tree-counter");
+  if (treeCounter) {
+    const numberElement = treeCounter.querySelector(".number");
+    if (numberElement) {
+      numberElement.textContent = "0";
+    }
+  }
+
+  // Tree Counter Animation for How It Works page
+  const treeCounterHowItWorks = document.getElementById(
+    "tree-counter-how-it-works",
+  );
+  if (treeCounterHowItWorks) {
+    const numberElement = treeCounterHowItWorks.querySelector(".number");
+    if (numberElement) {
+      numberElement.textContent = "0";
+    }
+  }
+
+  // Process Steps Animation
+  const animateOnScroll = () => {
+    const elements = document.querySelectorAll(".animate-on-scroll");
+
+    elements.forEach((element) => {
+      const elementPosition = element.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (elementPosition < windowHeight - 100) {
+        element.classList.add("visible");
+      }
+    });
+  };
+
+  // Run animation on page load and scroll
+  window.addEventListener("load", animateOnScroll);
+  window.addEventListener("scroll", animateOnScroll);
+
+  // Animate feature cards
+  const featureCards = document.querySelectorAll(".feature-card");
+  featureCards.forEach((card, index) => {
+    // Add staggered entrance animation
+    anime({
+      targets: card,
+      translateY: [50, 0],
+      translateZ: 0,
+      opacity: [0, 1],
+      delay: index * 200,
+      duration: 800,
+      easing: "easeOutQuad",
+    });
+
+    // Add hover animation
+    card.addEventListener("mouseenter", () => {
+      anime({
+        targets: card,
+        translateY: -10,
+        boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)",
+        duration: 300,
+        easing: "easeOutQuad",
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      anime({
+        targets: card,
+        translateY: 0,
+        boxShadow: "0 5px 15px rgba(0, 0, 0, 0.05)",
+        duration: 300,
+        easing: "easeOutQuad",
+      });
+    });
+  });
+
+  // Animate team members
+  const teamMembers = document.querySelectorAll(".team-member");
+  teamMembers.forEach((member, index) => {
+    // Add staggered entrance animation
+    anime({
+      targets: member,
+      translateX: [-50, 0],
+      translateZ: 0,
+      opacity: [0, 1],
+      delay: index * 300,
+      duration: 1000,
+      easing: "easeOutElastic(1, .5)",
+    });
+
+    // Add hover animation for photos
+    const photo = member.querySelector(".team-photo");
+    if (photo) {
+      member.addEventListener("mouseenter", () => {
+        anime({
+          targets: photo,
+          scale: 1.05,
+          duration: 400,
+          easing: "easeOutQuad",
+        });
+      });
+
+      member.addEventListener("mouseleave", () => {
+        anime({
+          targets: photo,
+          scale: 1,
+          duration: 400,
+          easing: "easeOutQuad",
+        });
+      });
+    }
+  });
+
+  // Animate steps in Get Involved section
+  const steps = document.querySelectorAll(".step");
+  steps.forEach((step, index) => {
+    // Add staggered entrance animation
+    anime({
+      targets: step,
+      translateY: [30, 0],
+      translateZ: 0,
+      opacity: [0, 1],
+      delay: index * 200,
+      duration: 800,
+      easing: "easeOutQuad",
+    });
+
+    // Add icon animation
+    const icon = step.querySelector("i");
+    if (icon) {
+      step.addEventListener("mouseenter", () => {
+        anime({
+          targets: icon,
+          rotate: [0, 360],
+          scale: [1, 1.2, 1],
+          duration: 800,
+          easing: "easeOutElastic(1, .5)",
+        });
+      });
+    }
+  });
+
+  // Animate buttons in Get Involved section
+  const getInvolvedButtons = document.querySelectorAll(
+    ".get-involved-buttons .btn",
+  );
+  getInvolvedButtons.forEach((button, index) => {
+    // Add staggered entrance animation
+    anime({
+      targets: button,
+      translateY: [20, 0],
+      translateZ: 0,
+      opacity: [0, 1],
+      delay: 1000 + index * 150,
+      duration: 600,
+      easing: "easeOutQuad",
+    });
+  });
+
+  // Tree Stories Animation
+  const animateStories = () => {
+    const storyCards = document.querySelectorAll(".story-card");
+
+    storyCards.forEach((card, index) => {
+      anime({
+        targets: card,
+        opacity: [0, 1],
+        translateY: [20, 0],
+        translateZ: 0,
+        delay: index * 200,
+        duration: 800,
+        easing: "easeOutQuad",
+      });
+    });
+  };
+
+  // Urban Heat Impact Animation
+  const animateHeatImpact = () => {
+    const impactCards = document.querySelectorAll(".impact-card");
+
+    impactCards.forEach((card, index) => {
+      anime({
+        targets: card,
+        opacity: [0, 1],
+        translateY: [20, 0],
+        translateZ: 0,
+        delay: index * 200,
+        duration: 800,
+        easing: "easeOutQuad",
+      });
+    });
+  };
+
+  // Wildlife Connection Animation
+  const animateWildlife = () => {
+    const wildlifeCards = document.querySelectorAll(".wildlife-card");
+
+    wildlifeCards.forEach((card, index) => {
+      anime({
+        targets: card,
+        opacity: [0, 1],
+        translateY: [20, 0],
+        translateZ: 0,
+        delay: index * 200,
+        duration: 800,
+        easing: "easeOutQuad",
+      });
+    });
+  };
+
+  // Run animations when sections come into view
+  const observerOptions = {
+    threshold: 0.2,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        if (entry.target.classList.contains("tree-stories-section")) {
+          animateStories();
+        } else if (entry.target.classList.contains("heat-impact-section")) {
+          animateHeatImpact();
+        } else if (entry.target.classList.contains("wildlife-section")) {
+          animateWildlife();
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe new sections
+  document
+    .querySelectorAll(
+      ".tree-stories-section, .heat-impact-section, .wildlife-section",
+    )
+    .forEach((section) => {
+      observer.observe(section);
+    });
+});
+
+// --- interactive.js ---
+// Interactive Features Functionality
+document.addEventListener("DOMContentLoaded", () => {
+  // Newsletter Form
+  const newsletterForm = document.getElementById("newsletter-form");
+  if (newsletterForm) {
+    newsletterForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = newsletterForm.querySelector('input[type="email"]').value;
+
+      try {
+        // Here you would typically send this to your backend
+        console.log("Newsletter subscription:", email);
+        showNotification("Thank you for subscribing!", "success");
+        newsletterForm.reset();
+      } catch (error) {
+        showNotification("Error subscribing. Please try again.", "error");
+      }
+    });
+  }
+
+  // Tree Counter Animation
+  const treeCounter = document.getElementById("tree-counter");
+  if (treeCounter) {
+    const numberElement = treeCounter.querySelector(".number");
+    if (numberElement) {
+      numberElement.textContent = "0";
+    }
+  }
+
+  // Tree Calculator
+  const treeCalculator = document.getElementById("tree-calculator");
+  if (treeCalculator) {
+    const calculateBtn = treeCalculator.querySelector("button");
+    const results = treeCalculator.querySelector(".results");
+
+    calculateBtn.addEventListener("click", () => {
+      const treeCount = parseInt(treeCalculator.querySelector("input").value);
+      if (treeCount > 0) {
+        const co2Absorption = treeCount * 22; // kg per year
+        const waterFiltered = treeCount * 1000; // gallons per year
+
+        results.style.display = "block";
+        results.querySelector(".co2").textContent = co2Absorption;
+        results.querySelector(".water").textContent = waterFiltered;
+
+        // Animate the results
+        anime({
+          targets: results.querySelectorAll("span"),
+          opacity: [0, 1],
+          translateY: [20, 0],
+          duration: 800,
+          delay: anime.stagger(100),
+          easing: "easeOutExpo",
+        });
+      }
+    });
+  }
+
+  // Gallery Preview
+  const galleryPreview = document.getElementById("gallery-preview");
+  if (galleryPreview) {
+    const galleryGrid = galleryPreview.querySelector(".gallery-grid");
+
+    // Sample gallery items (replace with your actual data)
+    const sampleImages = [
+      { src: "tree1.jpg", alt: "Tree Planting Event 1" },
+      { src: "tree2.jpg", alt: "Tree Planting Event 2" },
+      { src: "tree3.jpg", alt: "Tree Planting Event 3" },
+      { src: "tree4.jpg", alt: "Tree Planting Event 4" },
+      { src: "tree5.jpg", alt: "Tree Planting Event 5" },
+      { src: "tree6.jpg", alt: "Tree Planting Event 6" },
+    ];
+
+    sampleImages.forEach((image) => {
+      const img = document.createElement("img");
+      img.src = image.src;
+      img.alt = image.alt;
+      img.onerror = () => {
+        img.src = "placeholder.jpg"; // Fallback image
+        img.alt = "Image not available";
+      };
+      galleryGrid.appendChild(img);
+    });
+  }
+
+  // Testimonials Slider
+  const testimonials = document.getElementById("testimonials");
+  if (testimonials) {
+    const slider = testimonials.querySelector(".testimonial-slider");
+
+    // Sample testimonials (replace with your actual data)
+    const sampleTestimonials = [
+      {
+        text: "Planting trees with TreePlace.App was an amazing experience. The community is so welcoming and passionate about making Miami greener!",
+        author: "Sarah Johnson",
+      },
+      {
+        text: "I've never felt more connected to my community than when participating in tree planting events. It's truly making a difference.",
+        author: "Michael Rodriguez",
+      },
+      {
+        text: "The impact we're making is visible every day. My neighborhood is becoming more beautiful and sustainable thanks to TreePlace.App.",
+        author: "Lisa Chen",
+      },
+    ];
+
+    let currentTestimonial = 0;
+    let testimonialInterval;
+
+    function showTestimonial(index) {
+      const testimonial = sampleTestimonials[index];
+      slider.innerHTML = ""; // Clear the slider
+      const testimonialElement = document.createElement("div");
+      testimonialElement.classList.add("testimonial");
+      testimonialElement.innerHTML = `
+        <p>${testimonial.text}</p>
+        <div class="author">- ${testimonial.author}</div>
+      `;
+      slider.appendChild(testimonialElement);
+
+      // Animate the testimonial
+      anime({
+        targets: slider.querySelector(".testimonial"),
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800,
+        easing: "easeOutExpo",
+      });
+    }
+
+    // Show first testimonial
+    showTestimonial(currentTestimonial);
+
+    // Auto-rotate testimonials
+    testimonialInterval = setInterval(() => {
+      currentTestimonial = (currentTestimonial + 1) % sampleTestimonials.length;
+      showTestimonial(currentTestimonial);
+    }, 5000);
+
+    // Cleanup function
+    const cleanup = () => {
+      if (testimonialInterval) {
+        clearInterval(testimonialInterval);
+      }
+    };
+
+    // Clean up on page unload
+    window.addEventListener("unload", cleanup);
+  }
+});
+
+// Notification System
+function showNotification(message, type = "info") {
+  const notification = document.createElement("div");
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+
+  document.body.appendChild(notification);
+
+  // Add show class after a small delay to trigger animation
+  setTimeout(() => {
+    notification.classList.add("show");
+  }, 10);
+
+  // Remove notification after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove("show");
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, 3000);
+}
+
+// --- technical.js ---
+// Technical Improvements Functionality
+document.addEventListener("DOMContentLoaded", () => {
+  // Dark Mode Toggle
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+  // Check for saved theme preference or use system preference
+  const currentTheme =
+    localStorage.getItem("theme") ||
+    (prefersDarkScheme.matches ? "dark" : "light");
+
+  if (currentTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+
+  darkModeToggle.addEventListener("click", () => {
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+
+    if (isDark) {
+      document.documentElement.removeAttribute("data-theme");
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      localStorage.setItem("theme", "dark");
+    }
+
+    // Animate the toggle
+    anime({
+      targets: darkModeToggle,
+      rotate: [0, 360],
+      duration: 500,
+      easing: "easeOutElastic(1, .5)",
+    });
+  });
+
+  // Language Selector
+  const languageSelect = document.getElementById("language-select");
+  if(languageSelect) {
+    const currentLang = localStorage.getItem("language") || "en";
+
+    languageSelect.value = currentLang;
+
+    languageSelect.addEventListener("change", (e) => {
+      const newLang = e.target.value;
+      localStorage.setItem("language", newLang);
+
+      // Here you would typically load the language file and update the UI
+      // For now, we'll just show a notification
+      showNotification(`Language changed to ${newLang}`, "info");
+    });
+  }
+
+
+  // Search Functionality
+  const searchInput = document.getElementById("search-input");
+  const searchButton = document.getElementById("search-button");
+
+  if(searchInput && searchButton) {
+    let searchTimeout;
+
+    searchInput.addEventListener("input", (e) => {
+      clearTimeout(searchTimeout);
+
+      searchTimeout = setTimeout(() => {
+        const query = e.target.value.trim();
+        if (query.length >= 2) {
+          performSearch(query);
+        }
+      }, 300);
+    });
+
+    searchButton.addEventListener("click", () => {
+      const query = searchInput.value.trim();
+      if (query) {
+        performSearch(query);
+      }
+    });
+  }
+
+
+  function performSearch(query) {
+    try {
+      // Here you would typically make an API call to your backend
+      // For now, we'll just show a notification
+      showNotification(`Searching for: ${query}`, "info");
+
+      // Animate the search button
+      anime({
+        targets: searchButton,
+        scale: [1, 1.2, 1],
+        duration: 300,
+        easing: "easeOutElastic(1, .5)",
+      });
+    } catch (error) {
+      showNotification("An error occurred while searching.", "error");
+    }
+  }
+
+  // Mobile Menu Toggle
+  const headerControls = document.querySelector(".header-controls");
+  const menuButton = document.createElement("button");
+  menuButton.className = "menu-toggle";
+  menuButton.innerHTML = '<i class="fas fa-bars"></i>';
+
+  if(headerControls) {
+    document
+      .querySelector("header .container")
+      .insertBefore(menuButton, headerControls);
+
+    menuButton.addEventListener("click", () => {
+      headerControls.classList.toggle("mobile-visible");
+
+      // Animate the menu button
+      anime({
+        targets: menuButton,
+        rotate: [0, 90],
+        duration: 300,
+        easing: "easeOutElastic(1, .5)",
+      });
+    });
+  }
+
+
+  // Close mobile menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      headerControls &&
+      !headerControls.contains(e.target) &&
+      !menuButton.contains(e.target) &&
+      headerControls.classList.contains("mobile-visible")
+    ) {
+      headerControls.classList.remove("mobile-visible");
+    }
+  });
+});
+
+
+// Notification System
+function showNotification(message, type = "info") {
+  const notification = document.createElement("div");
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+
+  document.body.appendChild(notification);
+
+  // Add show class after a small delay to trigger animation
+  setTimeout(() => {
+    notification.classList.add("show");
+  }, 10);
+
+  // Remove notification after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove("show");
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, 3000);
 }

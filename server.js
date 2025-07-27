@@ -399,13 +399,33 @@ app.get("/api/notifications", async (req, res) => {
 });
 
 // Middleware to check for admin users
-function isAdmin(req, res, next) {
-  // In a real app, you would get the user from the session and check their role
-  // For now, we'll assume a user is an admin if they have a specific header
-  if (req.headers["x-admin"] === "true") {
-    next();
-  } else {
-    res.status(403).send("Forbidden");
+async function isAdmin(req, res, next) {
+  // IMPORTANT: This is not a secure way to check for admin privileges.
+  // It's a placeholder for a proper session or JWT-based authentication system.
+  // In a real application, you should get the user's ID from a secure session
+  // or a verified JWT, and then check their roles in the database.
+  const userId = req.headers['x-user-id'];
+
+  if (!userId) {
+    return res.status(401).send("Unauthorized: User ID not provided.");
+  }
+
+  if (!ObjectId.isValid(userId)) {
+    return res.status(400).send("Invalid User ID format.");
+  }
+
+  try {
+    const usersCollection = db.collection(usersCollectionName);
+    const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+
+    if (user && user.isAdmin) {
+      next();
+    } else {
+      res.status(403).send("Forbidden");
+    }
+  } catch (err) {
+    console.error("Error in isAdmin middleware:", err);
+    res.status(500).send("Internal Server Error");
   }
 }
 

@@ -20,9 +20,6 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="script.js" defer></script>
-    <script src="animations.js" defer></script>
-    <script src="interactive.js" defer></script>
-    <script src="technical.js" defer></script>
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704544852112670"
@@ -106,6 +103,64 @@
       </div>
     </section>
 
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About Us & Our App</h2>
+        <div class="text-box">
+          <p>
+            We are dedicated to improving the environment by planting trees in cities, beginning with Miami. Our mission is to create a greener, healthier Miami for all residents and visitors. We believe in the power of community and the importance of engaging with residents, businesses and government to make a lasting impact. By working together, we can transform urban spaces into lush, green environments that provide numerous benefits for both people and wildlife. Moreover, by connecting schools, parks, shops, and homes with tree lined streets, we can make walking, biking, driving and using public transit in our city an inviting experience.
+          </p>
+          <p>
+            Our organization was founded by a group of passionate environmentalists who saw the need to expand the tree canopy in our city. We are just beginning our journey to use technology to make Miami greener, and we're excited to partner with you, to help plant trees across our city. Our vision is to create connected, beautiful and sustainable cities for future generations to enjoy.
+          </p>
+          <p>
+            Our TreePlace App bridges the gap between your desire to plant trees, and the bureaucracy required to do it. You simply click and donate, and we will take care of the rest, the permits, purchase and maintenance of your tree.
+          </p>
+          <p>
+            TreePlace App facilitates tree planting in three key areas; open spaces (comprised of parks, schools, places of worship and commercial lots), endangered lands, and rights-of-way (the streets that connect our world). We prioritize areas that are most in need, Urban Heat Islands and underserved neighborhoods. By strategically restoring our tree canopy we help reduce air pollution, lower temperatures, and improve overall quality of life for residents. We also educate to help residents understand the importance of trees and how to care for them.
+          </p>
+          <p>
+            Join us in our mission to make Miami a greener, healthier place to live. Whether you want to volunteer your time, become a corporate sponsor, donate, or simply learn more about the benefits of trees, we welcome you to be a part of our growing community.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sponsors" class="section">
+      <div class="container">
+        <h2>Our Sponsors</h2>
+        <div class="sponsor-grid">
+          <div class="sponsor-card">
+            <div class="sponsor-logo">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Leaf It To Us</h3>
+            <p>Miami's premier tree-hugging consultancy. We take tree care so seriously, our CEO changed their name to "Branch Manager".</p>
+            <a href="mailto:support@treeplace.app?subject=Inquiry%20about%20Leaf%20It%20To%20Us" class="btn secondary">Learn More</a>
+          </div>
+          <div class="sponsor-card">
+            <div class="sponsor-logo">
+              <i class="fas fa-tree"></i>
+            </div>
+            <h3>Bark & Byte</h3>
+            <p>Tech company that's branching out into environmental conservation. Our servers are powered by tree-generated oxygen.</p>
+            <a href="mailto:support@treeplace.app?subject=Inquiry%20about%20Bark%20%26%20Byte" class="btn secondary">Learn More</a>
+          </div>
+          <div class="sponsor-card">
+            <div class="sponsor-logo">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <h3>Root Cause Solutions</h3>
+            <p>Environmental consulting firm that digs deep into tree-related problems. Our motto: "We get to the root of it!"</p>
+            <a href="mailto:support@treeplace.app?subject=Inquiry%20about%20Root%20Cause%20Solutions" class="btn secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="view-all-sponsors">
+          <a href="sponsors.html" class="btn primary">View All Sponsors</a>
+        </div>
+      </div>
+    </section>
+
     <section id="interactive-features" class="section">
       <div class="container">
         <div class="features-grid">
@@ -183,6 +238,137 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section id="sponsors" class="section">
+      <div class="container">
+        <h2>Our Sponsors</h2>
+        <div class="sponsor-grid">
+          <div class="sponsor-card">
+            <div class="sponsor-logo">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Leaf It To Us</h3>
+            <p>Miami's premier tree-hugging consultancy. We take tree care so seriously, our CEO changed their name to "Branch Manager".</p>
+            <a href="mailto:support@treeplace.app?subject=Inquiry%20about%20Leaf%20It%20To%20Us" class="btn secondary">Learn More</a>
+          </div>
+          <div class="sponsor-card">
+            <div class="sponsor-logo">
+              <i class="fas fa-tree"></i>
+            </div>
+            <h3>Bark & Byte</h3>
+            <p>Tech company that's branching out into environmental conservation. Our servers are powered by tree-generated oxygen.</p>
+            <a href="mailto:support@treeplace.app?subject=Inquiry%20about%20Bark%20%26%20Byte" class="btn secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="view-all-sponsors">
+          <a href="sponsors.html" class="btn primary">View All Sponsors</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="interactive-features" class="section">
+      <div class="container">
+        <div class="features-grid">
+          <!-- Newsletter Subscription -->
+          <div class="feature-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Stay Updated</h3>
+            <p>
+              Subscribe to our newsletter for tree planting updates and
+              environmental news.
+            </p>
+            <form class="newsletter-form" id="newsletter-form">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+          </div>
+
+          <!-- Tree Counter -->
+          <div class="feature-card">
+            <i class="fas fa-tree"></i>
+            <h3>Trees Planted</h3>
+            <div class="counter" id="tree-counter">
+              <span class="number">0</span>
+              <span class="label">Trees</span>
+            </div>
+            <p>Help us reach our goal of planting 10,000 trees in Miami!</p>
+          </div>
+
+          <!-- Tree Benefit Calculator -->
+          <div class="feature-card">
+            <i class="fas fa-calculator"></i>
+            <h3>Tree Impact Calculator</h3>
+            <p>Calculate the environmental impact of your planted trees.</p>
+            <div class="calculator" id="tree-calculator">
+              <input type="number" placeholder="Number of trees" min="1" />
+              <button class="btn primary">Calculate Impact</button>
+              <div class="results" style="display: none">
+                <p>Annual CO2 Absorption: <span class="co2">0</span> kg</p>
+                <p>Water Filtered: <span class="water">0</span> gallons</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Community Gallery -->
+          <div class="feature-card">
+            <i class="fas fa-images"></i>
+            <h3>Community Gallery</h3>
+            <p>See the trees our community has planted.</p>
+            <div class="gallery-preview" id="gallery-preview">
+              <div class="gallery-grid">
+                <!-- Gallery items will be loaded dynamically -->
+              </div>
+              <a href="gallery.html" class="btn primary">View All Photos</a>
+            </div>
+          </div>
+
+          <!-- Testimonials -->
+          <div class="feature-card">
+            <i class="fas fa-quote-left"></i>
+            <h3>Community Stories</h3>
+            <div class="testimonials" id="testimonials">
+              <div class="testimonial-slider">
+                <!-- Testimonials will be loaded dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Next Event -->
+          <div class="feature-card">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>Next Event</h3>
+            <div id="next-event">
+              <!-- Next event will be loaded dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sponsors" class="section">
+      <div class="container">
+        <h2>Our Sponsors</h2>
+        <div class="sponsor-grid">
+          <div class="sponsor-card">
+            <div class="sponsor-logo">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Leaf It To Us</h3>
+            <p>Miami's premier tree-hugging consultancy. We take tree care so seriously, our CEO changed their name to "Branch Manager".</p>
+            <a href="mailto:support@treeplace.app?subject=Inquiry%20about%20Leaf%20It%20To%20Us" class="btn secondary">Learn More</a>
+          </div>
+          <div class="sponsor-card">
+            <div class="sponsor-logo">
+              <i class="fas fa-tree"></i>
+            </div>
+            <h3>Bark & Byte</h3>
+            <p>Tech company that's branching out into environmental conservation. Our servers are powered by tree-generated oxygen.</p>
+            <a href="mailto:support@treeplace.app?subject=Inquiry%20about%20Bark%20%26%20Byte" class="btn secondary">Learn More</a>
+          </div>
+        </div>
+
+    <section id="contact" class="section">
     </section>
 
     <section id="tree-of-the-month" class="section">
@@ -283,192 +469,6 @@
               </button>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <h2 data-translate="about_title">About Us</h2>
-        <div class="text-box">
-          <p data-translate="about_text_1">
-            We are dedicated to improving the environment by planting trees in
-            Miami. Our mission is to create a greener, healthier city for all
-            residents and visitors. We believe in the power of community and the
-            importance of engaging with local residents to make a lasting
-            impact. By working together, we can transform urban spaces into
-            lush, green areas that provide numerous benefits for both people and
-            wildlife.
-          </p>
-          <p data-translate="about_text_2">
-            Our organization was founded by a group of passionate
-            environmentalists who saw the need for more green spaces in Miami.
-            We are just beginning our journey to make Miami greener, and we're
-            excited to partner with local schools, businesses, and government
-            agencies to plant trees across our city. Our vision is to create
-            beautiful, sustainable environments for future generations to enjoy.
-          </p>
-          <p data-translate="about_text_3">
-            Our tree planting initiatives will focus on areas that are most in
-            need of green spaces, such as underserved neighborhoods and urban
-            heat islands. By strategically planting trees in these areas, we can
-            help reduce air pollution, lower temperatures, and improve overall
-            quality of life for residents. In addition to tree planting, we also
-            provide education and resources to help the community understand the
-            importance of trees and how to care for them.
-          </p>
-          <p data-translate="about_text_4">
-            Join us in our mission to make Miami a greener, healthier place to
-            live. Whether you want to volunteer your time, donate to support our
-            efforts, or simply learn more about the benefits of trees, we
-            welcome you to be a part of our growing community.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="get-involved" class="section">
-      <div class="container">
-        <h2>Get Involved</h2>
-        <div class="steps">
-          <div class="step">
-            <i class="fas fa-hands-helping"></i>
-            <h3>Volunteer</h3>
-            <p>
-              Volunteer at a tree planting event and help us make Miami greener.
-              Your time and effort can make a significant impact on our
-              community and the environment. Whether you are an individual, a
-              group, or a corporate team, we welcome everyone to join us in our
-              mission. Our volunteer events are fun, educational, and a great
-              way to meet like-minded people who care about the environment.
-            </p>
-          </div>
-          <div class="step">
-            <i class="fas fa-donate"></i>
-            <h3>Donate</h3>
-            <p>
-              Donate to support our initiatives and help us plant more trees.
-              Your financial contributions go directly toward purchasing trees,
-              soil amendments, and necessary tools. Additionally, your support
-              helps fund our educational programs and community outreach
-              efforts. Donations of any size are greatly appreciated and make a
-              tangible difference in our ability to create a greener Miami.
-            </p>
-          </div>
-          <div class="step">
-            <i class="fas fa-share"></i>
-            <h3>Spread the Word</h3>
-            <p>
-              Share our mission on social media and educate others about the
-              importance of trees. Help us reach a wider audience and inspire
-              more people to join our cause. By spreading the word, you can
-              amplify our impact and encourage others to get involved in tree
-              planting and environmental stewardship. Follow us on social media,
-              share our posts, and invite your friends and family to join our
-              community.
-            </p>
-          </div>
-          <div class="step">
-            <i class="fas fa-leaf"></i>
-            <h3>Educate</h3>
-            <p>
-              Educate others about the importance of trees and how to care for
-              them. Join our educational programs and community outreach efforts
-              to promote environmental stewardship. We offer workshops,
-              seminars, and school programs that teach people of all ages about
-              the benefits of trees and how to care for them. By raising
-              awareness and providing knowledge, we can empower more people to
-              take action and make a positive impact on the environment.
-            </p>
-          </div>
-        </div>
-        <div class="get-involved-buttons">
-          <a
-            href="https://www.patreon.com/c/treeplace/membership"
-            class="btn primary"
-            >Donate Now</a
-          >
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSf_oNytXfR0bK_CbckfsF7tAMk5aaDIszYX2UeaEFVwfQ1V8w/viewform?usp=dialog"
-            class="btn primary"
-            >Volunteer</a
-          >
-          <a
-            href="https://www.patreon.com/treeplace/shop/plant-tree-for-friend-1199753?source=storefront"
-            class="btn primary"
-            >Buy a Tree for a Friend</a
-          >
-          <a
-            href="itms-services://?action=download-manifest&url=https://treeplace.app/manifest.plist"
-            class="btn primary"
-            >Get The Mobile App (ios)</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <section id="team" class="section">
-      <div class="container">
-        <h2>Meet the Team</h2>
-        <div class="team">
-          <div class="team-member">
-            <img src="ms-albarran" alt="Ms. Albarran" class="team-photo" />
-            <h3>Ms. Albarran</h3>
-            <p>
-              Ms. Albarran is the founder of TreePlace.App. As a passionate
-              educator and environmentalist, she has dedicated her career to
-              inspiring young minds and fostering a love for nature. Her vision
-              and leadership have been the driving force behind our
-              organization, guiding us toward a greener, healthier Miami. Ms.
-              Albarran teaches 8th-grade math and is deeply committed to making
-              a positive impact on her students and the community.
-            </p>
-          </div>
-          <div class="team-member">
-            <img src="thalia.jpg" alt="Thalia Webb" class="team-photo" />
-            <h3>Thalia Webb</h3>
-            <p>
-              Thalia Webb is a talented server engineer and a key member of our
-              team. As an 8th-grade student in Ms. Albarran's math class, Thalia
-              has shown exceptional skills in technology and problem-solving.
-              Her contributions to our projects ensure that our online presence
-              is robust and reliable. Thalia's dedication to environmental
-              causes and her technical expertise make her an invaluable asset to
-              our mission.
-            </p>
-          </div>
-          <div class="team-member">
-            <img src="franco.png" alt="Franco Betancourt" class="team-photo" />
-            <h3>Franco Betancourt</h3>
-            <p>
-              Franco Betancourt is a skilled developer and an essential part of
-              our team. Also an 8th-grade student in Ms. Albarran's math class,
-              Franco has demonstrated a strong aptitude for coding and software
-              development. His work on our website and digital tools helps us
-              reach a wider audience and engage the community effectively.
-              Franco's passion for technology and the environment drives his
-              commitment to our cause.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="container">
-        <h2 data-translate="contact_title">Contact Us</h2>
-        <div class="text-box">
-          <p data-translate="contact_text">
-            If you have any questions or need more information, please contact
-            us at
-            <a href="mailto:support@treeplace.app">support@treeplace.app</a>. We
-            are always happy to hear from our supporters and community members.
-            Whether you have a question about our projects, want to get
-            involved, or simply want to share your thoughts, we are here to
-            help. Feel free to reach out to us via email, social media, or
-            through our website's contact form. We look forward to connecting
-            with you!
-          </p>
         </div>
       </div>
     </section>
