@@ -10,6 +10,7 @@ const QRCode = require("qrcode");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -23,6 +24,7 @@ const dbName = "treeApp";
 const statsCollectionName = "stats";
 const usersCollectionName = "users";
 const activityCollectionName = "activity";
+const sponsorsCollectionName = "sponsors";
 
 // Global variable to store the database connection
 let db;
@@ -229,9 +231,16 @@ app.post("/api/login", async (req, res) => {
     await logUserActivity(user._id, "login");
 
     // In a real app, you would create a session or JWT here
+    const token = jwt.sign(
+      { userId: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET || "your_default_secret",
+      { expiresIn: "1h" }
+    );
+
     res.json({
       success: true,
       message: "Login successful.",
+      token: token,
       username: user.username,
       isAdmin: user.isAdmin,
       isBusiness: user.isBusiness,
@@ -400,38 +409,32 @@ app.get("/api/notifications", async (req, res) => {
 });
 
 // Middleware to check for admin users
-async function isAdmin(req, res, next) {
-  // IMPORTANT: This is not a secure way to check for admin privileges.
-  // It's a placeholder for a proper session or JWT-based authentication system.
-  // In a real application, you should get the user's ID from a secure session
-  // or a verified JWT, and then check their roles in the database.
-  const userId = req.headers['x-user-id'];
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
 
-  if (!userId) {
-    return res.status(401).send("Unauthorized: User ID not provided.");
-  }
-
-  if (!ObjectId.isValid(userId)) {
-    return res.status(400).send("Invalid User ID format.");
+  if (!token) {
+    return res.status(401).send("Unauthorized: No token provided.");
   }
 
   try {
-    const usersCollection = db.collection(usersCollectionName);
-    const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-
-    if (user && user.isAdmin) {
-      next();
-    } else {
-      res.status(403).send("Forbidden");
-    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "your_default_secret");
+    req.user = decoded;
+    next();
   } catch (err) {
-    console.error("Error in isAdmin middleware:", err);
-    res.status(500).send("Internal Server Error");
+    return res.status(401).send("Unauthorized: Invalid token.");
   }
-}
+};
+
+const isAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(403).send("Forbidden: Requires admin privileges.");
+  }
+};
 
 // Admin panel route
-app.get("/admin", (req, res) => {
+app.get("/admin", verifyToken, isAdmin, (req, res) => {
   res.sendFile(__dirname + "/admin.html");
 });
 
@@ -463,7 +466,7 @@ app.get("/api/users", async (req, res) => {
 });
 
 // API endpoint to get a single user by ID
-app.get("/api/users/:id", isAdmin, async (req, res) => {
+app.get("/api/users/:id", verifyToken, isAdmin, async (req, res) => {
   console.log(`GET /api/users/${req.params.id}`);
   try {
     const { id } = req.params;
@@ -485,7 +488,7 @@ app.get("/api/users/:id", isAdmin, async (req, res) => {
 });
 
 // API endpoint to get user activity
-app.get("/api/users/:id/activity", isAdmin, async (req, res) => {
+app.get("/api/users/:id/activity", verifyToken, isAdmin, async (req, res) => {
   console.log(`GET /api/users/${req.params.id}/activity`);
   try {
     const { id } = req.params;
@@ -546,7 +549,7 @@ app.put("/api/users/:id", async (req, res) => {
 });
 
 // API endpoint to suspend a user
-app.post("/api/users/:id/suspend", isAdmin, async (req, res) => {
+app.post("/api/users/:id/suspend", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);
@@ -561,7 +564,7 @@ app.post("/api/users/:id/suspend", isAdmin, async (req, res) => {
 });
 
 // API endpoint to unsuspend a user
-app.post("/api/users/:id/unsuspend", isAdmin, async (req, res) => {
+app.post("/api/users/:id/unsuspend", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);
@@ -576,7 +579,7 @@ app.post("/api/users/:id/unsuspend", isAdmin, async (req, res) => {
 });
 
 // API endpoint to flag a user
-app.post("/api/users/:id/flag", isAdmin, async (req, res) => {
+app.post("/api/users/:id/flag", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);
@@ -591,7 +594,7 @@ app.post("/api/users/:id/flag", isAdmin, async (req, res) => {
 });
 
 // API endpoint to unflag a user
-app.post("/api/users/:id/unflag", isAdmin, async (req, res) => {
+app.post("/api/users/:id/unflag", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);
@@ -606,7 +609,7 @@ app.post("/api/users/:id/unflag", isAdmin, async (req, res) => {
 });
 
 // API endpoint to manually verify a user's email
-app.post("/api/users/:id/manual-verify", isAdmin, async (req, res) => {
+app.post("/api/users/:id/manual-verify", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);
@@ -621,7 +624,7 @@ app.post("/api/users/:id/manual-verify", isAdmin, async (req, res) => {
 });
 
 // API endpoint to send a warning to a user
-app.post("/api/users/:id/send-warning", isAdmin, async (req, res) => {
+app.post("/api/users/:id/send-warning", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { message } = req.body;
@@ -651,7 +654,7 @@ app.post("/api/users/:id/send-warning", isAdmin, async (req, res) => {
 });
 
 // API endpoint to assign a badge to a user
-app.post("/api/users/:id/assign-badge", isAdmin, async (req, res) => {
+app.post("/api/users/:id/assign-badge", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { badge } = req.body;
@@ -667,7 +670,7 @@ app.post("/api/users/:id/assign-badge", isAdmin, async (req, res) => {
 });
 
 // API endpoint to add a note to a user
-app.post("/api/users/:id/add-note", isAdmin, async (req, res) => {
+app.post("/api/users/:id/add-note", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { note } = req.body;
@@ -689,7 +692,7 @@ app.post("/api/users/:id/add-note", isAdmin, async (req, res) => {
 });
 
 // API endpoint to change a user's username
-app.put("/api/users/:id/change-username", isAdmin, async (req, res) => {
+app.put("/api/users/:id/change-username", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { username } = req.body;
@@ -712,7 +715,7 @@ app.put("/api/users/:id/change-username", isAdmin, async (req, res) => {
 });
 
 // API endpoint to change a user's email
-app.put("/api/users/:id/change-email", isAdmin, async (req, res) => {
+app.put("/api/users/:id/change-email", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { email } = req.body;
@@ -735,7 +738,7 @@ app.put("/api/users/:id/change-email", isAdmin, async (req, res) => {
 });
 
 // API endpoint to anonymize a user
-app.post("/api/users/:id/anonymize", isAdmin, async (req, res) => {
+app.post("/api/users/:id/anonymize", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);
@@ -756,13 +759,13 @@ app.post("/api/users/:id/anonymize", isAdmin, async (req, res) => {
     await logUserActivity(new ObjectId(id), "Account anonymized by admin");
     res.status(200).send("User anonymized successfully");
   } catch (err) {
-    console.error(err);
+      console.error(err);
     res.status(500).send("Error anonymizing user");
   }
 });
 
 // API endpoint to delete a user
-app.get("/api/users/:id/export", isAdmin, async (req, res) => {
+app.get("/api/users/:id/export", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);
@@ -785,7 +788,7 @@ app.get("/api/users/:id/export", isAdmin, async (req, res) => {
 });
 
 // API endpoint to delete a user
-app.delete("/api/users/:id", isAdmin, async (req, res) => {
+app.delete("/api/users/:id", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);
@@ -814,7 +817,7 @@ app.get("/api/events", async (req, res) => {
 });
 
 // API endpoint to create an event
-app.post("/api/events", isAdmin, async (req, res) => {
+app.post("/api/events", verifyToken, isAdmin, async (req, res) => {
   try {
     const { name, date, location } = req.body;
     const eventsCollection = db.collection("events");
@@ -844,6 +847,45 @@ app.delete("/api/events/:id", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error deleting event");
+  }
+});
+
+// API endpoint to get all sponsors
+app.get("/api/sponsors", verifyToken, isAdmin, async (req, res) => {
+  try {
+    const sponsorsCollection = db.collection(sponsorsCollectionName);
+    const sponsors = await sponsorsCollection.find({}).toArray();
+    res.json(sponsors);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error querying the database for sponsors");
+  }
+});
+
+// API endpoint to add a new sponsor
+app.post("/api/sponsors", verifyToken, isAdmin, async (req, res) => {
+  try {
+    const { name, level, logo } = req.body;
+    const sponsorsCollection = db.collection(sponsorsCollectionName);
+    await sponsorsCollection.insertOne({ name, level, logo, createdAt: new Date() });
+    res.status(201).send("Sponsor added successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error adding sponsor");
+  }
+});
+
+// API endpoint to delete a sponsor
+app.delete("/api/sponsors/:id", verifyToken, isAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const sponsorsCollection = db.collection(sponsorsCollectionName);
+
+    await sponsorsCollection.deleteOne({ _id: new ObjectId(id) });
+    res.status(200).send("Sponsor deleted successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error deleting sponsor");
   }
 });
 
@@ -892,7 +934,7 @@ app.post("/api/check-in", async (req, res) => {
       _id: new ObjectId(eventId),
     });
     if (!event) {
-      return res.status(404).send("Event not found");
+      return res.status(404).send("Event not found.");
     }
 
     const existingAttendance = event.attendance.find((a) =>
@@ -1075,7 +1117,7 @@ app.post("/api/reset-password", async (req, res) => {
 });
 
 // API endpoint to trigger a password reset for a user by an admin
-app.post("/api/users/:id/reset-password", isAdmin, async (req, res) => {
+app.post("/api/users/:id/reset-password", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const usersCollection = db.collection(usersCollectionName);

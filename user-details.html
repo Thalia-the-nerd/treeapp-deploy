@@ -5,53 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details - TreePlace.App</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><a href="index.html">TreePlace.App</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="admin.html">Admin Dashboard</a></li>
-                    <li><a href="#" id="logout-button">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <div class="container user-details-container">
-        <main>
-            <div class="admin-card">
-                <h2 id="user-details-title">User Details</h2>
-                <div id="user-info"></div>
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h1><a href="admin.html" style="color: #ecf0f1; text-decoration: none;">TreePlace.App</a></h1>
             </div>
-            <div class="admin-card">
-                <h3>User Actions</h3>
-                <div class="user-actions">
-                    <button id="reset-password-btn" class="btn secondary" title="Sends the user an email with a link to reset their password.">Reset Password</button>
-                    <button id="suspend-user-btn" class="btn secondary" title="Prevents the user from logging in.">Suspend User</button>
-                    <button id="send-warning-btn" class="btn secondary" title="Sends a warning message to the user's email.">Send Warning</button>
-                    <button id="view-login-history-btn" class="btn secondary" title="Filters the activity log to show only login events.">View Login History</button>
-                    <button id="clear-cache-btn" class="btn secondary" title="Clears server-side cache for this user.">Clear Cache</button>
-                    <button id="recalculate-stats-btn" class="btn secondary" title="Triggers a manual recalculation of user statistics.">Recalculate Stats</button>
-                    <button id="assign-badge-btn" class="btn secondary" title="Assigns a new badge to the user.">Assign Badge</button>
-                    <button id="export-data-btn" class="btn secondary" title="Exports all user data to a JSON file.">Export Data</button>
-                    <button id="merge-account-btn" class="btn secondary" title="Merges this user account with another.">Merge Account</button>
-                    <button id="manual-verify-btn" class="btn secondary" title="Manually marks the user's email as verified.">Verify Email Manually</button>
-                    <button id="view-donations-btn" class="btn secondary" title="Filters the activity log to show only donation events.">View Donations</button>
-                    <button id="view-event-history-btn" class="btn secondary" title="Filters the activity log to show only event check-ins and check-outs.">View Event History</button>
-                    <button id="add-note-btn" class="btn secondary" title="Adds a private administrative note to the user's profile.">Add Note</button>
-                    <button id="change-username-btn" class="btn secondary" title="Changes the user's username.">Change Username</button>
-                    <button id="change-email-btn" class="btn secondary" title="Changes the user's email address.">Change Email</button>
-                    <button id="view-ip-history-btn" class="btn secondary" title="Displays a history of IP addresses used by the user.">View IP History</button>
-                    <button id="flag-account-btn" class="btn secondary" title="Flags the account for administrative review.">Flag Account</button>
-                    <button id="unflag-account-btn" class="btn secondary" title="Removes the administrative flag from the account.">Unflag Account</button>
-                    <button id="view-sent-emails-btn" class="btn secondary" title="Shows a log of emails sent to the user.">View Sent Emails</button>
-                    <button id="delete-account-btn" class="btn danger" title="Permanently deletes the user and all their data.">Delete Account</button>
-                    <button id="anonymize-user-btn" class="btn secondary" title="Removes all personally identifiable information from the user's account.">Anonymize User</button>
+            <nav class="sidebar-nav">
+                <a href="admin.html#users" class="nav-link"><i class="fas fa-users"></i> <span>Users</span></a>
+                <a href="admin.html#events" class="nav-link"><i class="fas fa-calendar-alt"></i> <span>Events</span></a>
+                <a href="admin.html#notifications" class="nav-link"><i class="fas fa-bell"></i> <span>Notifications</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" id="logout-button"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </div>
+        </aside>
+        <main class="admin-main-content">
+            <header class="admin-header">
+                <h2 id="user-details-title">User Details</h2>
+            </header>
+
+            <div class="user-details-layout">
+                <div class="user-profile-card admin-card">
+                    <div id="user-info">
+                        <!-- User info loaded by JS -->
+                    </div>
+                    <div id="user-stats">
+                        <!-- User stats loaded by JS -->
+                    </div>
+                </div>
+
+                <div class="user-actions-card admin-card">
+                    <h3>User Actions</h3>
+                    <div class="action-buttons-grid">
+                        <button id="reset-password-btn" class="btn secondary"><i class="fas fa-key"></i> Reset Password</button>
+                        <button id="suspend-user-btn" class="btn secondary"><i class="fas fa-user-lock"></i> Suspend User</button>
+                        <button id="send-warning-btn" class="btn secondary"><i class="fas fa-exclamation-triangle"></i> Send Warning</button>
+                        <button id="view-login-history-btn" class="btn secondary"><i class="fas fa-history"></i> View Login History</button>
+                        <button id="assign-badge-btn" class="btn secondary"><i class="fas fa-medal"></i> Assign Badge</button>
+                        <button id="export-data-btn" class="btn secondary"><i class="fas fa-file-export"></i> Export Data</button>
+                        <button id="merge-account-btn" class="btn secondary"><i class="fas fa-compress-arrows-alt"></i> Merge Account</button>
+                        <button id="manual-verify-btn" class="btn secondary"><i class="fas fa-check-circle"></i> Verify Email</button>
+                        <button id="add-note-btn" class="btn secondary"><i class="fas fa-sticky-note"></i> Add Note</button>
+                        <button id="change-username-btn" class="btn secondary"><i class="fas fa-user-edit"></i> Change Username</button>
+                        <button id="change-email-btn" class="btn secondary"><i class="fas fa-envelope"></i> Change Email</button>
+                        <button id="flag-account-btn" class="btn secondary"><i class="fas fa-flag"></i> Flag Account</button>
+                        <div class="danger-zone">
+                            <h4>Danger Zone</h4>
+                            <button id="delete-account-btn" class="btn danger"><i class="fas fa-trash-alt"></i> Delete Account</button>
+                            <button id="anonymize-user-btn" class="btn danger"><i class="fas fa-user-secret"></i> Anonymize User</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="admin-card">
+
+            <div class="admin-card full-width">
                 <h3>User Activity</h3>
                 <div id="user-activity-table-container">
                     <!-- Activity table will be loaded here by JavaScript -->
@@ -60,9 +71,7 @@
         </main>
     </div>
 
-    <script src="user-details.js"></script>
-
-    <!-- Modals for user actions -->
+    <!-- Modals -->
     <div id="action-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -73,5 +82,7 @@
             </form>
         </div>
     </div>
+
+    <script src="user-details.js"></script>
 </body>
 </html>

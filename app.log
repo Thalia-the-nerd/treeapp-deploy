@@ -5,7 +5,8 @@
 [dotenv@17.2.0] injecting env (7) from .env (tip: ⚙️  suppress all logs with { quiet: true })
 Connected successfully to MongoDB
 Server listening at http://0.0.0.0:3003
-socket disconnected before secure TLS connection was established
+Terminated
+onnected before secure TLS connection was established
     at Topology.selectServer (/home/thalia/treeapp-deploy/node_modules/mongodb/lib/sdam/topology.js:326:38)
     at async Topology._connect (/home/thalia/treeapp-deploy/node_modules/mongodb/lib/sdam/topology.js:200:28)
     at async Topology.connect (/home/thalia/treeapp-deploy/node_modules/mongodb/lib/sdam/topology.js:152:13)

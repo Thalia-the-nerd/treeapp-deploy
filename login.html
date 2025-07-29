@@ -48,11 +48,12 @@
               <label for="password">Password</label>
               <input type="password" id="password" name="password" required />
             </div>
-            <a href="business-login.html" class="btn secondary">Login for Business</a>
+            <button type="submit" class="btn primary">Login</button>
           </form>
           <div class="auth-links">
             <a href="forgot-password.html">Forgot Password?</a>
             <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+            <p>Are you a business? <a href="business-login.html">Business Login</a></p>
           </div>
         </div>
       </div>
@@ -82,34 +83,10 @@
           const data = await response.json();
 
           if (data.success) {
+            localStorage.setItem("token", data.token);
             localStorage.setItem("username", data.username);
             localStorage.setItem("isAdmin", data.isAdmin);
             window.location.href = "dashboard.html";
-          } else {
-            alert(data.message);
-          }
-        });
-
-      document
-        .getElementById("business-login-btn")
-        .addEventListener("click", async () => {
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
-
-          const response = await fetch("/api/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password, isBusiness: true }),
-          });
-
-          const data = await response.json();
-
-          if (data.success) {
-            localStorage.setItem("username", data.username);
-            localStorage.setItem("isBusiness", data.isBusiness);
-            window.location.href = "business-dashboard.html";
           } else {
             alert(data.message);
           }

@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const userModal = document.getElementById("edit-user-modal");
   const qrCodeModal = document.getElementById("qr-code-modal");
   const closeButtons = document.querySelectorAll(".close-button");
+  const token = localStorage.getItem("token");
 
   // --- Basic Setup & Navigation ---
-  if (!localStorage.getItem("isAdmin")) {
+  if (!token) {
     window.location.href = "login.html";
+    return;
   }
 
   navLinks.forEach((link) => {
@@ -26,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Load content for the clicked section
       if (targetId === "users") loadUsers();
       if (targetId === "events") loadEvents();
+      if (targetId === "sponsors") loadSponsors();
       if (targetId === "notifications") loadNotifications();
     });
   });
@@ -47,7 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- API Fetch Functions ---
   const fetchData = async (url) => {
     const response = await fetch(url, {
-      headers: { "x-admin": "true" },
+      headers: { 
+        "Authorization": `Bearer ${token}`
+      },
     });
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return response.json();
@@ -105,11 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const userSearchInput = document.getElementById("user-search-input");
-  const userSearchBtn = document.getElementById("user-search-btn");
-
-  userSearchBtn.addEventListener("click", () => {
-    loadUsers(userSearchInput.value);
-  });
 
   userSearchInput.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            "x-admin": "true",
+            "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify(body),
         });
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       await fetch(`/api/events/${eventId}`, {
         method: "DELETE",
-        headers: { "x-admin": "true" },
+        headers: { "Authorization": `Bearer ${token}` },
       });
       loadEvents(); // Refresh
     } catch (error) {
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
         await fetch("/api/events", {
           method: "POST",
           headers: {
-            "x-admin": "true",
+            "Authorization": `Bearer ${token}`
           },
           body: formData,
         });
@@ -274,8 +274,111 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // --- Sponsor Management ---
+  const loadSponsors = async () => {
+    try {
+      const sponsors = await fetchData("/api/sponsors");
+      const container = document.getElementById("sponsors-table-container");
+      container.innerHTML = `
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Level</th>
+                            <th>Logo</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${sponsors
+                          .map(
+                            (sponsor) => `
+                            <tr>
+                                <td>${sponsor.name}</td>
+                                <td>${sponsor.level}</td>
+                                <td>${sponsor.logo ? `<img src="${sponsor.logo}" alt="${sponsor.name} Logo" style="width: 50px; height: auto;">` : 'N/A'}</td>
+                                <td>
+                                    <button class="btn btn-sm danger delete-sponsor-btn" data-id="${sponsor._id}">Delete</button>
+                                </td>
+                            </tr>
+                        `,
+                          )
+                          .join("")}
+                    </tbody>
+                </table>
+            `;
+      document.querySelectorAll(".delete-sponsor-btn").forEach((button) => {
+        button.addEventListener("click", () => deleteSponsor(button.dataset.id));
+      });
+    } catch (error) {
+      console.error("Failed to load sponsors:", error);
+      document.getElementById("sponsors-table-container").innerHTML =
+        '<p class="error">Could not load sponsors.</p>';
+    }
+  };
+
+  const addSponsor = async (sponsorData) => {
+    try {
+      await fetch("/api/sponsors", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(sponsorData),
+      });
+      loadSponsors(); // Refresh the list
+    } catch (error) {
+      console.error("Failed to add sponsor:", error);
+    }
+  };
+
+  const deleteSponsor = async (sponsorId) => {
+    if (!confirm("Are you sure you want to delete this sponsor?")) return;
+    try {
+      await fetch(`/api/sponsors/${sponsorId}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` },
+      });
+      loadSponsors(); // Refresh
+    } catch (error) {
+      console.error("Failed to delete sponsor:", error);
+    }
+  };
+
+  document.getElementById("add-sponsor-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const sponsorName = document.getElementById("sponsorName").value;
+    const sponsorLevel = document.getElementById("sponsorLevel").value;
+    const sponsorLogo = document.getElementById("sponsorLogo").value;
+
+    await addSponsor({ name: sponsorName, level: sponsorLevel, logo: sponsorLogo });
+    e.target.reset();
+  });
+
   // --- Initial Load ---
   loadUsers();
+
+  document.getElementById('logout-button').addEventListener('click', async function() {
+      const username = localStorage.getItem('username');
+      if (username) {
+          await fetch('/api/logout', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ username })
+          });
+      }
+
+      // Clear local storage or any session variables
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      localStorage.removeItem('isAdmin');
+
+      // Redirect to login page
+      window.location.href = 'login.html';
+  });
 });
 
 function initMap() {
@@ -317,23 +420,3 @@ function initMap() {
   });
 }
 
-document.getElementById('logout-button').addEventListener('click', async function() {
-    const username = localStorage.getItem('username');
-    if (username) {
-        await fetch('/api/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username })
-        });
-    }
-
-    // Clear local storage or any session variables
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    localStorage.removeItem('isAdmin');
-
-    // Redirect to login page
-    window.location.href = 'login.html';
-});
