@@ -14,20 +14,30 @@
   </head>
   <body>
     <header>
-      <div class="container">
-        <h1><a href="index.html">TreePlace.App</a></h1>
-        <nav>
-          <ul>
-            <li>
-              <a href="#" id="username-link"
-                >Welcome, <span id="business-name"></span
-              ></a>
-            </li>
-            <li><a href="#" id="logout-button">Logout</a></li>
-          </ul>
+    <div class="container">
+        <div class="logo">
+            <h1><a href="https://treeplace.app">TreePlace.App</a></h1>
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html" data-translate="home">Home</a></li>
+                <li><a href="sponsors.html" data-translate="sponsors">Sponsors</a></li>
+                <li><a href="calendar.html" data-translate="calendar">Calendar</a></li>
+                <li><a href="partners.html" data-translate="partners">Partners</a></li>
+                <li><a href="login.html" data-translate="login">Login</a></li>
+                <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn primary" data-translate="donate">Donate</a></li>
+            </ul>
         </nav>
-      </div>
-    </header>
+        <div class="header-controls">
+            <button id="dark-mode-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" class="hamburger-menu" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
 
     <main class="container" style="padding-top: 2rem; padding-bottom: 2rem">
       <h2 style="margin-top: 4rem">Business Dashboard</h2>

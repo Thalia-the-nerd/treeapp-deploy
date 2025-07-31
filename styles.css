@@ -1,24 +1,24 @@
 :root {
-    --primary-color: #05472A;
-    --primary-dark: #235921;
-    --secondary-color: #3C9239;
-    --accent-color: #2B6B29;
+    --primary-color: #4CAF50;
+    --primary-dark: #388E3C;
+    --secondary-color: #81C784;
+    --accent-color: #FFC107;
     --text-color: #FFFFFF;
-    --light-bg: #000000;
+    --light-bg: #121212;
     --white: #ffffff;
     --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.3);
     --transition: all 0.3s ease-in-out;
     --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    --glass-bg: rgba(43, 107, 41, 0.1);
-    --glass-border: rgba(43, 107, 41, 0.2);
-    --card-bg: #111111;
-    --card-border: #222222;
-    --scroll-top-bg: rgba(43, 107, 41, 0.9);
-    --bg-color: #000000;
-    --header-bg: rgba(0, 0, 0, 0.8);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-bg: #1E1E1E;
+    --card-border: #2E2E2E;
+    --scroll-top-bg: rgba(76, 175, 80, 0.9);
+    --bg-color: #121212;
+    --header-bg: rgba(18, 18, 18, 0.8);
     --shadow-color: rgba(0, 0, 0, 0.5);
-    --hover-bg: #222222;
+    --hover-bg: #2E2E2E;
     
     /* New color variables */
     --success-light: #a8e6cf;
@@ -56,25 +56,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 3.2rem;
     margin-bottom: 1.5rem;
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 1.25rem;
 }
 
 h3 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 1rem;
 }
 
 p {
     margin: 0 0 1.5rem;
     color: var(--text-secondary);
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.15rem;
+    line-height: 1.8;
 }
 
 header {
@@ -158,59 +158,6 @@ nav ul li a:hover {
 .theme-toggle:hover {
     color: var(--text-color);
     background: var(--glass-bg);
-}
-
-.hamburger-menu {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--text-color);
-    cursor: pointer;
-    padding: 0.5rem;
-    font-size: 1.5rem;
-    z-index: 1001;
-}
-
-@media (max-width: 768px) {
-    .hamburger-menu {
-        display: block;
-    }
-
-    #main-nav {
-        display: none;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        height: 100%;
-        background: var(--header-bg);
-        padding: 6rem 2rem 2rem;
-        transition: right 0.3s ease-in-out;
-        z-index: 1000;
-    }
-
-    #main-nav.active {
-        display: flex;
-        right: 0;
-    }
-
-    #main-nav ul {
-        flex-direction: column;
-        gap: 2rem;
-        width: 100%;
-    }
-
-    #main-nav ul li a {
-        display: block;
-        padding: 1rem;
-        text-align: center;
-        border-radius: var(--border-radius-md);
-    }
-
-    body.menu-open {
-        overflow: hidden;
-    }
 }
 
 /* Dark Mode Styles */
@@ -364,7 +311,7 @@ nav ul li a:hover {
 .environmental-quote {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
-    border-left: 6px solid var(--primary-color);
+    border-left: 6px solid #4CAF50;
     border-radius: 16px;
     padding: 3rem;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
@@ -380,7 +327,7 @@ nav ul li a:hover {
     left: 20px;
     font-size: 12rem;
     font-family: Georgia, serif;
-    color: rgba(43, 107, 41, 0.15);
+    color: rgba(76, 175, 80, 0.15);
     line-height: 1;
     transform: rotate(-5deg);
 }
@@ -392,7 +339,7 @@ nav ul li a:hover {
     right: 20px;
     font-size: 12rem;
     font-family: Georgia, serif;
-    color: rgba(43, 107, 41, 0.15);
+    color: rgba(76, 175, 80, 0.15);
     line-height: 1;
     transform: rotate(5deg);
 }
@@ -400,7 +347,7 @@ nav ul li a:hover {
 .environmental-quote:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
-    border-left: 6px solid var(--primary-dark);
+    border-left: 6px solid #66BB6A;
     background: rgba(255, 255, 255, 0.12);
 }
 
@@ -552,9 +499,9 @@ body.dark-mode .environmental-quote:hover cite {
     overflow: hidden;
 }
 
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--card-shadow-hover);
+.feature-card:hover, .team-member:hover, .step:hover, .sponsor-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: var(--shadow-hover);
     border-color: var(--primary-color);
 }
 
@@ -608,16 +555,16 @@ body.dark-mode .environmental-quote:hover cite {
     align-items: center;
     position: relative;
     padding: 1rem;
-    background: rgba(43, 107, 41, 0.1);
+    background: rgba(46, 204, 113, 0.1);
     border-radius: var(--border-radius-md);
     border: 2px solid var(--primary-color);
-    box-shadow: 0 0 15px rgba(43, 107, 41, 0.2);
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
     transition: var(--transition);
 }
 
 .counter:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(43, 107, 41, 0.3);
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
 }
 
 .counter .number {
@@ -710,27 +657,23 @@ body.dark-mode .environmental-quote:hover cite {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.8rem 1.6rem;
-    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
     font-weight: 600;
     text-decoration: none;
     transition: var(--transition);
     cursor: pointer;
-    border: 2px solid transparent;
+    border: none;
     gap: 0.5rem;
     position: relative;
     overflow: hidden;
-}
-
-.btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--bg-color), 0 0 0 5px var(--primary-color);
 }
 
 .btn.primary {
     background: var(--gradient);
     color: var(--white);
     box-shadow: var(--shadow);
+    border: none;
 }
 
 .btn.primary:hover {
@@ -739,35 +682,15 @@ body.dark-mode .environmental-quote:hover cite {
     filter: brightness(1.1);
 }
 
-.btn.primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255, 255, 255, 0.25),
-        transparent
-    );
-    transition: 0.6s;
-}
-
-.btn.primary:hover::before {
-    left: 100%;
-}
-
 .btn.secondary {
     background: transparent;
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
 }
 
 .btn.secondary:hover {
-    background: var(--primary-color);
-    color: var(--white);
+    background: var(--accent-color);
+    color: var(--primary-dark);
     transform: translateY(-3px);
     box-shadow: var(--shadow-hover);
 }
@@ -906,12 +829,12 @@ body.dark-mode .environmental-quote:hover cite {
     margin-bottom: 1.5rem;
     border: 4px solid var(--primary-color);
     transition: var(--transition);
-    box-shadow: 0 0 20px rgba(43, 107, 41, 0.2);
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.2);
 }
 
 .team-member:hover .team-photo {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(43, 107, 41, 0.3);
+    box-shadow: 0 0 30px rgba(46, 204, 113, 0.3);
 }
 
 .team-member h3 {
@@ -973,7 +896,7 @@ body.dark-mode .environmental-quote:hover cite {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(43, 107, 41, 0.2));
+    filter: drop-shadow(0 2px 4px rgba(46, 204, 113, 0.2));
 }
 
 .step:hover i {
@@ -1998,9 +1921,6 @@ header h1 a {
     }
 
     .feature-card i {
-
-
-
         font-size: 2rem;
     }
 
@@ -2147,157 +2067,3 @@ header h1 a {
     background-color: var(--primary-color);
     color: var(--white);
 }
-.team-member-details {
-    text-align: center;
-}
-
-.team-photo-large {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 1.5rem;
-    border: 4px solid var(--primary-color);
-    box-shadow: 0 0 20px rgba(46, 204, 113, 0.2);
-}
-
-.team-member-details h2 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.team-member-details h4 {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    font-weight: 500;
-}
-
-.team-member-details .social-media {
-    margin-bottom: 2rem;
-}
-
-.team-member-details .text-box {
-    text-align: left;
-    margin-bottom: 2rem;
-}
-
-.team-member-details ul {
-    list-style: none;
-    padding: 0;
-}
-
-.team-member-details ul li {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-}
-
-.team-member-details ul li i {
-    color: var(--primary-color);
-    margin-right: 1rem;
-}
-
-
-.sponsor-logo-large {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    color: var(--white);
-    font-size: 6rem;
-    box-shadow: 0 0 20px rgba(46, 204, 113, 0.2);
-}
-
-
-.calendar-container {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--card-border);
-}
-
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.calendar-header h3 {
-    color: var(--primary-color);
-    margin: 0;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1rem;
-}
-
-.calendar-day {
-    padding: 1rem;
-    text-align: center;
-    border-radius: 5px;
-    background: var(--light-bg);
-    position: relative;
-}
-
-.calendar-day.empty {
-    background: transparent;
-}
-
-.calendar-day.event {
-    background: var(--primary-color);
-    color: var(--white);
-    cursor: pointer;
-}
-
-.event-tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--card-bg);
-    color: var(--text-color);
-    padding: 0.5rem;
-    border-radius: 5px;
-    box-shadow: var(--shadow);
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.calendar-day.event:hover .event-tooltip {
-    opacity: 1;
-    visibility: visible;
-}
-
-
-.badge-card {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    text-align: left;
-}
-
-.badge-card i {
-    font-size: 3rem;
-    color: var(--accent-color);
-}
-
-.badge-info h4 {
-    margin: 0 0 0.5rem;
-    color: var(--primary-color);
-}
-
-.badge-info p {
-    margin: 0;
-    color: var(--text-secondary);
-}
-
