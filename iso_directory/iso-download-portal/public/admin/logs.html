@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Logs</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="/admin">Status</a>
+            <a href="/admin/logs.html">Event Logs</a>
+            <a href="/admin/manage.html">Manage Distros</a>
+        </nav>
+    </header>
+    <main>
+        <table id="log-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Level</th>
+                    <th>Message</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody id="log-body"></tbody>
+        </table>
+    </main>
+    <script>
+        fetch('/admin/logs')
+            .then(res => res.json())
+            .then(logs => {
+                const tbody = document.getElementById('log-body');
+                logs.forEach(log => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${new Date(log.timestamp).toLocaleString()}</td>
+                        <td><span class="log-level ${log.level.toLowerCase()}">${log.level}</span></td>
+                        <td>${log.message}</td>
+                        <td><pre>${JSON.stringify(log, null, 2)}</pre></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            });
+    </script>
+</body>
+</html>

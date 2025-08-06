@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="/admin">Status</a>
+            <a href="/admin/logs.html">Event Logs</a>
+            <a href="/admin/manage.html">Manage Distros</a>
+        </nav>
+    </header>
+    <main>
+        <table id="admin-table">
+            <!-- ... Admin table structure ... -->
+        </table>
+    </main>
+    <script>
+        const tableBody = document.getElementById('table-body');
+
+        const fetchStatus = () => {
+            fetch('/api/status')
+                .then(res => res.json())
+                .then(distros => {
+                    tableBody.innerHTML = ''; // Clear table
+                    distros.forEach(distro => {
+                        distro.versions.forEach(v => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${v.name}</td>
+                                <td>${v.version || 'N/A'}</td>
+                                <td>${v.lastChecked ? new Date(v.lastChecked).toLocaleString() : 'Never'}</td>
+                                <td><button onclick="triggerCheck('${v.id}')">Check Now</button></td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    });
+                });
+        };
+
+        const triggerCheck = (versionId) => {
+            if (!confirm('Are you sure you want to trigger a manual update check?')) return;
+            fetch(`/api/check/${versionId}`, { method: 'POST' })
+                .then(res => {
+                    if (res.ok) {
+                        alert('Update check triggered! The table will refresh shortly.');
+                        setTimeout(fetchStatus, 8000); // Refresh after 8s to allow check to complete
+                    } else {
+                        alert('Failed to trigger check.');
+                    }
+                });
+        };
+
+        fetchStatus();
+    </script>
+</body>
+</html>
