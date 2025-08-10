@@ -32,6 +32,11 @@ let db;
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.use(express.static(__dirname));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -67,8 +72,8 @@ async function connectToDb() {
 // Nodemailer transporter setup (replace with your actual email service credentials)
 const auth = {
   auth: {
-    api_key: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN,
+    api_key: process.env.MAILGUN_API_KEY || "dummy-key",
+    domain: process.env.MAILGUN_DOMAIN || "dummy-domain",
   },
 };
 
@@ -1155,6 +1160,10 @@ app.post("/api/users/:id/reset-password", verifyToken, isAdmin, async (req, res)
     console.error(err);
     res.status(500).send("Error sending password reset link.");
   }
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/favicon.ico', (req, res) => res.status(204));
