@@ -15,6 +15,28 @@ const jwt = require("jsonwebtoken");
 const app = express();
 const port = process.env.PORT || 3003;
 
+const DOCS_PASSWORD = "treeapp";
+
+// Middleware for password protecting APIINFO.md
+app.get('/APIINFO.md', (req, res, next) => {
+  const password = req.query.password;
+
+  if (password === DOCS_PASSWORD) {
+    // Correct password, serve the file
+    return next();
+  }
+
+  // Incorrect or no password, send a prompt
+  res.status(401).send(`
+    <script>
+      const pass = prompt("Enter the password to view this page:");
+      if (pass) {
+        window.location.href = window.location.pathname + '?password=' + encodeURIComponent(pass);
+      }
+    </script>
+  `);
+});
+
 // Connection URL
 const url = process.env.MONGODB_URI || "mongodb://localhost:27017";
 const client = new MongoClient(url);
