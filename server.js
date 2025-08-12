@@ -247,7 +247,7 @@ app.get("/api/verify", async (req, res) => {
 // API endpoint for user login
 app.post("/api/login", async (req, res) => {
   try {
-    const { username, password, isBusiness } = req.body;
+    const { username, password, isBusiness, stayLoggedIn } = req.body;
     const usersCollection = db.collection(usersCollectionName);
 
     const user = await usersCollection.findOne({
@@ -277,6 +277,12 @@ app.post("/api/login", async (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     await usersCollection.updateOne({ _id: user._id }, { $push: { ipHistory: { ip, timestamp: new Date() } } });
     await logUserActivity(user._id, "login");
+
+    if (stayLoggedIn) {
+      req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 30; // 30 days
+    } else {
+      req.session.cookie.expires = false;
+    }
 
     req.session.user = {
       id: user._id,
