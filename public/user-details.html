@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704544852112670"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details - TreePlace.App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h1><a href="admin.html" style="color: #ecf0f1; text-decoration: none;">TreePlace.App</a></h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin.html#users" class="nav-link"><i class="fas fa-users"></i> <span>Users</span></a>
+                <a href="admin.html#events" class="nav-link"><i class="fas fa-calendar-alt"></i> <span>Events</span></a>
+                <a href="admin.html#notifications" class="nav-link"><i class="fas fa-bell"></i> <span>Notifications</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" id="logout-button"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </div>
+        </aside>
+        <main class="admin-main-content">
+            <header class="admin-header">
+                <h2 id="user-details-title">User Details</h2>
+            </header>
+
+            <div class="user-details-layout">
+                <div class="user-profile-card admin-card">
+                    <div id="user-info">
+                        <!-- User info loaded by JS -->
+                    </div>
+                    <div id="user-stats">
+                        <!-- User stats loaded by JS -->
+                    </div>
+                </div>
+
+                <div class="user-actions-card admin-card">
+                    <h3>User Actions</h3>
+                    <div class="action-buttons-grid">
+                        <button id="reset-password-btn" class="btn secondary"><i class="fas fa-key"></i> Reset Password</button>
+                        <button id="suspend-user-btn" class="btn secondary"><i class="fas fa-user-lock"></i> Suspend User</button>
+                        <button id="send-warning-btn" class="btn secondary"><i class="fas fa-exclamation-triangle"></i> Send Warning</button>
+                        <button id="view-login-history-btn" class="btn secondary"><i class="fas fa-history"></i> View Login History</button>
+                        <button id="assign-badge-btn" class="btn secondary"><i class="fas fa-medal"></i> Assign Badge</button>
+                        <button id="export-data-btn" class="btn secondary"><i class="fas fa-file-export"></i> Export Data</button>
+                        <button id="merge-account-btn" class="btn secondary"><i class="fas fa-compress-arrows-alt"></i> Merge Account</button>
+                        <button id="manual-verify-btn" class="btn secondary"><i class="fas fa-check-circle"></i> Verify Email</button>
+                        <button id="add-note-btn" class="btn secondary"><i class="fas fa-sticky-note"></i> Add Note</button>
+                        <button id="change-username-btn" class="btn secondary"><i class="fas fa-user-edit"></i> Change Username</button>
+                        <button id="change-email-btn" class="btn secondary"><i class="fas fa-envelope"></i> Change Email</button>
+                        <button id="flag-account-btn" class="btn secondary"><i class="fas fa-flag"></i> Flag Account</button>
+                        <div class="danger-zone">
+                            <h4>Danger Zone</h4>
+                            <button id="delete-account-btn" class="btn danger"><i class="fas fa-trash-alt"></i> Delete Account</button>
+                            <button id="anonymize-user-btn" class="btn danger"><i class="fas fa-user-secret"></i> Anonymize User</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card full-width">
+                <h3>User Activity</h3>
+                <div id="user-activity-table-container">
+                    <!-- Activity table will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="action-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title"></h2>
+            <form id="modal-form" class="admin-form">
+                <div id="modal-body"></div>
+                <button type="submit" class="btn primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="user-details.js"></script>
+</body>
+</html>
