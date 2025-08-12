@@ -91,9 +91,6 @@
           const data = await response.json();
 
           if (data.success) {
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("username", data.username);
-            localStorage.setItem("isAdmin", data.isAdmin);
             window.location.href = "dashboard.html";
           } else {
             alert(data.message);

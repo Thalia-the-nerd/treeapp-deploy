@@ -11,6 +11,8 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -54,6 +56,23 @@ let db;
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "your_default_session_secret",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      clientPromise: client.connect().then(c => c.db(dbName)),
+      ttl: 14 * 24 * 60 * 60, // = 14 days. Default
+    }),
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+    },
+  })
+);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -257,17 +276,16 @@ app.post("/api/login", async (req, res) => {
     await usersCollection.updateOne({ _id: user._id }, { $push: { ipHistory: { ip, timestamp: new Date() } } });
     await logUserActivity(user._id, "login");
 
-    // In a real app, you would create a session or JWT here
-    const token = jwt.sign(
-      { userId: user._id, isAdmin: user.isAdmin },
-      process.env.JWT_SECRET || "your_default_secret",
-      { expiresIn: "1h" }
-    );
+    req.session.user = {
+      id: user._id,
+      username: user.username,
+      isAdmin: user.isAdmin,
+      isBusiness: user.isBusiness,
+    };
 
     res.json({
       success: true,
       message: "Login successful.",
-      token: token,
       username: user.username,
       isAdmin: user.isAdmin,
       isBusiness: user.isBusiness,
@@ -278,20 +296,39 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.post("/api/logout", async (req, res) => {
-  try {
-    const { username } = req.body;
-    const usersCollection = db.collection(usersCollectionName);
-    const user = await usersCollection.findOne({ username });
-
-    if (user) {
-      await logUserActivity(user._id, "logout");
+app.post("/api/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: "Error logging out." });
     }
-
+    res.clearCookie("connect.sid");
     res.json({ success: true, message: "Logout successful." });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error logging out.");
+  });
+});
+
+app.get("/api/check-auth", (req, res) => {
+  if (req.session.user) {
+    res.json({
+      isAuthenticated: true,
+      user: req.session.user,
+    });
+  } else {
+    res.json({
+      isAuthenticated: false,
+    });
+  }
+});
+
+app.get("/api/check-auth", (req, res) => {
+  if (req.session.user) {
+    res.json({
+      isAuthenticated: true,
+      user: req.session.user,
+    });
+  } else {
+    res.json({
+      isAuthenticated: false,
+    });
   }
 });
 

@@ -16,8 +16,6 @@ document
     const data = await response.json();
 
     if (data.success) {
-      localStorage.setItem("username", data.username);
-      localStorage.setItem("isBusiness", data.isBusiness);
       window.location.href = "business-dashboard.html";
     } else {
       alert(data.message);

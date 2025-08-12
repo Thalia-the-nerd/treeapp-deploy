@@ -1,45 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const username = localStorage.getItem("username");
-  const isAdmin = localStorage.getItem("isAdmin") === "true";
-
-  if (!username) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  document.getElementById("username").textContent = username;
-
-  const adminLinkContainer = document.getElementById("admin-link-container");
-
-  if (isAdmin) {
-    if (adminLinkContainer) {
-      adminLinkContainer.style.display = "list-item";
-    }
-  }
-
-  const rewards = [
-    { name: "T-Shirt", type: "money", threshold: 150 },
-    { name: "T-Shirt", type: "time", threshold: 50 },
-    { name: "Mug", type: "money", threshold: 300 },
-    { name: "Mug", type: "time", threshold: 100 },
-    { name: "Tote Bag", type: "money", threshold: 500 },
-    { name: "Tote Bag", type: "time", threshold: 200 },
-    { name: "Engraved Plaque", type: "money", threshold: 1000 },
-    { name: "Engraved Plaque", type: "time", threshold: 500 },
-  ];
-
-  // Fetch dashboard data
-  fetch(`/api/user/dashboard?username=${username}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch user data");
-      }
-      return response.json();
-    })
+  fetch("/api/check-auth")
+    .then((response) => response.json())
     .then((data) => {
-      // Populate stats
-      const statsContainer = document.querySelector(".dashboard-stats");
-      statsContainer.innerHTML = `
+      if (!data.isAuthenticated) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const { username, isAdmin } = data.user;
+      document.getElementById("username").textContent = username;
+
+      const adminLinkContainer = document.getElementById("admin-link-container");
+      if (isAdmin && adminLinkContainer) {
+        adminLinkContainer.style.display = "list-item";
+      }
+
+      // Fetch dashboard data
+      fetch(`/api/user/dashboard?username=${username}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch user data");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Populate stats
+          const statsContainer = document.querySelector(".dashboard-stats");
+          statsContainer.innerHTML = `
                 <div class="feature-card">
                     <i class="fas fa-dollar-sign"></i>
                     <h3>Money Donated</h3>
@@ -57,17 +44,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-      // Populate locations
-      const locationsGrid = document.querySelector(".locations-grid");
-      locationsGrid.innerHTML = "";
-      if (data.nextEvent) {
-        const eventCard = document.createElement("div");
-        eventCard.className = "location-card-new";
-        const eventDate = new Date(data.nextEvent.date).toLocaleDateString(
-          "en-US",
-          { weekday: "long", year: "numeric", month: "long", day: "numeric" },
-        );
-        eventCard.innerHTML = `
+          // Populate locations
+          const locationsGrid = document.querySelector(".locations-grid");
+          locationsGrid.innerHTML = "";
+          if (data.nextEvent) {
+            const eventCard = document.createElement("div");
+            eventCard.className = "location-card-new";
+            const eventDate = new Date(data.nextEvent.date).toLocaleDateString(
+              "en-US",
+              { weekday: "long", year: "numeric", month: "long", day: "numeric" },
+            );
+            eventCard.innerHTML = `
                     <img src="${data.nextEvent.image}" alt="${data.nextEvent.name}" class="card-image">
                     <div class="card-content">
                         <h4 class="card-title">${data.nextEvent.name}</h4>
@@ -76,58 +63,70 @@ document.addEventListener("DOMContentLoaded", () => {
                         <a href="location.html?id=${data.nextEvent.id}" class="btn primary">View Details</a>
                     </div>
                 `;
-        locationsGrid.appendChild(eventCard);
-      } else {
-        locationsGrid.innerHTML =
-          "<p>No upcoming events scheduled. Check back soon!</p>";
-      }
+            locationsGrid.appendChild(eventCard);
+          } else {
+            locationsGrid.innerHTML =
+              "<p>No upcoming events scheduled. Check back soon!</p>";
+          }
 
-      // Populate rewards
-      const rewardsContainer = document.getElementById("rewards-container");
-      rewardsContainer.innerHTML = "";
+          // Populate rewards
+          const rewardsContainer = document.getElementById("rewards-container");
+          rewardsContainer.innerHTML = "";
 
-      const moneyRewards = rewards
-        .filter((r) => r.type === "money")
-        .sort((a, b) => a.threshold - b.threshold);
-      const timeRewards = rewards
-        .filter((r) => r.type === "time")
-        .sort((a, b) => a.threshold - b.threshold);
+          const moneyRewards = rewards
+            .filter((r) => r.type === "money")
+            .sort((a, b) => a.threshold - b.threshold);
+          const timeRewards = rewards
+            .filter((r) => r.type === "time")
+            .sort((a, b) => a.threshold - b.threshold);
 
-      const nextMoneyReward = moneyRewards.find(
-        (r) => data.moneyDonated < r.threshold,
-      );
-      const nextTimeReward = timeRewards.find(
-        (r) => data.timeDonated < r.threshold,
-      );
+          const nextMoneyReward = moneyRewards.find(
+            (r) => data.moneyDonated < r.threshold,
+          );
+          const nextTimeReward = timeRewards.find(
+            (r) => data.timeDonated < r.threshold,
+          );
 
-      if (nextMoneyReward) {
-        rewardsContainer.appendChild(
-          createRewardCard(nextMoneyReward, data.moneyDonated),
-        );
-      }
-      if (nextTimeReward) {
-        rewardsContainer.appendChild(
-          createRewardCard(nextTimeReward, data.timeDonated),
-        );
-      }
+          if (nextMoneyReward) {
+            rewardsContainer.appendChild(
+              createRewardCard(nextMoneyReward, data.moneyDonated),
+            );
+          }
+          if (nextTimeReward) {
+            rewardsContainer.appendChild(
+              createRewardCard(nextTimeReward, data.timeDonated),
+            );
+          }
 
-      // Populate badges
-      const badgesContainer = document.getElementById("badges-container");
-      badgesContainer.innerHTML = "";
-      if (data.badges && data.badges.length > 0) {
-          data.badges.forEach(badge => {
-              badgesContainer.appendChild(createBadgeCard(badge));
-          });
-      } else {
-          badgesContainer.innerHTML = "<p>No badges earned yet. Keep up the great work!</p>";
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching dashboard data:", error);
-      const mainContainer = document.querySelector("main.container");
-      mainContainer.innerHTML =
-        '<p style="color: red;">Could not load dashboard data. Please try again later.</p>';
+          // Populate badges
+          const badgesContainer = document.getElementById("badges-container");
+          badgesContainer.innerHTML = "";
+          if (data.badges && data.badges.length > 0) {
+              data.badges.forEach(badge => {
+                  badgesContainer.appendChild(createBadgeCard(badge));
+              });
+          } else {
+              badgesContainer.innerHTML = "<p>No badges earned yet. Keep up the great work!</p>";
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching dashboard data:", error);
+          const mainContainer = document.querySelector("main.container");
+          mainContainer.innerHTML =
+            '<p style="color: red;">Could not load dashboard data. Please try again later.</p>';
+        });
     });
+
+  const rewards = [
+    { name: "T-Shirt", type: "money", threshold: 150 },
+    { name: "T-Shirt", type: "time", threshold: 50 },
+    { name: "Mug", type: "money", threshold: 300 },
+    { name: "Mug", type: "time", threshold: 100 },
+    { name: "Tote Bag", type: "money", threshold: 500 },
+    { name: "Tote Bag", type: "time", threshold: 200 },
+    { name: "Engraved Plaque", type: "money", threshold: 1000 },
+    { name: "Engraved Plaque", type: "time", threshold: 500 },
+  ];
 
   function createRewardCard(reward, currentValue) {
     const card = document.createElement("div");
@@ -171,9 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logoutButton) {
     logoutButton.addEventListener("click", (e) => {
       e.preventDefault();
-      localStorage.removeItem("username");
-      localStorage.removeItem("isAdmin");
-      window.location.href = "login.html";
+      fetch("/api/logout", { method: "POST" })
+        .then(() => {
+          window.location.href = "login.html";
+        });
     });
   }
 });
