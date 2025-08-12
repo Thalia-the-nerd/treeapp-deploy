@@ -76,6 +76,12 @@ TreePlace.App is a community-driven platform dedicated to making Miami greener b
     ```
 2.  Open your browser and navigate to `http://localhost:3000` (or your machine's IP address).
 
+### Systemd Service
+To restart the application service, run the following command:
+```bash
+sudo systemctl restart treeapp.service
+```
+
 ## 🛠️ Development
 
 ### Project Structure

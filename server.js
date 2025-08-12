@@ -56,10 +56,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
@@ -462,12 +462,12 @@ const isAdmin = (req, res, next) => {
 
 // Admin panel route
 app.get("/admin", verifyToken, isAdmin, (req, res) => {
-  res.sendFile(__dirname + "/admin.html");
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Business dashboard route
 app.get("/business-dashboard", (req, res) => {
-  res.sendFile(__dirname + "/business-dashboard.html");
+  res.sendFile(path.join(__dirname, 'public', 'business-dashboard.html'));
 });
 
 // API endpoint to get all users
@@ -1184,9 +1184,7 @@ app.post("/api/users/:id/reset-password", verifyToken, isAdmin, async (req, res)
   }
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
