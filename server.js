@@ -38,7 +38,7 @@ app.get('/APIINFO.md', (req, res, next) => {
 });
 
 // Connection URL
-const url = process.env.MONGODB_URI || "mongodb://localhost:27017";
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017/?tls=false";
 const client = new MongoClient(url);
 
 // Database and collection names
