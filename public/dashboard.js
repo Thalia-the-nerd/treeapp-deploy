@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("username").textContent = username;
 
   const adminLinkContainer = document.getElementById("admin-link-container");
-  adminLinkContainer.style.display = "none";
 
   if (isAdmin) {
     if (adminLinkContainer) {
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <i class="fas fa-dollar-sign"></i>
                     <h3>Money Donated</h3>
                     <div class="counter">
-                        <span class="number">$${data.moneyDonated.toFixed(2)}</span>
+                        <span class="number">${data.moneyDonated.toFixed(2)}</span>
                     </div>
                 </div>
                 <div class="feature-card">
