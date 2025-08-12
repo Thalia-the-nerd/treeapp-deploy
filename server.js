@@ -63,7 +63,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      clientPromise: client.connect().then(c => c.db(dbName)),
+      client: client,
+      dbName: dbName,
+      collectionName: "sessions",
       ttl: 14 * 24 * 60 * 60, // = 14 days. Default
     }),
     cookie: {
