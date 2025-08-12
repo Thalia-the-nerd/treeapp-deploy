@@ -15,6 +15,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
 const app = express();
+app.set('trust proxy', 1);
 const port = process.env.PORT || 3003;
 
 const DOCS_PASSWORD = "treeapp";
@@ -312,19 +313,6 @@ app.post("/api/logout", (req, res) => {
     res.clearCookie("connect.sid");
     res.json({ success: true, message: "Logout successful." });
   });
-});
-
-app.get("/api/check-auth", (req, res) => {
-  if (req.session.user) {
-    res.json({
-      isAuthenticated: true,
-      user: req.session.user,
-    });
-  } else {
-    res.json({
-      isAuthenticated: false,
-    });
-  }
 });
 
 app.get("/api/check-auth", (req, res) => {
