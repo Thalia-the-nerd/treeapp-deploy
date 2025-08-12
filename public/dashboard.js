@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Fetch dashboard data
-      fetch(`/api/user/dashboard?username=${username}`)
+      fetch(`/api/user/dashboard`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to fetch user data");

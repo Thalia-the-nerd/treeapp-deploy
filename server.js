@@ -41,7 +41,7 @@ app.get('/APIINFO.md', (req, res, next) => {
 });
 
 // Connection URL
-const url = process.env.MONGODB_URI || "mongodb://localhost:27017/?tls=false";
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017";
 const client = new MongoClient(url);
 
 // Database and collection names
@@ -330,14 +330,15 @@ app.get("/api/check-auth", (req, res) => {
 
 // API endpoint for user-specific dashboard data
 app.get("/api/user/dashboard", async (req, res) => {
-  const { username } = req.query;
-  if (!username) {
-    return res.status(400).send("Username is required.");
+  if (!req.session.user) {
+    return res.status(401).send("User not authenticated.");
   }
+
+  const userId = req.session.user.id;
 
   try {
     const usersCollection = db.collection(usersCollectionName);
-    const user = await usersCollection.findOne({ username });
+    const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
 
     if (!user) {
       return res.status(404).send("User not found.");
