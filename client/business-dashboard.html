@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F9MF8NS4JF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-F9MF8NS4JF");
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704544852112670"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Dashboard - TreePlace.App</title>
+    <link rel="stylesheet" href="/src/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+    <div class="container">
+        <div class="logo">
+            <h1><a href="https://treeplace.app">TreePlace.App</a></h1>
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html" data-translate="home">Home</a></li>
+                <li><a href="sponsors.html" data-translate="sponsors">Sponsors</a></li>
+                <li><a href="calendar.html" data-translate="calendar">Calendar</a></li>
+                <li><a href="partners.html" data-translate="partners">Partners</a></li>
+                <li><a href="login.html" data-translate="login">Login</a></li>
+                <li><a href="https://www.patreon.com/c/treeplace/membership" class="btn primary" data-translate="donate">Donate</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="dark-mode-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" class="hamburger-menu" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+    <main class="container" style="padding-top: 2rem; padding-bottom: 2rem">
+      <h2 style="margin-top: 4rem">Business Dashboard</h2>
+
+      <section id="dashboard-stats" class="dashboard-stats features-grid">
+        <!-- Stats will be populated by JavaScript -->
+      </section>
+
+      <section id="locations" style="margin-top: 2rem">
+        <h3>Next Upcoming Planting Event</h3>
+        <div class="locations-grid features-grid">
+          <!-- Locations will be populated by JavaScript -->
+        </div>
+      </section>
+
+      <section id="sponsorship-management" style="margin-top: 2rem">
+        <h3>Sponsorship Management</h3>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h4>Edit Sponsorship Details</h4>
+            <form id="sponsorship-form">
+              <label for="sponsor-name">Sponsor Name</label>
+              <input type="text" id="sponsor-name" name="sponsor-name" required>
+              <label for="sponsor-description">Sponsor Description</label>
+              <textarea id="sponsor-description" name="sponsor-description" rows="4" required></textarea>
+              <label for="sponsor-logo">Sponsor Logo URL</label>
+              <input type="url" id="sponsor-logo" name="sponsor-logo">
+              <button type="submit" class="btn primary">Save Changes</button>
+            </form>
+          </div>
+          <div class="feature-card">
+            <h4>Sponsorship Tier</h4>
+            <p>Your current tier: <span id="current-tier">Bronze</span></p>
+            <button id="upgrade-tier" class="btn primary">Upgrade Tier</button>
+          </div>
+          <div class="feature-card">
+            <h4>Contact Admin</h4>
+            <p>Have questions or need help with your sponsorship?</p>
+            <button id="contact-admin" class="btn secondary">Contact Admin</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TreePlace.App. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script type="module" src="/src/js/business-dashboard.js"></script>
+</body>
+</html>
